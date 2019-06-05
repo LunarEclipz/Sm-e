@@ -1,0 +1,52 @@
+<div class="jumbotron text-center">
+    <h1>Create Pet!</h1>
+
+    <div class="form-group mb-4">
+        <label class="font-italic" for="feelingsPet">On a scale of 1 to 5 how are you feeling?</label>
+        <input type="range" class="custom-range" min="1" max="5" step="1" id="feelingsPet" name="feelingsPet" value="3"
+            oninput="feelingsRange()"></input>
+        <div id="box">
+            <h3>Happiness</h3>
+            <h1 id="wordsinBox"></h1>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var range = document.getElementById('feelingsPet');
+        var box = document.getElementById('wordsinBox');
+        function feelingsRange() {
+            var val = range.value;
+            box.innerHTML = val;
+        }
+    </script>
+
+    <br>
+    <h5> What motivates you? </h5>
+
+    <form>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="Studying" value="Studying" name="motiv">
+            <label class="custom-control-label" for="Studying">Studying</label>
+        </div>
+
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="Encoragement" value="Encoragement" name="motiv">
+            <label class="custom-control-label" for="Encoragement">Encoragement</label>
+        </div>
+
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="Conversations" value="Conversations" name="motiv">
+            <label class="custom-control-label" for="Conversations">Conversations</label>
+        </div>
+
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="Writing" value="Writing" name="motiv">
+            <label class="custom-control-label" for="Writing">Writing</label>
+        </div>
+    </form>
+    <br>
+    <hr>
+    <br>
+    <button type="button" class="btn btn-lg btn-block btn-danger">Create Pet</button>
+
+</div>

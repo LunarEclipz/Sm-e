@@ -14,6 +14,7 @@ const bodyParser = require('body-parser');
 * will be called based on the HTTP request and URL.
 */
 const mainRoute = require('./routes/main');
+const avatarRoute = require('./routes/avatar');
 
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
@@ -69,7 +70,9 @@ app.use(function (req, res, next) {
 * Defines that any root URL with '/' that Node JS receives request from, for eg. http://localhost:5000/, will be handled by
 * mainRoute which was defined earlier to point to routes/main.js
 * */
-app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
+app.use('/', mainRoute);
+app.use('/avatar', avatarRoute);
+// mainRoute is declared to point to routes/main.js
 // This route maps the root URL to any path defined in main.js
 
 /*

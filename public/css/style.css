@@ -1,0 +1,33 @@
+.logo{
+  width:130px;
+  margin:auto;
+}
+
+.containeravatar{
+  display: inline-block;
+  width: 288px;
+  height: 320px;
+
+}
+
+.down{
+  position: bottom;
+}
+
+#box{
+  width: 150px;
+  height: 150px;
+  background: #FEDCD2;
+  margin : 20px auto;
+  color : #DF744A;
+  text-align: center;
+  line-height: 300px;
+  border: 10px solid #DCB239;
+  font-size: 15px; 
+}
+
+#wordsinBox{
+  text-align: center;
+  color : #DF744A;
+  position: center;
+}

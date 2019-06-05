@@ -1,3 +1,178 @@
+body {
+  background-color: #2f4454;
+}
+
+.button {
+  background-color: #2f4454;
+  border: none;
+  color: #da7b93;
+  padding: 7.5px 10px;
+  text-align: left;
+  font-size: 16px;
+  border-radius: 20px;
+  width: 300px;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.redButton {
+  background-color: #2f4454;
+  border: none;
+  color: red;
+  padding: 7.5px 10px;
+  font-size: 16px;
+  border-radius: 20px;
+  width: 150px;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.QnButton {
+  background-color: #da7b93;
+  border: 2px solid #2f4454;
+  color: #2f4454;
+  padding: 7.5px 10px;
+  text-align: left;
+  font-size: 16px;
+  border-radius: 20px;
+  width: 700px;
+  position: relative;
+  margin: 0 left;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.QnButton:hover {
+  background-color: gray;
+}
+
+#question {
+  color: #2f4454;
+  font-weight: bold;
+}
+
+#quizContent {
+  color: #2f4454;
+  padding-top: 15px;
+  padding-left: 40px; 
+  font-weight: bold;
+}
+
+#reportContent {
+  color: #2f4454;
+  padding-left: 30px;
+}
+
+#anxietyContent {
+  color: #2f4454;
+  padding-left: 40px;
+}
+
+.liAnxiety {
+  color: white;
+  font-size: 20px;
+}
+
+.card {
+  border-radius: 20px;
+  background-color: #DA7B93;
+}
+
+.navbar {
+  background-color: #da7b93;
+  color: #2f4454;
+ }
+
+.navbar li a {
+  color: #2f4454;
+}
+
+.navbar-brand {
+  color: #2f4454;
+  font-weight: bold;
+} 
+
+.navbar-brand:hover {
+  color: gray;
+
+}
+.graphImg {
+  width:400px;
+  height:280px;
+  margin: 0 auto;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-radius: 30px;
+}
+
+.anxietyGraphDisplay {
+  width:350px;
+  height:230px;
+  margin: 0 auto;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-radius: 30px;
+}
+
+hr {
+  border: none;
+  height: 0.5px;
+  background-color: #2f4454;
+  box-shadow: 1px 1px 1px 0.5px #2f4454;
+}
+
+.correctPoints {
+  color: chartreuse;
+  font-size: 25px;
+  font-weight:100;
+  margin-right: 10px;
+}
+
+.questionBox {
+  width: 740px;
+}
+
+.table {
+  color: #2f4454;
+}
+
+td {
+  color: #2f4454;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+th {
+  color: white;
+}
+
+.labelName {
+  color: #2f4454;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-content  {
+  -webkit-border-radius: 20px ;
+  -moz-border-radius: 20px ;
+  border-radius: 20px ; 
+}
+
+.modal-dialog {
+  border: 0px !important;
+}
+
+#deleteButtons:hover {
+  color:#DA7B93;
+  background-color: #2f4454;
+}
+
 .logo{
   width:130px;
   margin:auto;

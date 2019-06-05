@@ -16,6 +16,7 @@ const bodyParser = require('body-parser');
 const mainRoute = require('./routes/main');
 const quizRoute = require('./routes/quiz');
 const avatarRoute = require('./routes/avatar');
+const hopeboardRoute = require('./routes/hopeboard');
 
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
@@ -75,6 +76,7 @@ app.use(function (req, res, next) {
 app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
 app.use('/quiz', quizRoute)
 app.use('/avatar', avatarRoute);
+app.use('/', hopeboardRoute);
 // This route maps the root URL to any path defined in main.js
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known

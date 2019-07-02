@@ -1,4 +1,4 @@
-<h1 class="display-2 text-light">{{title}}</h1>
+<h1 class="display-2 text-light">{{Title}}</h1>
 
 <section id="utilities">
 	<div id="utilities" class="card text-center shadow-lg bg-white">
@@ -26,27 +26,42 @@
 			<div id="meditation" class="tab-pane show active fadeIn" role="tabpanel">
 				<h4 class="display-4">Meditation</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#addModal">
+				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
+					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
-				<div class="card w-25 bg-white mt-3">
-					<div class="view overlay">
-						<img class="card-img-top" src="/img/478breathing.jpg">
-					</div>
-					<div class="card-body">
-						<h4 class="card-title">4-7-8 Breathing</h4>
-						<p class="card-text">This breathing pattern aims to reduce anxiety or help people get to sleep.
-						</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
-							<i class="fas fa-trash-alt"></i>
-						</button>
+				<div class="row">
 
-						<button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#editModal">
-							<i class="fas fa-pencil-alt"></i>
-						</button>
-					</div>
+					{{#if medArticle}}
+					{{#each medArticle}}
+					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
+						<div class="card bg-white">
+							<div class="view overlay">
+								<img class="card-img-top" id="displayThumbnail" src="/{{thumbnail}}" height="200px" width="200px">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">{{title}}</h4>
+								<p class="card-text">{{description}}
+								</p>
+								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+									data-target="#deleteModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
 
+								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
+									data-target="#editModal">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+					{{else}}
+					<div>
+						No article available.
+					</div>
+					{{/if}}
 				</div>
 			</div>
 
@@ -54,32 +69,51 @@
 			<div id="video" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Video</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#addModal">
+				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
+					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
-				<div class="card w-25 bg-white mt-3">
-					<div class="view overlay">
-						<img class="card-img-top" src="/img/asmrhaircut.jpg">
-					</div>
-					<div class="card-body">
-						<h4 class="card-title">ASMR Haircut</h4>
-						<p class="card-text">Sleep inducing haircut video.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
-							<i class="fas fa-trash-alt"></i>
-						</button>
+				<div class="row">
 
-						<button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#editModal">
-							<i class="fas fa-pencil-alt"></i>
-						</button>
+					{{#if vidArticle}}
+					{{#each vidArticle}}
+					<div class="col-14 mt-4 col-md-4 col-lg-3">
+						<div class="card bg-white">
+							<div class="view overlay">
+								<img class="card-img-top" src="/img/478breathing.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">{{title}}</h4>
+								<p class="card-text">{{description}}
+								</p>
+								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+									data-target="#deleteModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+
+								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
+									data-target="#editModal">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+							</div>
+						</div>
 					</div>
+					{{/each}}
+					{{else}}
+					<div>
+						No article available.
+					</div>
+					{{/if}}
 				</div>
+				
 			</div>
 
 			<div id="music" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Music</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#addModal">
+				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
+					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
@@ -90,7 +124,8 @@
 					<div class="card-body">
 						<h4 class="card-title">Relaxing Guitar Music</h4>
 						<p class="card-text">Stress relieving guitar music.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
+						<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+							data-target="#deleteModal">
 							<i class="fas fa-trash-alt"></i>
 						</button>
 
@@ -104,7 +139,8 @@
 			<div id="workout" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Workout</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#addModal">
+				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
+					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
@@ -116,7 +152,8 @@
 						<h4 class="card-title">Workout for two</h4>
 						<p class="card-text">Whether you want to shed some fat, sculpt muscle, improve fitness or simply
 							play – here’s a great 15-minute whole body workout designed for two.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
+						<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+							data-target="#deleteModal">
 							<i class="fas fa-trash-alt"></i>
 						</button>
 
@@ -130,7 +167,8 @@
 			<div id="depressiontips" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Depression Tips</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#addModal">
+				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
+					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
@@ -141,7 +179,8 @@
 					<div class="card-body">
 						<h4 class="card-title">Depression Tips</h4>
 						<p class="card-text">Effective tips for coping with depression.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
+						<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+							data-target="#deleteModal">
 							<i class="fas fa-trash-alt"></i>
 						</button>
 
@@ -168,29 +207,41 @@
 				</button>
 			</div>
 
-			<div class="modal-body">
-				<div class="md-form mb-3">
-					<label for="Title">Title</label>
-					<input type="text" class="form-control" id="Title">
+			<form action="" method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="md-form mb-3">
+						<label for="Category">Category</label>
+						<select name="Category" class="form-control" id="Category">
+						    <option value="Meditation">Meditation</option>
+						    <option value="Video">Video</option>
+						    <option value="Music">Music</option>
+						    <option value="Workout">Workout</option>
+						    <option value="Depression Tips">Depression Tips</option>
+						</select>
+					</div>
+					<div class="md-form mb-3">
+						<label for="Title">Title</label>
+						<input type="text" name="Title" value="" class="form-control" id="Title">
+					</div>
+					<div class="md-form mb-3">
+						<label for="Description">Description</label>
+						<textarea name="Description" class="form-control" id="noteText" rows="3"></textarea>
+					</div>
+					<div class="md-form mb-3">
+						<label for="Link">URL Link</label>
+						<input type="url" name="URL" class="form-control" id="Link"
+							placeholder="https://www.google.com/">
+					</div>
+					<div class="md-form mb-5">
+						<label for="Thumbnail">Thumbnail</label>
+						<input type="file" name="Thumbnail" class="form-control-file" id="Thumbnail" accept="image/png,image/jpeg,image/jpg,image/gif">
+					</div>
 				</div>
-				<div class="md-form mb-3">
-					<label for="Description">Description</label>
-					<textarea class="form-control" id="noteText" rows="3"></textarea>
-				</div>
-				<div class="md-form mb-3">
-					<label for="Link">URL Link</label>
-					<input type="url" class="form-control" id="Link" placeholder="https://www.google.com/"> 
-				</div>
-				<div class="md-form mb-5">
-					<label for="Thumbnail">Thumbnail</label>
-					<input type="file" class="form-control-file" id="Thumbnail">
-				</div>
-				
-			</div>
 
-			<div class="modal-footer">
-				<button class="btn btn-primary btn-md btn-block" data-dismiss="modal">Create</button>
-			</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary btn-md btn-block">Create</button>
+				</div>
+			</form>
 
 		</div>
 
@@ -251,7 +302,7 @@
 				</div>
 				<div class="md-form mb-3">
 					<label for="Link">URL Link</label>
-					<input type="url" class="form-control" id="Link" placeholder="https://www.google.com/"> 
+					<input type="url" class="form-control" id="Link" placeholder="https://www.google.com/">
 				</div>
 				<div class="md-form mb-5">
 					<label for="Thumbnail">Thumbnail</label>

@@ -1,0 +1,86 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<h2> Mood Tracker </h2>
+<div id="chart_div"></div>
+
+
+<script>
+    google.charts.load('current', {
+        packages: ['corechart', 'line']
+    });
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Mood');
+
+        data.addRows([
+            [0, 0],
+            [1 / 1, 10],
+            [2 / 1, 5],
+            [3 / 1, 6],
+            [4 / 1, 2],
+            [5 / 1, 9],
+            [6 / 1, 7],
+            [7 / 1, 5],
+            [8 / 1, 7],
+            [9 / 1, 1],
+            [10 / 1, 0],
+            [11 / 1, 4],
+            [12 / 1, 4],
+            [13 / 1, 3],
+            [14 / 1, 2],
+            [15 / 1, 7],
+            [16 / 1, 4],
+            [17 / 1, 8],
+            [18 / 1, 2],
+            [19 / 1, 4],
+            [20 / 1, 9],
+            [21 / 1, 10],
+            [22 / 1, 6],
+            [23 / 1, 8],
+            [24 / 1, 0],
+            [25 / 1, 0],
+            [26 / 1, 2],
+            [27 / 1, 1],
+            [28 / 1, 9],
+            [29 / 1, 3],
+            [30 / 1, 5],
+            [31 / 1, 7]
+        ]);
+
+        var options = {
+            hAxis: {
+                title: 'Date',
+                textStyle: {
+                    color: '#df744a',
+                    bold: true
+                },
+                titleTextStyle: {
+                    color: '#df744a',
+                    bold: true
+                }
+            },
+            vAxis: {
+                title: 'Mood',
+                textStyle: {
+                    color: '#df744a',
+                    bold: true
+                },
+                titleTextStyle: {
+                    color: '#df744a',
+                    bold: true
+                }
+            },
+            colors: ['#dcb239'],
+            width: 900,
+            height: 500
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+    }
+
+</script>

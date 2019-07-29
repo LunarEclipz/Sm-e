@@ -1,0 +1,59 @@
+<h2>New Entry</h2>
+<form action="/saveEntry" method="POST">
+
+    <div class="form-group">
+        <h5 id="displayDate"></h5>
+        <textarea class="form-control" rows="5" id="entry" name="entry"></textarea>
+        <textarea display="none" id="dateValue" name="date"></textarea>
+
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="font-italic" for="mood"> Rate your mood from 0 to 5</label>
+        <input type="range" class="custom-range" min="0" max="5" step="1" id="mood" name="mood" value="2"
+            oninput="moodRange()"></input>
+        <div id="box">
+            <h3>Mood</h3>
+            <h1 id="moodNum"></h1>
+        </div>
+
+    </div>
+    <div class="form-group mb-4">
+        <label class="font-italic" for="emotion"> Choose your emotion </label>
+        <div id="box">
+            <h3>Emotion</h3>
+            <input id="emotion" name="emotion" type="radio" value="Happy">
+            <img src="/img/happy.png" height=100 width=100>
+            </input>
+            <input id="emotion" name="emotion" type="radio" value="Meh">
+            <img src="/img/meh.png" height=100 width=100>
+            </input>
+            <input id="emotion" name="emotion" type="radio" value="Sad">
+            <img src="/img/sad.png" height=100 width=100>
+            </input>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var range = document.getElementById('mood');
+        var box = document.getElementById('moodNum');
+        function moodRange() {
+            var val = range.value;
+            box.innerHTML = val;
+        }
+
+        var displayDate = document.getElementById('displayDate');
+        var dateValue = document.getElementById('dateValue');
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        displayDate.innerHTML = today;
+        dateValue.value = today;
+
+    </script>
+
+    <button class="btn" type="submit"> Submit </button>
+</form>
+</div>

@@ -1,208 +1,107 @@
-body {
-  background-color: #2f4454;
-}
-
-.button {
-  background-color: #2f4454;
-  border: none;
-  color: #da7b93;
-  padding: 7.5px 10px;
-  text-align: left;
-  font-size: 16px;
-  border-radius: 20px;
-  width: 300px;
-  position: relative;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.redButton {
-  background-color: #2f4454;
-  border: none;
-  color: red;
-  padding: 7.5px 10px;
-  font-size: 16px;
-  border-radius: 20px;
-  width: 150px;
-  position: relative;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.QnButton {
-  background-color: #da7b93;
-  border: 2px solid #2f4454;
-  color: #2f4454;
-  padding: 7.5px 10px;
-  text-align: left;
-  font-size: 16px;
-  border-radius: 20px;
-  width: 700px;
-  position: relative;
-  margin: 0 left;
-  margin-bottom: 10px;
-  padding-left: 20px;
-}
-
-.QnButton:hover {
-  background-color: gray;
-}
-
-#question {
-  color: #2f4454;
-  font-weight: bold;
-}
-
-#quizContent {
-  color: #2f4454;
-  padding-top: 15px;
-  padding-left: 40px; 
-  font-weight: bold;
-}
-
-#reportContent {
-  color: #2f4454;
-  padding-left: 30px;
-}
-
-#anxietyContent {
-  color: #2f4454;
-  padding-left: 40px;
-}
-
-.liAnxiety {
-  color: white;
-  font-size: 20px;
-}
-
-.card {
-  border-radius: 20px;
-  background-color: #DA7B93;
-}
-
-.navbar {
-  background-color: #da7b93;
-  color: #2f4454;
- }
-
-.navbar li a {
-  color: #2f4454;
-}
-
-.navbar-brand {
-  color: #2f4454;
-  font-weight: bold;
-} 
-
-.navbar-brand:hover {
-  color: gray;
-
-}
-.graphImg {
-  width:400px;
-  height:280px;
-  margin: 0 auto;
-  padding-bottom: 15px;
-  padding-top: 15px;
-  border-radius: 30px;
-}
-
-.anxietyGraphDisplay {
-  width:350px;
-  height:230px;
-  margin: 0 auto;
-  padding-bottom: 15px;
-  padding-top: 15px;
-  border-radius: 30px;
-}
-
-hr {
-  border: none;
-  height: 0.5px;
-  background-color: #2f4454;
-  box-shadow: 1px 1px 1px 0.5px #2f4454;
-}
-
-.correctPoints {
-  color: chartreuse;
-  font-size: 25px;
-  font-weight:100;
-  margin-right: 10px;
-}
-
-.questionBox {
-  width: 740px;
-}
-
-.table {
-  color: #2f4454;
-}
-
-td {
-  color: #2f4454;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-th {
-  color: white;
-}
-
-.labelName {
-  color: #2f4454;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.modal-content  {
-  -webkit-border-radius: 20px ;
-  -moz-border-radius: 20px ;
-  border-radius: 20px ; 
-}
-
-.modal-dialog {
-  border: 0px !important;
-}
-
-#deleteButtons:hover {
-  color:#DA7B93;
-  background-color: #2f4454;
-}
-
 .logo{
   width:130px;
   margin:auto;
 }
 
-.containeravatar{
+.container-dashboard{
+  background-color: #ffffff;
+}
+
+.container-date{
+  background-color: #BFD8D2;
+  height: 170px;
+  display: block;
+}
+
+.day{
+  background-color: #FEDCD2;
+}
+.carousel-inner {
+  padding: 2%;
+}
+
+.carousel-item{
+  margin-left: 15%;
+}
+
+button.btn-lg{
+  background-color: #ffffff;
+  width: 125px;
+  height: 50px;
+  text-align: center;
+  color: #DF744A;
+  margin-right: 1%;
+}
+
+.carousel-indicators{
+  margin: -4px;
+}
+
+.date-own{
+  margin-left: 46%;
+  margin-top: 1%;
+}
+
+p{
   display: inline-block;
-  width: 288px;
-  height: 320px;
-
+  padding-left: 1.5%;
+  padding-right:1.5%;
+  margin: 3%;
+  color: #DF744A;
 }
 
-.down{
-  position: bottom;
+.btn{
+  background-color: #dcb239;
+  color: #ffffff;
 }
 
-#box{
-  width: 150px;
-  height: 150px;
-  background: #FEDCD2;
-  margin : 20px auto;
-  color : #DF744A;
-  text-align: center;
-  line-height: 300px;
-  border: 10px solid #DCB239;
-  font-size: 15px; 
+.col-sm-2{
+  padding: 0px;
+  margin-top: 1%;
 }
 
-#wordsinBox{
-  text-align: center;
-  color : #DF744A;
-  position: center;
+.wrapper {
+  display: flex;
+  align-items: stretch;
 }
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+.navbar{
+  background-color:#ffffff;
+}
+
+.navbar-brand, .navbar-nav, .nav-link {
+  color: #DF744A;
+}
+
+h2{
+  color: #ffffff;
+  background-color: #BFD8D2;
+  padding: 2%;
+  text-shadow: -3px -1px #FEDCD2;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+

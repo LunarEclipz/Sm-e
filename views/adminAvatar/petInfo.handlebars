@@ -1,0 +1,60 @@
+{{#with Pet}}
+
+<div class="jumbotron text-center">
+
+    <h3>Add Pet</h3>
+    <div class="container">
+        <form action="/adminAvatar/updatePet/{{id}}" method="POST">
+            <div class="row">
+                <div class="form-group col-md-6 my-4">
+                    <label class="font-italic" for="petName">Motivator / Name of Pet</label>
+                <textarea class="form-control" id="petName" name="petName">{{petName}}</textarea>
+                    <br>
+                    <label class="font-italic" for="quotes">Quote</label>
+                <textarea class="form-control" id="quotes" name="quotes">{{quotes}}</textarea>
+
+            <select name="tasks" class="custom-select" id="task" placeholder="{{tasks}}" value="{{tasks}}" required>
+                <option for="tasks" value="{{tasks}}" selected>{{tasks}}</option>
+                        <option for="tasks" value="Writing">Writing</option>
+                        <option for="tasks" value="Conversations">Conversations</option>
+                        <option for="tasks" value="Encouragements">Encouragements</option>
+                    </select>
+            <select name="noTasks" class="custom-select" id="noTask" placeholder="{{noTasks}}" value="{{noTasks}}"
+                required>
+                <option for="tasks" value="{{noTasks}}" selected>{{noTasks}}</option>
+                        <option for="noTasks" value="1">1</option>
+                        <option for="noTasks" value="2">2</option>
+                        <option for="noTasks" value="3">3</option>
+                        <option for="noTasks" value="4">4</option>
+                        <option for="noTasks" value="5">5</option>
+                        <option for="noTasks" value="6">6</option>
+                        <option for="noTasks" value="7">7</option>
+                        <option for="noTasks" value="8">8</option>
+                        <option for="noTasks" value="9">9</option>
+                        <option for="noTasks" value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6 my-4">
+                    <div>
+                        <input type="file" id="petPicUpload" name="petPicUpload" accept="image/png,
+															image/jpeg,image/jpg,image/gif">
+                    </div>
+                    <br>
+                    <div>
+                        <img id="petPic" src="{{{petPicURL}}}" alt="" class="border img-thumbnail img-fluid"
+                            style="height:95%;width:95%">
+                        <input id="petPicURL" type="hidden" name="petPicURL">
+                        <div class="font-weight-bold text-danger small" id="petPicErr" style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-lg btn-block btn-dark">Edit Pet</button>
+        </form>
+    </div>
+
+</div>
+</div>
+</div>
+{{/with}}

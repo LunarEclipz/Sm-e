@@ -1,5 +1,7 @@
+{{#if Avatar}}
 <div class="jumbotron text-center">
     <h1>Create Pet!</h1>
+    <form action="/avatar/updatePet" method="POST">
 
     <div class="form-group mb-4">
         <label class="font-italic" for="feelingsPet">On a scale of 1 to 5 how are you feeling?</label>
@@ -10,6 +12,45 @@
             <h1 id="wordsinBox"></h1>
         </div>
     </div>
+    <br>
+    <h5> What motivates you? </h5>
+        {{#each pets}}
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="{{petName}}" value="{{petName}}" name="motiv">
+            <label class="custom-control-label" for="{{petName}}">{{petName}}</label>
+        </div>
+        {{/each}}
+            <button class="btn btn-lg btn-block btn-dark">Create Pet</button>
+    </form>
+    
+{{else}}
+
+
+<div class="jumbotron text-center">
+    <h1>Create Pet!</h1>
+    <form action="/avatar/savePet" method="POST">
+
+    <div class="form-group mb-4">
+        <label class="font-italic" for="feelingsPet">On a scale of 1 to 5 how are you feeling?</label>
+        <input type="range" class="custom-range" min="1" max="5" step="1" id="feelingsPet" name="feelingsPet" value="3"
+            oninput="feelingsRange()"></input>
+        <div id="box">
+            <h3>Happiness</h3>
+            <h1 id="wordsinBox"></h1>
+        </div>
+    </div>
+    <br>
+    <h5> What motivates you? </h5>
+        {{#each pets}}
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="{{petName}}" value="{{petName}}" name="motiv">
+            <label class="custom-control-label" for="{{petName}}">{{petName}}</label>
+        </div>
+        {{/each}}
+            <button class="btn btn-lg btn-block btn-dark">Create Pet</button>
+    </form>
+    {{/if}}   
+
 
     <script type="text/javascript">
         var range = document.getElementById('feelingsPet');
@@ -20,33 +61,5 @@
         }
     </script>
 
-    <br>
-    <h5> What motivates you? </h5>
-
-    <form>
-        <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="Studying" value="Studying" name="motiv">
-            <label class="custom-control-label" for="Studying">Studying</label>
-        </div>
-
-        <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="Encoragement" value="Encoragement" name="motiv">
-            <label class="custom-control-label" for="Encoragement">Encoragement</label>
-        </div>
-
-        <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="Conversations" value="Conversations" name="motiv">
-            <label class="custom-control-label" for="Conversations">Conversations</label>
-        </div>
-
-        <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="Writing" value="Writing" name="motiv">
-            <label class="custom-control-label" for="Writing">Writing</label>
-        </div>
-    </form>
-    <br>
-    <hr>
-    <br>
-    <button type="button" class="btn btn-lg btn-block btn-danger">Create Pet</button>
-
+    
 </div>

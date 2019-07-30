@@ -1,0 +1,163 @@
+
+        {{#each Aspect}}
+        <div class="container">
+
+            <div class="modal fade" id="myModal{{id}}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">#{{id}}, {{Name}}</h4>
+                <img src="{{firstURL}}" height=240 width=320></img>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <p>{{Quote}}</p>
+                            <p>{{Tasks}}</p>
+                            <p>{{noTasks}}</p>
+                        </div>
+                                        <img src="{{secondURL}}" height=240 width=320></img>
+
+                        <div class="modal-body">
+                            <p>{{Quote2}}</p>
+                            <p>{{Tasks2}}</p>
+                            <p>{{noTasks2}}</p>
+                        </div>
+                                                                <img src="{{thirdURL}}" height=240 width=320></img>
+
+                                                <div class="modal-body">
+                            <p>{{Quote3}}</p>
+                            <p>{{Tasks3}}</p>
+                            <p>{{noTasks3}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/adminAvatar/deleteAspect/{{id}}" method="POST">
+                                <button type="submit" class="btn btn-warning"> Delete Pet</button>
+                            </form>
+                            <a href="editAspect/{{id}}" id="linksnull"><button type="button" class="btn btn-danger">Edit
+                                    Info</button></a>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        {{/each}}
+
+
+<div class="jumbotron text-center">    
+
+    <h3>List of Aspects</h3>
+
+    <h4>Feelings Field</h4>
+    <div class="containeravatar">
+
+        <div id="feelingsBox"></div>
+
+    </div>
+
+
+
+
+
+    <hr>
+
+
+
+    <h4>Thoughts Field</h4>
+    <div class="containeravatar">
+
+                <br><div id="thoughtsBox"></div>
+
+    </div>
+    <hr>
+
+    <h4>Actions Field</h4>
+    <div class="containeravatar">
+                <br><div id="actionsBox"></div>
+
+    </div>
+    <hr>
+
+    <h4>Aura Field</h4>
+    <div class="containeravatar">
+                <br><div id="auraBox"></div>
+
+    </div>
+    <hr>
+    <a href="/adminAvatar/addAspect"><button class="btn btn-lg btn-block btn-dark">Add Aspect</button></a>
+
+
+    
+</div>
+</div>
+<script>
+    
+(function checkFields() {
+    var feelingsBox = document.getElementById('feelingsBox');
+    var thoughtsBox = document.getElementById('thoughtsBox');
+    var actionsBox = document.getElementById('actionsBox');
+    var auraBox = document.getElementById('auraBox');
+
+    if (feelingsBox.innerHTML == "") {
+        {{#each Aspect}}
+        var Fields = '{{Fields}}';
+        var id = '{{id}}';
+        var firstURL = '{{firstURL}}';
+        if (Fields == 'Feelings') {
+            feelingsBox.innerHTML += "<img src='{{firstURL}}' height='240' width='320'></img>";
+            feelingsBox.innerHTML += "<button type='button' class='btn btn-lg btn-info btn-block btn-dark' data-toggle='modal' data-target='#myModal{{id}}'>{{Name}} Info</button> <br>";
+        }
+
+        {{/each}}
+    }
+
+        if (thoughtsBox.innerHTML == "") {
+        {{#each Aspect}}
+        var Fields = '{{Fields}}';
+        var id = '{{id}}';
+        var firstURL = '{{firstURL}}';
+
+        if (Fields == 'Thoughts') {
+            thoughtsBox.innerHTML += "<img src='{{firstURL}}' height='240' width='320'>";
+            thoughtsBox.innerHTML += "<button type='button' class='btn btn-lg btn-info btn-block btn-dark' data-toggle='modal' data-target='#myModal{{id}}'>{{Name}} Info</button> <br>";
+        }
+
+        {{/each}}
+    }
+
+        if (actionsBox.innerHTML == "") {
+        {{#each Aspect}}
+        var Fields = '{{Fields}}';
+        var id = '{{id}}';
+                var firstURL = '{{firstURL}}';
+
+        if (Fields == 'Actions') {
+        actionsBox.innerHTML += "<img src='{{firstURL}}' height='240' width='320'></img>";
+
+            actionsBox.innerHTML += "<button type='button' class='btn btn-lg btn-info btn-block btn-dark' data-toggle='modal' data-target='#myModal{{id}}'>{{Name}} Info</button> <br>";
+        }
+
+        {{/each}}
+    }
+
+        if (auraBox.innerHTML == "") {
+        {{#each Aspect}}
+        var Fields = '{{Fields}}';
+        var id = '{{id}}';
+                var firstURL = '{{firstURL}}';
+
+        if (Fields == 'Aura') {
+                                    auraBox.innerHTML += "<img src='{{firstURL}}' height='240' width='320'></img>";
+
+            auraBox.innerHTML += "<button type='button' class='btn btn-lg btn-info btn-block btn-dark' data-toggle='modal' data-target='#myModal{{id}}'>{{Name}} Info</button> <br>";
+        }
+
+        {{/each}}
+    }
+})();
+</script>

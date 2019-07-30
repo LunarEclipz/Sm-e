@@ -1,0 +1,192 @@
+{{#with Aspect}}
+
+<div class="jumbotron text-center">
+
+    <h1>Edit {{Name}}</h1>
+
+    <form action="/adminAvatar/updateAspect/{{id}}" method="POST">
+
+        <div>
+            <div id="fieldBox">
+                <h5 id="fieldinBox"></h5>
+            </div>
+            <h3>Level 1</h3>
+            <select name="Fields" class="custom-select" id="Fields" oninput="addto()" aria-placeholder="Fields"
+                required>
+                                <option for="Fields" value="{{Fields}}" selected>{{Fields}}</option>
+
+                <option value="Feelings">Feelings</option>
+                <option value="Thoughts">Thoughts</option>
+                <option value="Actions">Actions</option>
+                <option value="Aura">Aura</option>
+            </select>
+
+            <div class="form-group mb-4">
+                <label class="font-italic" for="Name">Name</label>
+                <textarea class="form-control" id="Name" name="Name" required>{{Name}}</textarea>
+            </div>
+
+
+            <script type="text/javascript">
+                var field = document.getElementById('Fields');
+                var fieldbox = document.getElementById('fieldinBox');
+
+                function addto() {
+
+                    var val = field.value;
+                    fieldbox.innerHTML = "Chosen Field: " + val;
+
+                }
+            </script>
+
+<div class="col-lg-3 mb-4">
+                <input type="file" id="firstUpload" name="firstUpload" accept="image/png,
+															image/jpeg,image/jpg,image/gif">
+                <img id="first" src="{{{firstURL}}}" alt="" class="border img-thumbnail img-fluid"
+                    style="height:95%;width:100%">
+                <input id="firstURL" type="hidden" name="firstURL">
+                <div class="font-weight-bold text-danger small" id="firstErr" style="display:none"></div>
+            </div>
+
+
+            <div class="form-group mb-4">
+                <label class="font-italic" for="Quote">Quote</label>
+                <textarea class="form-control" id="Quote" name="Quote" required>{{Quote}}</textarea>
+            </div>
+
+            <select name="Tasks" class="custom-select" id="Tasks" aria-placeholder="Tasks" required>
+                <option for="Tasks" value="{{Tasks}}" selected>{{Tasks}}</option>
+
+                <option for="Tasks" value="Writing">Writing</option>
+                <option for="Tasks" value="Conversations">Conversations</option>
+                <option for="Tasks" value="Encouragements">Encouragements</option>
+            </select>
+            <select name="noTasks" class="custom-select" id="noTasks" aria-placeholder="1" required>
+                <option for="noTasks" value="{{noTasks}}" selected>{{noTasks}}</option>
+
+                <option for="noTasks" value="1">1</option>
+                <option for="noTasks" value="2">2</option>
+                <option for="noTasks" value="3">3</option>
+                <option for="noTasks" value="4">4</option>
+                <option for="noTasks" value="5">5</option>
+                <option for="noTasks" value="6">6</option>
+                <option for="noTasks" value="7">7</option>
+                <option for="noTasks" value="8">8</option>
+                <option for="noTasks" value="9">9</option>
+                <option for="noTasks" value="10">10</option>
+            </select>
+
+            <br>
+
+        </div>
+        <hr>
+        <div>
+
+            <h3>Level 2</h3>
+<div class="col-lg-3 mb-4">
+                <input type="file" id="secondUpload" name="secondUpload" accept="image/png,
+															image/jpeg,image/jpg,image/gif">
+                <img id="second" src="{{{secondURL}}}" alt="" class="border img-thumbnail img-fluid"
+                    style="height:95%;width:100%">
+                <input id="secondURL" type="hidden" name="secondURL">
+                <div class="font-weight-bold text-danger small" id="secondErr" style="display:none"></div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="font-italic" for="Quote2">Quote</label>
+                <textarea class="form-control" id="Quote2" name="Quote2" required>{{Quote2}}</textarea>
+            </div>
+
+
+            <br>
+            <select name="Tasks2" class="custom-select" id="Tasks2" aria-placeholder="Tasks" required>
+                <option for="Tasks2" value="{{Tasks2}}" selected>{{Tasks2}}</option>
+                <option for="Tasks2" value="Writing">Writing</option>
+                <option for="Tasks2" value="Conversations">Conversations</option>
+                <option for="Tasks2" value="Encouragements">Encouragements</option>
+            </select>
+            <select name="noTasks2" class="custom-select" id="noTasks2" aria-placeholder="1" required>
+                <option for="noTasks2" value="{{noTasks2}}" selected>{{noTasks2}}</option>
+                <option for="noTasks2" value="1">1</option>
+                <option for="noTasks2" value="2">2</option>
+                <option for="noTasks2" value="3">3</option>
+                <option for="noTasks2" value="4">4</option>
+                <option for="noTasks2" value="5">5</option>
+                <option for="noTasks2" value="6">6</option>
+                <option for="noTasks2" value="7">7</option>
+                <option for="noTasks2" value="8">8</option>
+                <option for="noTasks2" value="9">9</option>
+                <option for="noTasks2" value="10">10</option>
+            </select>
+
+        </div>
+        <hr>
+        <div>
+            <h3>Level 3</h3>
+<div class="col-lg-3 mb-4">
+                <input type="file" id="thirdUpload" name="thirdUpload" accept="image/png,
+															image/jpeg,image/jpg,image/gif">
+                <img id="third" src="{{{thirdURL}}}" alt="" class="border img-thumbnail img-fluid"
+                    style="height:95%;width:100%">
+                <input id="thirdURL" type="hidden" name="thirdURL">
+                <div class="font-weight-bold text-danger small" id="thirdErr" style="display:none"></div>
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="font-italic" for="Quote3">Quote</label>
+                <textarea class="form-control" id="Quote3" name="Quote3" required>{{Quote3}}</textarea>
+            </div>
+
+
+
+            <select name="Tasks3" class="custom-select" id="Tasks3" aria-placeholder="Tasks" required>
+                <option for="Tasks3" value="{{Tasks3}}" selected>{{Tasks3}}</option>
+
+                <option for="Tasks3" value="Writing">Writing</option>
+                <option for="Tasks3" value="Conversations">Conversations</option>
+                <option for="Tasks3" value="Encouragements">Encouragements</option>
+            </select>
+            <select name="noTasks3" class="custom-select" id="noTask3" aria-placeholder="1" required>
+                <option for="noTasks3" value="{{noTasks3}}" selected>{{noTasks3}}</option>
+
+                <option for="noTasks3" value="1">1</option>
+                <option for="noTasks3" value="2">2</option>
+                <option for="noTasks3" value="3">3</option>
+                <option for="noTasks3" value="4">4</option>
+                <option for="noTasks3" value="5">5</option>
+                <option for="noTasks3" value="6">6</option>
+                <option for="noTasks3" value="7">7</option>
+                <option for="noTasks3" value="8">8</option>
+                <option for="noTasks3" value="9">9</option>
+                <option for="noTasks3" value="10">10</option>
+            </select>
+            <br>
+
+        </div>
+        <br>
+        <button type="submit" class="btn btn-lg btn-block btn-dark">Edit Aspect</button>
+    </form>
+</div>
+
+
+{{/with}}
+
+ 
+
+
+        
+            <script type="text/javascript">
+                var field = document.getElementById('Fields');
+                var fieldbox = document.getElementById('fieldinBox');
+
+                function addto() {
+
+                    var val = field.value;
+                    fieldbox.innerHTML = "Chosen Field: " + val;
+
+                }
+            </script>
+
+
+
+
+            

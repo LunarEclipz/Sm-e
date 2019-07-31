@@ -4,6 +4,9 @@ const db = require('../config/DBConfig');
 Note that Sequelize automatically pleuralizes the entity name as the table name
 */
 const article = db.define('article', {
+    category: {
+        type: Sequelize.STRING
+    },
     title: {
         type: Sequelize.STRING
     },
@@ -16,5 +19,14 @@ const article = db.define('article', {
     thumbnail: {
         type: Sequelize.STRING
     },
+    date: {
+        type: Sequelize.STRING
+    },
+    time: {
+        type: Sequelize.STRING
+    },
+    view: {
+        type: Sequelize.INTEGER
+    }
 });
 module.exports = article;

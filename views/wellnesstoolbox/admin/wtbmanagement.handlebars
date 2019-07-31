@@ -1,7 +1,8 @@
 <h1 class="display-2 text-light">{{Title}}</h1>
 
-<section id="utilities">
-	<div id="utilities" class="card text-center shadow-lg bg-white">
+
+<section id="articles">
+	<div id="articles" class="card text-center shadow-lg bg-white">
 		<div class="card-header">
 			<ul class="nav nav-pills card-header-pills">
 				<li class="nav-item flex-fill">
@@ -26,10 +27,32 @@
 			<div id="meditation" class="tab-pane show active fadeIn" role="tabpanel">
 				<h4 class="display-4">Meditation</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
+				<div class="row">
+					<div class="col-8 mb-2">
+						<select class="form-control col-3" id="sortBy">
+							<option>Sort By:</option>
+							<option>Most Viewed</option>
+							<option>Least Viewed</option>
+							<option onchange="sortLatest()">Latest First</option>
+							<option>Oldest First</option>
+						</select>
+					</div>
+					<div class="col-4">
+						<form class="form-inline">
+							<input class="form-control" type="text" placeholder="Search" aria-label="Search">
+							<i class="fas fa-search" aria-hidden="true"></i>
+						</form>
+					</div>
+
+				</div>
+
+
+				<button type="button" class="btn btn-lg btn-yellowalt float-right" data-toggle="modal"
 					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
+
+
 
 				<div class="row">
 
@@ -38,21 +61,31 @@
 					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" id="displayThumbnail" src="/{{thumbnail}}" height="200px" width="200px">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
-								<p class="card-text">{{description}}
-								</p>
+								<div class="row">
+									<div class="col-12 desc">
+										<p class="card-text col-12" style="height: 70px; overflow: auto">{{description}}
+										</p>
+									</div>
+								</div>
 								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
-									data-target="#deleteModal">
+									data-target="#deleteModal{{id}}">
 									<i class="fas fa-trash-alt"></i>
 								</button>
 
 								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
-									data-target="#editModal">
+									data-target="#editModal{{id}}">
 									<i class="fas fa-pencil-alt"></i>
 								</button>
+
+								<footer class="font-small mt-4">
+									<p class="font-weight-light">Last updated: {{date}}</small></p>
+								</footer>
+
 							</div>
 						</div>
 					</div>
@@ -62,6 +95,7 @@
 						No article available.
 					</div>
 					{{/if}}
+
 				</div>
 			</div>
 
@@ -69,6 +103,13 @@
 			<div id="video" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Video</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
+				<select class="form-control col-2" id="sortBy">
+					<option>Sort By:</option>
+					<option>Most Viewed</option>
+					<option>Least Viewed</option>
+					<option>Latest First</option>
+					<option>Oldest First</option>
+				</select>
 				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
 					data-target="#addModal">
 					<i class="fas fa-plus"></i>
@@ -78,24 +119,32 @@
 
 					{{#if vidArticle}}
 					{{#each vidArticle}}
-					<div class="col-14 mt-4 col-md-4 col-lg-3">
+					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" src="/img/478breathing.jpg">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
-								<p class="card-text">{{description}}
-								</p>
+								<div class="col-12 desc">
+									<p class="card-text">{{description}}
+									</p>
+								</div>
 								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
-									data-target="#deleteModal">
+									data-target="#deleteModal{{id}}">
 									<i class="fas fa-trash-alt"></i>
 								</button>
 
 								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
-									data-target="#editModal">
+									data-target="#editModal{{id}}">
 									<i class="fas fa-pencil-alt"></i>
 								</button>
+
+								<footer class="font-small mt-4">
+									<p class="font-weight-light">Last updated: {{date}}</small></p>
+								</footer>
+
 							</div>
 						</div>
 					</div>
@@ -105,89 +154,182 @@
 						No article available.
 					</div>
 					{{/if}}
+
 				</div>
-				
+
 			</div>
 
 			<div id="music" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Music</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
+				<select class="form-control col-2" id="sortBy">
+					<option>Sort By:</option>
+					<option>Most Viewed</option>
+					<option>Least Viewed</option>
+					<option>Latest First</option>
+					<option>Oldest First</option>
+				</select>
 				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
 					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
-				<div class="card w-25 bg-white mt-3">
-					<div class="view overlay">
-						<img class="card-img-top" src="/img/guitarmusic.jpg">
-					</div>
-					<div class="card-body">
-						<h4 class="card-title">Relaxing Guitar Music</h4>
-						<p class="card-text">Stress relieving guitar music.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
-							data-target="#deleteModal">
-							<i class="fas fa-trash-alt"></i>
-						</button>
+				<div class="row">
 
-						<button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#editModal">
-							<i class="fas fa-pencil-alt"></i>
-						</button>
+					{{#if musicArticle}}
+					{{#each musicArticle}}
+					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
+						<div class="card bg-white">
+							<div class="view overlay">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">{{title}}</h4>
+								<div class="col-12 desc">
+									<p class="card-text">{{description}}
+									</p>
+								</div>
+								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+									data-target="#deleteModal{{id}}">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+
+								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
+									data-target="#editModal{{id}}">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+
+								<footer class="font-small mt-4">
+									<p class="font-weight-light">Last updated: {{date}}</small></p>
+								</footer>
+
+							</div>
+						</div>
 					</div>
+					{{/each}}
+					{{else}}
+					<div>
+						No article available.
+					</div>
+					{{/if}}
+
 				</div>
 			</div>
 
 			<div id="workout" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Workout</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
+				<select class="form-control col-2" id="sortBy">
+					<option>Sort By:</option>
+					<option>Most Viewed</option>
+					<option>Least Viewed</option>
+					<option>Latest First</option>
+					<option>Oldest First</option>
+				</select>
 				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
 					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
-				<div class="card w-25 bg-white mt-3">
-					<div class="view overlay">
-						<img class="card-img-top" src="/img/workoutfortwo.jpg">
-					</div>
-					<div class="card-body">
-						<h4 class="card-title">Workout for two</h4>
-						<p class="card-text">Whether you want to shed some fat, sculpt muscle, improve fitness or simply
-							play – here’s a great 15-minute whole body workout designed for two.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
-							data-target="#deleteModal">
-							<i class="fas fa-trash-alt"></i>
-						</button>
+				<div class="row">
 
-						<button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#editModal">
-							<i class="fas fa-pencil-alt"></i>
-						</button>
+					{{#if workArticle}}
+					{{#each workArticle}}
+					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
+						<div class="card bg-white">
+							<div class="view overlay">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">{{title}}</h4>
+								<div class="col-12 desc">
+									<p class="card-text">{{description}}
+									</p>
+								</div>
+								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+									data-target="#deleteModal{{id}}">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+
+								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
+									data-target="#editModal{{id}}">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+
+								<footer class="font-small mt-4">
+									<p class="font-weight-light">Last updated: {{date}}</small></p>
+								</footer>
+
+							</div>
+						</div>
 					</div>
+					{{/each}}
+					{{else}}
+					<div>
+						No article available.
+					</div>
+					{{/if}}
+
 				</div>
 			</div>
 
 			<div id="depressiontips" class="tab-pane show fadeIn" role="tabpanel">
 				<h4 class="display-4">Depression Tips</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
+				<select class="form-control col-2" id="sortBy">
+					<option>Sort By:</option>
+					<option>Most Viewed</option>
+					<option>Least Viewed</option>
+					<option>Latest First</option>
+					<option>Oldest First</option>
+				</select>
 				<button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal"
 					data-target="#addModal">
 					<i class="fas fa-plus"></i>
 				</button>
 
-				<div class="card w-25 bg-white mt-3">
-					<div class="view overlay">
-						<img class="card-img-top" src="/img/depressiontips.jpg">
-					</div>
-					<div class="card-body">
-						<h4 class="card-title">Depression Tips</h4>
-						<p class="card-text">Effective tips for coping with depression.</p>
-						<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
-							data-target="#deleteModal">
-							<i class="fas fa-trash-alt"></i>
-						</button>
+				<div class="row">
 
-						<button type="button" class="btn btn-info ml-2" data-toggle="modal" data-target="#editModal">
-							<i class="fas fa-pencil-alt"></i>
-						</button>
+					{{#if depArticle}}
+					{{#each depArticle}}
+					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
+						<div class="card bg-white">
+							<div class="view overlay">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">{{title}}</h4>
+								<div class="col-12 desc">
+									<p class="card-text">{{description}}
+									</p>
+								</div>
+								<button type="button" class="btn btn-danger ml-2" data-toggle="modal"
+									data-target="#deleteModal{{id}}">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+
+								<button type="button" class="btn btn-info ml-2" data-toggle="modal"
+									data-target="#editModal{{id}}">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+
+								<footer class="font-small mt-4">
+									<p class="font-weight-light">Last updated: {{date}}</small></p>
+								</footer>
+
+							</div>
+						</div>
 					</div>
+					{{/each}}
+					{{else}}
+					<div>
+						No article available.
+					</div>
+					{{/if}}
+
 				</div>
 			</div>
 		</div>
@@ -207,39 +349,41 @@
 				</button>
 			</div>
 
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 				<div class="modal-body">
 					<div class="md-form mb-3">
 						<label for="Category">Category</label>
 						<select name="Category" class="form-control" id="Category">
-						    <option value="Meditation">Meditation</option>
-						    <option value="Video">Video</option>
-						    <option value="Music">Music</option>
-						    <option value="Workout">Workout</option>
-						    <option value="Depression Tips">Depression Tips</option>
+							<option value="Meditation">Meditation</option>
+							<option value="Video">Video</option>
+							<option value="Music">Music</option>
+							<option value="Workout">Workout</option>
+							<option value="Depression Tips">Depression Tips</option>
 						</select>
 					</div>
 					<div class="md-form mb-3">
 						<label for="Title">Title</label>
-						<input type="text" name="Title" value="" class="form-control" id="Title">
+						<input type="text" name="Title" value="" class="form-control" id="Title" maxlength="12"
+							required>
 					</div>
 					<div class="md-form mb-3">
 						<label for="Description">Description</label>
-						<textarea name="Description" class="form-control" id="noteText" rows="3"></textarea>
+						<textarea name="Description" class="form-control" id="noteText" rows="3" required></textarea>
 					</div>
 					<div class="md-form mb-3">
 						<label for="Link">URL Link</label>
 						<input type="url" name="URL" class="form-control" id="Link"
-							placeholder="https://www.google.com/">
+							placeholder="https://www.google.com/" required>
 					</div>
 					<div class="md-form mb-5">
 						<label for="Thumbnail">Thumbnail</label>
-						<input type="file" name="Thumbnail" class="form-control-file" id="Thumbnail" accept="image/png,image/jpeg,image/jpg,image/gif">
+						<input type="file" name="Thumbnail" class="form-control-file" id="Thumbnail"
+							accept="image/png,image/jpeg,image/jpg,image/gif">
 					</div>
 				</div>
 
 				<div class="modal-footer">
-					<button class="btn btn-primary btn-md btn-block">Create</button>
+					<button id="createbutton" class="btn btn-primary btn-md btn-block">Create</button>
 				</div>
 			</form>
 
@@ -249,7 +393,9 @@
 </div>
 
 <!--deleteModal-->
-<div class="modal fade" id="deleteModal" role="dialog">
+{{#if article}}
+{{#each article}}
+<div class="modal fade" id="deleteModal{{id}}" role="dialog">
 	<div class="modal-dialog" role="document">
 
 		<div class="modal-content">
@@ -267,19 +413,22 @@
 					</p>
 				</div>
 			</div>
-
 			<div class="modal-footer">
 				<button class="btn btn-secondary btn-md" data-dismiss="modal">Cancel</button>
-				<button class="btn btn-danger btn-md" data-dismiss="modal">Delete</button>
+				<a class="btn btn-danger btn-md" href="/wellnesstoolbox/admin/wtbmanagement/delete/{{id}}">Delete</a>
 			</div>
 
 		</div>
 
 	</div>
 </div>
+{{/each}}
+{{/if}}
 
 <!--editModal-->
-<div class="modal fade" id="editModal" role="dialog">
+{{#if article}}
+{{#each article}}
+<div class="modal fade" id="editModal{{id}}" role="dialog">
 	<div class="modal-dialog" role="document">
 
 		<div class="modal-content">
@@ -291,31 +440,52 @@
 				</button>
 			</div>
 
-			<div class="modal-body">
-				<div class="md-form mb-3">
-					<label for="Title">Title</label>
-					<input class="form-control" type="text">
+			<form action="wtbmanagement/edit/{{id}}" method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="md-form mb-3">
+						<label for="Category">Category</label>
+						<select name="Category" class="form-control" id="Category">
+							<option value="Meditation" {{selectCheck category 'Meditation'}}>Meditation</option>
+							<option value="Video" {{selectCheck category 'Video'}}>Video</option>
+							<option value="Music" {{selectCheck category 'Music'}}>Music</option>
+							<option value="Workout" {{selectCheck category 'Workout'}}>Workout</option>
+							<option value="Depression Tips" {{selectCheck category 'Depression Tips'}}>Depression Tips
+							</option>
+						</select>
+					</div>
+					<div class="md-form mb-3">
+						<label for="Title">Title</label>
+						<input type="text" name="Title" value="{{title}}" class="form-control" id="Title"
+							maxlength="12">
+					</div>
+					<div class="md-form mb-3">
+						<label for="Description">Description</label>
+						<textarea name="Description" class="form-control" id="noteText" rows="3"
+							required>{{description}}</textarea>
+					</div>
+					<div class="md-form mb-3">
+						<label for="Link">URL Link</label>
+						<input type="url" name="URL" value="{{link}}" class="form-control" id="Link"
+							placeholder="https://www.google.com/" required>
+					</div>
+					<div class="md-form mb-5">
+						<label for="Thumbnail">Thumbnail</label>
+						<input type="file" name="Thumbnail" class="form-control-file" id="Thumbnail"
+							accept="image/png,image/jpeg,image/jpg,image/gif">
+					</div>
 				</div>
-				<div class="md-form mb-3">
-					<label for="Description">Description</label>
-					<textarea class="form-control" id="noteText" rows="3"></textarea>
-				</div>
-				<div class="md-form mb-3">
-					<label for="Link">URL Link</label>
-					<input type="url" class="form-control" id="Link" placeholder="https://www.google.com/">
-				</div>
-				<div class="md-form mb-5">
-					<label for="Thumbnail">Thumbnail</label>
-					<input type="file" class="form-control-file" id="Thumbnail">
-				</div>
-			</div>
 
-			<div class="modal-footer">
-				<button class="btn btn-secondary btn-md" data-dismiss="modal">Cancel</button>
-				<button class="btn btn-primary btn-md" data-dismiss="modal">Save Changes</button>
-			</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary btn-md" data-dismiss="modal">Cancel</button>
+					<button class="btn btn-primary btn-md">Save Changes</button>
+				</div>
+			</form>
 
 		</div>
 
 	</div>
 </div>
+{{/each}}
+{{/if}}
+
+<script type="text/javascript" src="/js/wtb.js"> </script>

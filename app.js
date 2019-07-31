@@ -133,6 +133,7 @@ app.use('/admin', adminRoute);
 app.use('/avatar', avatarRoute);
 app.use ('/wellnesstoolbox', wellnesstoolboxRoute);
 app.use('/adminAvatar', adminAvatarRoute);
+app.use('/journal', journalRoute);
 
 // This route maps the root URL to any path defined in main.js
 /*

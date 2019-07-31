@@ -89,3 +89,46 @@ $('#thirdUpload').on('change', function(){
 		}
 	});
 });
+
+function categoryCheck() {
+    var categories = document.getElementsByName('categories');
+    var error = document.getElementById('categoryErr');
+    var button = document.getElementById('butAddEvent');
+    var ticks = 0;
+    for (var i = 0; i < categories.length; i++) {
+        if (categories[i].checked == true) {
+            ticks++;
+        }
+    }
+    if (ticks == 0) {
+        error.style.display = 'block';
+        button.disabled = true;
+    }
+    else {
+        error.style.display = 'none';
+        button.disabled = false;
+    }
+}
+
+$('#posterUpload').on('change', function(){
+	let image = $("#posterUpload")[0].files[0];
+	let formdata = new FormData();
+	formdata.append('posterUpload', image);
+	$.ajax({
+		url: '/adminEvents/upload',
+		data: formdata,
+		contentType: false,
+		processData: false,
+		type: 'POST',
+		'success':(data) => {
+			$('#poster').attr('src', data.file);
+			$('#posterURL').attr('value', data.file);	// sets posterURL hidden field
+			if(data.err){
+				$('#posterErr').show();
+				$('#posterErr').text(data.err.message);
+			} else{
+				$('#posterErr').hide();
+			}
+		}
+	});
+});

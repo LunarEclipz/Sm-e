@@ -14,10 +14,13 @@ const bodyParser = require('body-parser');
 * will be called based on the HTTP request and URL.
 */
 const mainRoute = require('./routes/main');
-const quizRoute = require('./routes/quiz');
 const avatarRoute = require('./routes/avatar');
-const hopeboardRoute = require('./routes/hopeboard');
 const wellnesstoolboxRoute = require ('./routes/wellnesstoolbox');
+const smile = require('./config/DBConnection');
+const adminAvatarRoute = require('./routes/adminAvatar');
+
+// Connects to MySQL database
+smile.setUpDB(false);
 
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
@@ -75,10 +78,10 @@ app.use(function (req, res, next) {
 * mainRoute which was defined earlier to point to routes/main.js
 * */
 app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
-app.use('/quiz', quizRoute)
 app.use('/avatar', avatarRoute);
-app.use('/', hopeboardRoute);
 app.use ('/wellnesstoolbox', wellnesstoolboxRoute);
+app.use('/adminAvatar', adminAvatarRoute);
+
 // This route maps the root URL to any path defined in main.js
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known

@@ -1,0 +1,217 @@
+<div class="jumbotron text-center">
+
+            {{#if check_user.feelings}}
+            
+            <div class="card border-primary mb-2 w-100 mx-auto">
+			<div class="card-header">
+				<h5 class="card-title">{{feelings.name}}</h5>
+			</div>
+            
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<a href="{{{feelings.firstURL}}}" data-title="{{feelings.name}}" data-toggle="lightbox">
+							<img src="{{{feelings.firstURL}}}" alt="Poster unavailable" height="240" width="320">
+						</a>
+					</div>
+
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<div class="row"> {{!-- subtitles, language... --}}
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Quote</p>
+								<p class="text-info">
+									{{feelings.Quote}}
+								</p>
+							</div>
+                            <div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Level</p>
+								<p class="text-info">
+									{{fl}}
+								</p>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+								<p class="font-italic">Tasks</p>
+								<p class="text-info">
+									{{feelings.Tasks}}
+								</p>
+							</div>
+
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">noTasks</p>
+								<p class="text-info">
+									{{feelings.noTasks}}
+								</p>
+							</div>
+													</div>
+					</div>
+					</div>
+			</div>			
+		</div>
+
+        <div class="card border-primary mb-2 w-100 mx-auto">
+			<div class="card-header">
+				<h5 class="card-title">{{thoughts.name}}</h5>
+			</div>
+            
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<a href="{{{thoughts.firstURL}}}" data-title="{{thoughts.name}}" data-toggle="lightbox">
+							<img src="{{{thoughts.firstURL}}}" alt="Poster unavailable" height="240" width="320">
+						</a>
+					</div>
+
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<div class="row"> {{!-- subtitles, language... --}}
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Quote</p>
+								<p class="text-info">
+									{{thoughts.Quote}}
+								</p>
+							</div>
+                            <div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Level</p>
+								<p class="text-info">
+									{{tl}}
+								</p>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+								<p class="font-italic">Tasks</p>
+								<p class="text-info">
+									{{thoughts.Tasks}}
+								</p>
+							</div>
+
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">noTasks</p>
+								<p class="text-info">
+									{{thoughts.noTasks}}
+								</p>
+							</div>
+													</div>
+					</div>
+					</div>
+			</div>			
+		</div>
+
+        <div class="card border-primary mb-2 w-100 mx-auto">
+			<div class="card-header">
+				<h5 class="card-title">{{actions.name}}</h5>
+			</div>
+            
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<a href="{{{actions.firstURL}}}" data-title="{{actions.name}}" data-toggle="lightbox">
+							<img src="{{{actions.firstURL}}}" alt="Poster unavailable" height="240" width="320">
+						</a>
+					</div>
+
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<div class="row"> {{!-- subtitles, language... --}}
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Quote</p>
+								<p class="text-info">
+									{{actions.Quote}}
+								</p>
+							</div>
+                            <div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Level</p>
+								<p class="text-info">
+									{{al}}
+								</p>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+								<p class="font-italic">Tasks</p>
+								<p class="text-info">
+									{{actions.Tasks}}
+								</p>
+							</div>
+
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">noTasks</p>
+								<p class="text-info">
+									{{actions.noTasks}}
+								</p>
+							</div>
+													</div>
+					</div>
+					</div>
+			</div>			
+		</div>
+
+        <div class="card border-primary mb-2 w-100 mx-auto">
+			<div class="card-header">
+				<h5 class="card-title">{{aura.name}}</h5>
+			</div>
+            
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-2">
+						<a href="{{{aura.firstURL}}}" data-title="{{aura.name}}" data-toggle="lightbox">
+							<img src="{{{aura.firstURL}}}" alt="Poster unavailable" height="240" width="320">
+						</a>
+					</div>
+
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<div class="row"> {{!-- subtitles, language... --}}
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Quote</p>
+								<p class="text-info">
+									{{aura.Quote}}
+								</p>
+							</div>
+                            <div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">Level</p>
+								<p class="text-info">
+									{{ul}}
+								</p>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-3">
+								<p class="font-italic">Tasks</p>
+								<p class="text-info">
+									{{aura.Tasks}}
+								</p>
+							</div>
+
+							<div class="col-sm-12 col-md-6 col-lg-2">
+								<p class="font-italic">noTasks</p>
+								<p class="text-info">
+									{{aura.noTasks}}
+								</p>
+							</div>
+													</div>
+					</div>
+					</div>
+			</div>			
+		</div>
+            {{else}}
+    <div class="containeravatar">
+        <img {{{AvatarPic}}}></img>
+        <div class="down">
+            <a  href="/avatar/createAvatar"><button type="button" class="btn btn-lg btn-block btn-warning">Create Avatar</button></a>
+        </div>
+    </div>
+        {{/if}}
+
+
+{{#if check_user.pet}}
+<div class="containeravatar">
+			<img src="{{{pets.petPicURL}}}" alt="Poster unavailable" height="240" width="320">
+        <div class="down">
+        </div>
+    </div>
+
+
+            {{else}}
+
+    <div class="containeravatar">
+        <img {{{PetPic}}}></img>
+        <div class="down">
+            <a  href="/avatar/createPet"><button type="button" class="btn btn-lg btn-block btn-danger">Create Pet</button></a>
+        </div>
+    </div>
+
+{{/if}}
+    <br>
+</div>

@@ -179,22 +179,23 @@ router.get('/', (req, res) => {
 
 router.get('/createAvatar', (req, res) => {
 
-	Pet.findAll({
+	Avatar.findOne({
+		where: { pet: { [Op.ne]: null } }
 	}).then(pets => {
-		Aspect.findAll({
-		}).then((Aspect) => {
-		res.render('avatar/createAvatar', {
-			Aspect: Aspect,
-			pets: pets
-		});
-	}).catch(err =>
-
 		Aspect.findAll({
 		}).then((Aspect) => {
 			res.render('avatar/createAvatar', {
 				Aspect: Aspect,
-			}) // To catch no video ID
-		}));
+				pets: pets
+			});
+		}).catch(err =>
+
+			Aspect.findAll({
+			}).then((Aspect) => {
+				res.render('avatar/createAvatar', {
+					Aspect: Aspect,
+				}) // To catch no video ID
+			}));
 	});
 });
 
@@ -204,112 +205,112 @@ router.get('/createAvatar', (req, res) => {
 
 
 
-	router.post('/updatePet', (req, res) => {
-		let feelingsPet = req.body.feelingsPet;
-		let pet = req.body.motiv;
-		console.log(feelingsPet, pet)
-		Avatar.update({ feelingsPet: feelingsPet, pet: pet }, {
-			where: { username: "tom" }
-		}).then((Avatar) => {
-			res.redirect('/avatar');
-		})
-	});
+router.post('/updatePet', (req, res) => {
+	let feelingsPet = req.body.feelingsPet;
+	let pet = req.body.motiv;
+	console.log(feelingsPet, pet)
+	Avatar.update({ feelingsPet: feelingsPet, pet: pet }, {
+		where: { username: "tom" }
+	}).then((Avatar) => {
+		res.redirect('/avatar');
+	})
+});
 
-	router.post('/updateAvatar', (req, res) => {
-		let username = "tom";
-		let thoughts = req.body.thoughts;
-		let feelings = req.body.feelings;
-		let aura = req.body.aura;
-		let actions = req.body.actions;
-		Avatar.update({ username: username, thoughts: thoughts, aura: aura, actions: actions, feelings: feelings }, {
-			where: { username: "tom" }
-		}).then((Avatar) => {
-			res.redirect('/avatar');
-		})
-	});
+router.post('/updateAvatar', (req, res) => {
+	let username = "tom";
+	let thoughts = req.body.thoughts;
+	let feelings = req.body.feelings;
+	let aura = req.body.aura;
+	let actions = req.body.actions;
+	Avatar.update({ username: username, thoughts: thoughts, aura: aura, actions: actions, feelings: feelings }, {
+		where: { username: "tom" }
+	}).then((Avatar) => {
+		res.redirect('/avatar');
+	})
+});
 
-	router.get('/createPet', (req, res) => {
-		Avatar.findOne({
-			where: { pet: { [Op.ne]: null } }
-		}).then(Avatar => {
-			Pet.findAll({
-				// where: { petName: user_pet },
-				// raw: true
-			}).then(pets => {
-				const petName = pets[0].petName;
-				console.log("PETTsdsdsdITTTS", petName)
+router.get('/createPet', (req, res) => {
+	Avatar.findOne({
+		where: { feelings: { [Op.ne]: null } }
+	}).then(Avatar => {
+		Pet.findAll({
+			// where: { petName: user_pet },
+			// raw: true
+		}).then(pets => {
+			const petName = pets[0].petName;
+			console.log("PETTsdsdsdITTTS", petName)
 
-				res.render('avatar/createPet', {
-					pets: pets,
-					petName: petName,
-					Avatar: Avatar
-				});
+			res.render('avatar/createPet', {
+				pets: pets,
+				petName: petName,
+				Avatar: Avatar
 			});
+		});
 
-		}).catch(err =>
-			Pet.findAll({
-				// where: { petName: user_pet },
-				// raw: true
-			}).then(pets => {
-				const petName = pets[0].petName;
+	}).catch(err =>
+		Pet.findAll({
+			// where: { petName: user_pet },
+			// raw: true
+		}).then(pets => {
+			const petName = pets[0].petName;
 
-				console.log("PETTITTTS", petName)
-				res.render('avatar/createPet', {
-					pets: pets,
-					petName: petName,
-					Avatar: Avatar
-				});
-			}));
+			console.log("PETTITTTS", petName)
+			res.render('avatar/createPet', {
+				pets: pets,
+				petName: petName,
+				Avatar: Avatar
+			});
+		}));
 
-	});
-
-
-
-
-	router.get('/deletePet', (req, res) => {
-		res.render('avatar/deletePet') // renders views/index.handlebars
-	});
-
-	router.get('/deleteAvatar', (req, res) => {
-		res.render('avatar/deleteAvatar') // renders views/index.handlebars
-	});
+});
 
 
-	// Logout User
-	router.get('/logout', (req, res) => {
-		req.logout();
-		res.redirect('/');
-	});
 
-	router.post('/saveAvatar', (req, res) => {
-		let username = "tom";
-		let thoughts = req.body.thoughts;
-		let feelings = req.body.feelings;
-		let aura = req.body.aura;
-		let actions = req.body.actions;
-		console.log(thoughts, feelings, aura, actions)
-		Avatar.create({
-			thoughts,
-			feelings,
-			aura,
-			actions,
-			username
-		}).then((Avatar) => {
-			res.redirect('/avatar');
-		})
-	});
 
-	router.post('/savePet', (req, res) => {
-		let username = "tom";
-		let feelingsPet = req.body.feelingsPet;
-		let pet = req.body.motiv;
-		Avatar.create({
-			feelingsPet,
-			pet,
-			username
-		}).then((Avatar) => {
-			res.redirect('/avatar');
-		})
-	});
+router.get('/deletePet', (req, res) => {
+	res.render('avatar/deletePet') // renders views/index.handlebars
+});
 
-	module.exports = router;
+router.get('/deleteAvatar', (req, res) => {
+	res.render('avatar/deleteAvatar') // renders views/index.handlebars
+});
+
+
+// Logout User
+router.get('/logout', (req, res) => {
+	req.logout();
+	res.redirect('/');
+});
+
+router.post('/saveAvatar', (req, res) => {
+	let username = "tom";
+	let thoughts = req.body.thoughts;
+	let feelings = req.body.feelings;
+	let aura = req.body.aura;
+	let actions = req.body.actions;
+	console.log(thoughts, feelings, aura, actions)
+	Avatar.create({
+		thoughts,
+		feelings,
+		aura,
+		actions,
+		username
+	}).then((Avatar) => {
+		res.redirect('/avatar');
+	})
+});
+
+router.post('/savePet', (req, res) => {
+	let username = "tom";
+	let feelingsPet = req.body.feelingsPet;
+	let pet = req.body.motiv;
+	Avatar.create({
+		feelingsPet,
+		pet,
+		username
+	}).then((Avatar) => {
+		res.redirect('/avatar');
+	})
+});
+
+module.exports = router;

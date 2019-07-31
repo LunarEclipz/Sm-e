@@ -20,7 +20,7 @@ const upload = multer({
 	fileFilter: (req, file, callback) => {
 		checkFileType(file, callback);
 	}
-}).single('petPicUpload');
+}).single('posterUpload');
 
 // Check File Type
 function checkFileType(file, callback) {

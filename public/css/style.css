@@ -24,7 +24,7 @@
   margin-left: 15%;
 }
 
-button.btn-lg-yellowalt{
+button.btn-lg-warmalt{
   background-color: #ffffff;
   width: 125px;
   height: 50px;
@@ -42,7 +42,7 @@ button.btn-lg-yellowalt{
   margin-top: 1%;
 }
 
-.p-yellow{
+.p-warm{
   display: inline-block;
   padding-left: 1.5%;
   padding-right:1.5%;
@@ -50,13 +50,13 @@ button.btn-lg-yellowalt{
   color: #DF744A;
 }
 
-.btn-yellow{
+.btn-warm{
   background-color: #dcb239;
   color: #ffffff;
   border-color: #dcb239; 
 }
 
-.btn-yellowalt{
+.btn-warmalt{
   background-color: #ffffff;
   color: #DF744A;
   border-color: #DF744A; 
@@ -135,4 +135,28 @@ h2{
 .card-text {
   height: 70px;
   overflow: auto;
+}
+
+.nav-pills .nav-link.active{
+    background-color: #DF744A;
+}
+
+a:hover {
+  color: darkorange;
+}
+
+.text-powder {
+  color: #BFD8D2;
+}
+
+.text-warm {
+  color: #DF744A;
+}
+
+.text-lemon {
+  color: #dcb239;
+}
+
+.card-peach {
+  background-color: #FEDCD2;
 }

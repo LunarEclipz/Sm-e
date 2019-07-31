@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="card card-body" style="color:#df744a">
+        <h3>Edit Event</h3>
+        <form action="/adminEvents/saveEdit/{{event.id}}?_method=PUT" method="post" id="editEvent">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="form-group">
+                        {{!-- Practical 5 Exercise 2: Add a eventName input text here named 'eventName'--}}
+                        <label class="font-italic" for="eventName">Event Name</label>
+                        <input class="form-control" type="text" name="eventName" id="eventName"
+                            value="{{event.eventName}}" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="font-italic" for="eventDescription">Event Description</label>
+                        <textarea class="form-control" id="eventDescription" name="eventDescription" rows="6"
+                            required>{{event.eventDescription}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-italic" for="eventCost">Event Cost (Leave blank if event cost is
+                            free)</label>
+                        <input class="form-control" type="text" name="eventCost" value="{{event.eventCost}}"
+                            id="eventCost">
+                    </div>
+                    <div class="form-group">
+                        <label class="font-italic" for="eventLocation">Event Location</label>
+                        <input class="form-control" type="text" name="eventLocation" value="{{event.eventLocation}}"
+                            id="eventLocation" required>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <input type="file" id="posterUpload" name="posterUpload"
+                        accept="image/png,image/jpeg,image/jpg,image/gif">
+                    <a href="{{event.posterURL}}" data-title="{{event.title}}" data-toggle="lightbox">
+                        <img id="poster" {{#if event.posterURL}} src="{{event.posterURL}}" {{else}}
+                            src="/img/default.jpeg" {{/if}} class="border img-thumbnail img-fluid"
+                            style="height:95%;width:100%">
+                    </a>
+                    <input id="posterURL" type="hidden" name="posterURL" value="{{event.posterURL}}">
+                    <div class="font-weight-bold text-danger small" id="posterErr" style="display:none"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
+                        <label class="font-italic">Date of Event</label>
+                        <input id="datepicker" width="200" name="eventDate"
+                            value="{{dateFormat event.eventDate 'DD/MM/YYYY'}}" readonly required />
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <label class="font-italic">Event Category</label>
+                        <br>
+                        {{!-- Practical 5 Exercise 2: Language radio buttons here'--}}
+                        <div class="form-check form-check-inline">
+                            <input class="form=check-input" type="checkbox" name="categories" value="Depression"
+                                onclick="categoryCheck()" {{checkbox event.eventCategory 'Depression'}}>
+                            <label class="form-check-label" for="depression">Depression</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form=check-input" type="checkbox" name="categories" value="Anxiety"
+                                onclick="categoryCheck()" {{checkbox event.eventCategory 'Anxiety'}}>
+                            <label class="form-check-label" for="anxiety">Anxiety</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form=check-input" type="checkbox" name="categories" value="Mood Disorder"
+                                onclick="categoryCheck()" {{checkbox event.eventCategory 'Mood Disorder'}}>
+                            <label class="form-check-label" for="mood disorder">Mood Disorder</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form=check-input" type="checkbox" name="categories" value="Eating Disorder"
+                                onclick="categoryCheck()" {{checkbox event.eventCategory 'Eating Disorder'}}>
+                            <label class="form-check-label" for="eating disorder">Eating Disorder</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form=check-input" type="checkbox" name="categories" id=""
+                                value="Post-Traumatic Stress" onclick="categoryCheck()"
+                                {{checkbox event.eventCategory 'Post-Traumatic Stress'}}>
+                            <label class="form-check-label" for="post-traumatic stress">Post-Traumatic Stress</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form=check-input" type="checkbox" name="categories" value="Social Anxiety"
+                                onclick="categoryCheck()" {{checkbox event.eventCategory 'Social Anxiety'}}>
+                            <label class="form-check-label" for="social anxiety">Social Anxiety</label>
+                        </div>
+                        <p class="font-weight-bold" id="categoryErr" style="display:block; color: #bfd8d2;">
+                            Please select at least one category</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <label for="eventTime" class="font-italic">Event Time</label>
+                            <input class="form-control" type="time" value="{{event.eventTime}}" id="eventTime"
+                                name="eventTime" required>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-2">
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <label for="eventEndTime" class="font-italic">Event Time</label>
+                            <input class="form-control" type="time" value="{{event.eventEndTime}}" id="eventEndTime"
+                                name="eventEndTime" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button id="butAddEvent" type="submit" class="btn button" action="/adminEvents/addEvent"
+                style="float:right;" disabled>Update Event
+            </button>
+        </form>
+    </div>
+</div>
+<script>
+    $('#datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        uiLibrary: 'bootstrap4',
+    });
+</script>

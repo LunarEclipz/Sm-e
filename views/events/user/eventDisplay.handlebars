@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <h3 class="text-left" style="color: #df744a;font-weight: bold;">Event List</h3>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4 text-right">
+                    <a class="btn button" role="button" data-toggle="modal" data-target="#basicExampleModal">
+                        View Joined Events
+                    </a>
+                </div>
+            </div>
+            </br>
+            <div id="search" class="search-wrap" style="color: #df744a">
+                <p class="font-italic text-left"><i class="fas fa-search"></i> Search for Events</i></p>
+                <form action="/events/find" class="search">
+                    <div>
+                        <input type="search" name="term" class="form-control"
+                            placeholder="Type something and hit 'Enter' to search for it!">
+                    </div>
+                </form>
+            </div>
+            </br>
+            <hr>
+            <div class="card-deck">
+                {{#if events}}
+                {{#each events}}
+                <div class="card-body col-sm-12 col-md-12 col-lg-4 d-flex align-items-stretch">
+                    <div class="card card-cascade regular">
+                        <!-- Card image -->
+                        <div class="view view-cascade overlay">
+                            <img id="poster" {{#if posterURL}} src="{{posterURL}}" {{else}} src="/img/default.jpeg"
+                                {{/if}} alt="No image available" class="card-img-top" height="250px" width="200px">
+                        </div>
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade">
+                            <h4 class="font-weight-bold card-title contentText">{{eventName}}</h4>
+                            <h5 class="card-text contentText" style="color:#df744a">{{eventCost}}</h5>
+                            <p class="card-text contentText">{{eventLocation}}</p>
+                            <p class="card-text" style="color: #df744a"> <i
+                                    class="fas fa-calendar mr-1"></i>{{dateFormat eventDate 'DD MMM YYYY'}}</p>
+                        </div>
+                        <div class="card-footer text-muted text-center">
+                            <a class="btn button" role="button" href="eventInfo/{{id}}">View Event</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <div class="text-center" style="margin-left: 20px">
+                    <h4 class="contentText">No Events</h4>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+</br>
+
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#df744a">Events You Registered for: </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <th class="text-left align-middle">Event Name</th>
+                            <th class="text-left align-middle">Actions</th>
+                        </thead>
+                        {{#if registers}}
+                        {{#each registers}}
+                        <tbody>
+                            <tr>
+                                <td class="text-left align-middle"><a href="eventInfo/{{eid}}">{{eventName}}</a></td>
+                                <td class="text-left align-middle">
+                                    <button class="btn btn-danger" data-toggle="confirmation"
+                                        data-title="Cancel Registration?" href="cancel/{{id}}">Cancel Registration</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {{/each}}
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

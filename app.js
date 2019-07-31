@@ -18,6 +18,7 @@ const avatarRoute = require('./routes/avatar');
 const wellnesstoolboxRoute = require ('./routes/wellnesstoolbox');
 const smile = require('./config/DBConnection');
 const adminAvatarRoute = require('./routes/adminAvatar');
+const mainRoute = require('./routes/journal');
 
 // Connects to MySQL database
 smile.setUpDB(false);

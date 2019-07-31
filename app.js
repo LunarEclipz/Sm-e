@@ -54,6 +54,7 @@ const app = express();
 *
 * */
 app.engine('handlebars', exphbs({
+	helpers: hbs,
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
 app.set('view engine', 'handlebars');

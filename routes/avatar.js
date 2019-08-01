@@ -4,8 +4,9 @@ const Avatar = require('../models/avatar');
 const Pet = require('../models/adminPet');
 const Aspect = require('../models/adminAvatar');
 const Sequelize = require('sequelize');
-
+const jimp = require('jimp');
 const Op = Sequelize.Op;
+
 
 
 
@@ -89,22 +90,55 @@ router.get('/', (req, res) => {
 												where: { petName: user_pet },
 												raw: true
 											}).then(pets => {
-												console.log("HERE!!!!!!!!!", userpet);
-
-												console.log("HERE!!!!!!!!!", pets);
-												res.render('avatar/avatar', {
-													AvatarPic: EmptyAvatar, PetPic: EmptyPet,
-													checkuser: checkuser, feelings: feelings[0], thoughts: thoughts[0],
-													actions: actions[0], aura: aura[0], fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
-													pets: pets[0]
+												const images = ['./public/img/Body.png', './public/'+feelings[0].firstURL, './public/'+thoughts[0].firstURL,
+												'./public/'+ actions[0].firstURL, './public/'+aura[0].firstURL];
+												const jimps = [];
+												
+												for (var i = 0; i < images.length; i++) {
+													jimps.push(jimp.read(images[i]));
+												}
+												Promise.all(jimps).then(function (data) {
+													return Promise.all(jimps);
+												}).then(function (data) {
+													data[0].composite(data[1], -100, -100);
+													data[0].composite(data[2], -100, -190);
+													data[0].composite(data[3], -100, 0);
+													data[0].composite(data[4], -150, 0);
+													data[0].write('public/uploads/final-images/test.png', function () {
+														console.log("wrote the image");
+													});
 												});
-											}).catch(err =>
-
+												const finalImg = "public/uploads/final-images/test.png";
 												res.render('avatar/avatar', {
 													AvatarPic: EmptyAvatar, PetPic: EmptyPet,
 													checkuser: checkuser, feelings: feelings[0], thoughts: thoughts[0],
 													actions: actions[0], aura: aura[0], fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
-												})); // To catch no video ID
+													pets: pets[0], finalImg:finalImg
+												});
+											}).catch(err =>{
+												const images = ['./public/img/Body.png', './public/'+feelings[0].firstURL, './public/'+thoughts[0].firstURL,
+												'./public/'+ actions[0].firstURL, './public/'+aura[0].firstURL];
+												const jimps = [];
+												for (var i = 0; i < images.length; i++) {
+													jimps.push(jimp.read(images[i]));
+												}
+												Promise.all(jimps).then(function (data) {
+													return Promise.all(jimps);
+												}).then(function (data) {
+													data[0].composite(data[1], -50, 20);
+													data[0].composite(data[2], -50, 0);
+													data[0].composite(data[3], -50, -50);
+													data[0].composite(data[4], -50, -50);
+													data[0].write('public/uploads/final-images/test.png', function () {
+														console.log("wrote the image");
+													});
+												});
+												const finalImg = "public/uploads/final-images/test.png";
+												res.render('avatar/avatar', {
+													AvatarPic: EmptyAvatar, PetPic: EmptyPet,
+													checkuser: checkuser, feelings: feelings[0], thoughts: thoughts[0],
+													actions: actions[0], aura: aura[0], fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,finalImg:finalImg
+												})}); // To catch no video ID
 										});
 									});
 								});

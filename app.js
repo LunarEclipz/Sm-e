@@ -25,7 +25,11 @@ const wellnesstoolboxRoute = require ('./routes/wellnesstoolbox');
 const smile = require('./config/DBConnection');
 const adminAvatarRoute = require('./routes/adminAvatar');
 const journalRoute = require('./routes/journal');
-const hbs = require('./helpers/hbs');
+const eventRoute = require('./routes/events')
+const adminEventsRoute = require('./routes/adminEvents')
+const {dateFormat} = require('./helpers/dateFormat')
+const {checkbox} = require('./helpers/checkbox')
+const {selectCheck} = require('./helpers/hbs')
 
 // Connects to MySQL database
 const smileDB = require('./config/DBConnection');
@@ -33,7 +37,6 @@ smile.setUpDB(false);
 
 const authenticate = require('./config/passport');
 authenticate.localStrategy(passport);
-
 
 const MySQLStore = require('express-mysql-session');
 const db = require('./config/db');
@@ -55,7 +58,17 @@ const app = express();
 *
 * */
 app.engine('handlebars', exphbs({
-	helpers: hbs,
+	helpers: {
+		selectCheck: selectCheck,
+		dateFormat : dateFormat,
+		checkbox : checkbox
+	},
+	// helpers: hbs,
+	// helpers:{
+	// 	hbs: hbs,
+	// 	dateFormat : dateFormat,
+	// 	checkbox : checkbox
+	// },
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
 app.set('view engine', 'handlebars');
@@ -68,7 +81,7 @@ app.use(bodyParser.json());
 
 // Creates static folder for publicly accessible HTML, CSS and Javascript files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/wtbuploads', express.static('wtbuploads'));
+app.use('/uploads', express.static('uploads'));
 
 // Method override middleware to use other HTTP methods such as PUT and DELETE
 app.use(methodOverride('_method'));
@@ -137,6 +150,8 @@ app.use('/avatar', avatarRoute);
 app.use ('/wellnesstoolbox', wellnesstoolboxRoute);
 app.use('/adminAvatar', adminAvatarRoute);
 app.use('/journal', journalRoute);
+app.use('/events', eventRoute)
+app.use('/adminEvents', adminEventsRoute)
 
 // This route maps the root URL to any path defined in main.js
 /*

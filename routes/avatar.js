@@ -15,15 +15,15 @@ router.get('/', (req, res) => {
 	const EmptyAvatar = 'src="/img/Empy_Mark.png" height=240 width=320';
 	const EmptyPet = 'src="/img/Empy_Mark.png" height=240 width=320';
 	Avatar.findOne({
-			// where: { username: "tom" },
-			// raw: true
+			where: { username: "tom" },
+			raw: true
 	}).then(check_user => {
 		const checkuser = check_user.username;
 
 
 		Avatar.findOne({
 			attributes: ['feelings'],
-			where: { username: checkuser },
+			where: { username: checkuser, feelings: { [Op.ne]: null }},
 			raw: true
 		}).then(userfeelings => {
 			const user_feelings = userfeelings.feelings
@@ -147,7 +147,10 @@ router.get('/', (req, res) => {
 						});
 					});
 				});
-			});
+			})
+			
+			
+			;
 
 		}).catch(err =>
 			Avatar.findOne({
@@ -164,14 +167,14 @@ router.get('/', (req, res) => {
 				}).then(pets => {
 					res.render('avatar/avatar', {
 						AvatarPic: EmptyAvatar, PetPic: EmptyPet,
-						checkuser: checkuser, fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
+						checkuser: checkuser, check_user: check_user,
 						pets: pets[0]
 					});
 				}).catch(err =>
 
 					res.render('avatar/avatar', {
 						AvatarPic: EmptyAvatar, PetPic: EmptyPet,
-						checkuser: checkuser, fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
+						checkuser: checkuser,  check_user: check_user,
 					})); // To catch no video ID
 			}));
 	}).catch(err =>
@@ -273,7 +276,6 @@ router.get('/createPet', (req, res) => {
 			// raw: true
 		}).then(pets => {
 			const petName = pets[0].petName;
-			console.log("PETTsdsdsdITTTS", petName)
 
 			res.render('avatar/createPet', {
 				pets: pets,

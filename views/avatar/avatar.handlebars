@@ -1,7 +1,7 @@
 <div class="jumbotron text-center">
 
             {{#if check_user.feelings}}
-            
+							<img src="/uploads/final-images/test.png" alt="Poster unavailable" id="mergedImg" height="240" width="320">
             <div class="card border-primary mb-2 w-100 mx-auto">
 			<div class="card-header">
 				<h5 class="card-title">{{feelings.name}}</h5>
@@ -215,3 +215,20 @@
 {{/if}}
     <br>
 </div>
+
+{{!-- <script src="https://unpkg.com/merge-images">
+import mergeImages from 'merge-images';
+(function merge(){
+	(mergeImages ([ { src: '/img/body.png', x: 0, y: 0 },
+  { src: '{{feelings.firstURL}}',x: 0, y: 0 },
+  { src: '{{thoughts.firstURL}}',x: 10, y: 0  },
+  { src: '{{actions.firstURL}}',x: 110, y: 0 },
+  { src: '{{aura.firstURL}}' }
+  ]).then(b64 =>
+   document.getElementById("mergedImg").src = b64;
+ ) )
+
+
+
+} .();
+</script> --}}

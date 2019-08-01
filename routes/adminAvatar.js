@@ -7,6 +7,10 @@ const upload = require('../helpers/petPicUpload');
 const firstUpload = require('../helpers/firstLevel');
 const secondUpload = require('../helpers/secondLevel');
 const thirdUpload = require('../helpers/thirdLevel');
+const alertMessage = require('../helpers/messenger');
+
+
+
 
 // var Handlebars = require('handlebars');
 
@@ -124,6 +128,7 @@ router.post('/thirdUpload', (req, res) => {
 	});
 })
 router.post('/addAspect', (req, res) => {
+	alertMessage(res, 'success', 'You have added an aspect. ', true);
 	let Fields = req.body.Fields;
 	let Tasks = req.body.Tasks;
 	let noTasks = req.body.noTasks;
@@ -160,6 +165,8 @@ router.post('/addAspect', (req, res) => {
 });
 
 router.post('/addPet', (req, res) => {
+	alertMessage(res, 'success', 'You have added a pet. ', true);
+
 	let petName = req.body.petName;
 	let tasks = req.body.tasks;
 	let noTasks = req.body.noTasks;
@@ -220,6 +227,8 @@ router.get('/editAspect/:id', (req, res) => {
 
 
 router.post('/updatePet/:id', (req, res) => {
+	alertMessage(res, 'success', 'You have updated a pet. ', true);
+
 	var id = req.params.id
 	let petName = req.body.petName;
 	let tasks = req.body.tasks;
@@ -234,6 +243,8 @@ router.post('/updatePet/:id', (req, res) => {
 });
 
 router.post('/updateAspect/:id', (req, res) => {
+	alertMessage(res, 'success', 'You have updated an aspect. ', true);
+
 	var id = req.params.id
 
 	let Fields = req.body.Fields;
@@ -241,15 +252,18 @@ router.post('/updateAspect/:id', (req, res) => {
 	let noTasks = req.body.noTasks;
 	let Name = req.body.Name;
 	let Quote = req.body.Quote;
+	let firstURL = req.body.firstURL;
 	let Tasks2 = req.body.Tasks2;
 	let noTasks2 = req.body.noTasks2;
 	let Quote2 = req.body.Quote2;
+	let secondURL = req.body.secondURL;
 	let Tasks3 = req.body.Tasks3;
 	let noTasks3 = req.body.noTasks3;
 	let Quote3 = req.body.Quote3;
+	let thirdURL = req.body.thirdURL;
 	Aspect.update({ Fields: Fields, Quote: Quote, Tasks: Tasks, noTasks: noTasks, Name: Name,
 		Quote2: Quote2, Tasks2: Tasks2, noTasks2: noTasks2, 
-		Quote3: Quote3, Tasks3: Tasks3, noTasks3: noTasks3  }, {
+		Quote3: Quote3, Tasks3: Tasks3, noTasks3: noTasks3, firstURL:firstURL, secondURL:secondURL,thirdURL:thirdURL  }, {
 		where: { id: id }
 	})
 		.then((Aspect) => {
@@ -258,6 +272,8 @@ router.post('/updateAspect/:id', (req, res) => {
 });
 
 router.post('/deletePet/:id', (req, res) => {
+	alertMessage(res, 'danger', 'You have deleted a pet. ', true);
+
 	var id = req.params.id
 	Pet.destroy({
 		where: {
@@ -269,6 +285,8 @@ router.post('/deletePet/:id', (req, res) => {
 });
 
 router.post('/deleteAspect/:id', (req, res) => {
+	alertMessage(res, 'danger', 'You have deleted a aspect. ', true);
+
 	var id = req.params.id
 	Aspect.destroy({
 		where: {

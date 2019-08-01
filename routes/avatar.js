@@ -6,6 +6,8 @@ const Aspect = require('../models/adminAvatar');
 const Sequelize = require('sequelize');
 const jimp = require('jimp');
 const Op = Sequelize.Op;
+const User = require('../models/User');
+const alertMessage = require('../helpers/messenger');
 
 
 
@@ -14,15 +16,15 @@ router.get('/', (req, res) => {
 	const EmptyAvatar = 'src="/img/Empy_Mark.png" height=240 width=320';
 	const EmptyPet = 'src="/img/Empy_Mark.png" height=240 width=320';
 	Avatar.findOne({
-		// 	where: { username: user },
-		// 	raw: true
+			where: { username: "tom" },
+			raw: true
 	}).then(check_user => {
 		const checkuser = check_user.username;
 
 
 		Avatar.findOne({
 			attributes: ['feelings'],
-			where: { username: checkuser },
+			where: { username: checkuser, feelings: { [Op.ne]: null }},
 			raw: true
 		}).then(userfeelings => {
 			const user_feelings = userfeelings.feelings
@@ -146,7 +148,10 @@ router.get('/', (req, res) => {
 						});
 					});
 				});
-			});
+			})
+			
+			
+			;
 
 		}).catch(err =>
 			Avatar.findOne({
@@ -163,14 +168,14 @@ router.get('/', (req, res) => {
 				}).then(pets => {
 					res.render('avatar/avatar', {
 						AvatarPic: EmptyAvatar, PetPic: EmptyPet,
-						checkuser: checkuser, fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
+						checkuser: checkuser, check_user: check_user,
 						pets: pets[0]
 					});
 				}).catch(err =>
 
 					res.render('avatar/avatar', {
 						AvatarPic: EmptyAvatar, PetPic: EmptyPet,
-						checkuser: checkuser, fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
+						checkuser: checkuser,  check_user: check_user,
 					})); // To catch no video ID
 			}));
 	}).catch(err =>
@@ -240,6 +245,8 @@ router.get('/createAvatar', (req, res) => {
 
 
 router.post('/updatePet', (req, res) => {
+	alertMessage(res, 'success', 'You have added a pet. ', true);
+
 	let feelingsPet = req.body.feelingsPet;
 	let pet = req.body.motiv;
 	console.log(feelingsPet, pet)
@@ -251,6 +258,8 @@ router.post('/updatePet', (req, res) => {
 });
 
 router.post('/updateAvatar', (req, res) => {
+	alertMessage(res, 'success', 'You have added an Avatar. ', true);
+
 	let username = "tom";
 	let thoughts = req.body.thoughts;
 	let feelings = req.body.feelings;
@@ -272,7 +281,6 @@ router.get('/createPet', (req, res) => {
 			// raw: true
 		}).then(pets => {
 			const petName = pets[0].petName;
-			console.log("PETTsdsdsdITTTS", petName)
 
 			res.render('avatar/createPet', {
 				pets: pets,
@@ -317,6 +325,8 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/saveAvatar', (req, res) => {
+	alertMessage(res, 'success', 'You have added an Avatar. ', true);
+
 	let username = "tom";
 	let thoughts = req.body.thoughts;
 	let feelings = req.body.feelings;
@@ -335,6 +345,8 @@ router.post('/saveAvatar', (req, res) => {
 });
 
 router.post('/savePet', (req, res) => {
+	alertMessage(res, 'success', 'You have added a pet. ', true);
+
 	let username = "tom";
 	let feelingsPet = req.body.feelingsPet;
 	let pet = req.body.motiv;

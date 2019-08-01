@@ -1,0 +1,120 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Journal.</h3>
+        </div>
+
+        <ul class="list-unstyled">
+            <li>
+                <a href="/journal/calendar">View All Entries</a>
+            </li>
+            <li>
+                <a href="/journal/newEntry">Write A New Entry</a>
+            </li>
+            <li>
+                <a href="#trackerSubmenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">Trackers</a>
+                <ul class="collapse list-unstyled" id="trackerSubmenu">
+                    <li class="active">
+                        <a href="/journal/moodTracker">Mood Tracker</a>
+                    </li>
+                    <li>
+                        <a href="/journal/emotionTracker">Emotion Tracker</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar-2 navbar-expand-lg">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-yellow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h2 class="text-center">Mood Tracker</h2>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <p class="font-italic">
+                Drag to Zoom
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar, #content').toggleClass('active');
+            $(this).toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+</script>
+<script>
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            zoomEnabled: true,
+            axisY: {
+                includeZero: false,
+            },
+            data: [
+                {
+                    type: "line",
+
+                    dataPoints: [
+                        { x: new Date(2019, 00, 1), y: 1 },
+                        { x: new Date(2019, 01, 1), y: 5 },
+                        { x: new Date(2019, 02, 1), y: 5 },
+                        { x: new Date(2019, 03, 1), y: 4 },
+                        { x: new Date(2019, 04, 1), y: 4 },
+                        { x: new Date(2019, 05, 1), y: 5 },
+                        { x: new Date(2019, 06, 1), y: 2 },
+                        { x: new Date(2019, 07, 1), y: 3 },
+                        { x: new Date(2019, 08, 1), y: 1 },
+                        { x: new Date(2019, 09, 1), y: 0 },
+                        { x: new Date(2019, 10, 1), y: 0 },
+                        { x: new Date(2019, 11, 1), y: 1 }
+                    ]
+                }
+            ]
+        });
+        chart.render();
+
+    }
+
+    /*var myData = localStorage['objectToPass'];
+    localStorage.removeItem('objectToPass');
+    var moodY = myData[0];
+    var dateX = myData[1];
+    var data = [];
+    var dataSeries = { type: "line" };
+    var dataPoints = [];
+    dataPoints.push({
+        x: moodY,
+        y: dateX
+    });
+    dataSeries.dataPoints = dataPoints;
+    data.push(dataSeries);*/
+
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

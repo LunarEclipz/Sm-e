@@ -1,0 +1,131 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Journal.</h3>
+        </div>
+
+        <ul class="list-unstyled">
+            <li>
+                <a href="/journal/calendar">View All Entries</a>
+            </li>
+            <li>
+                <a href="/journal/newEntry">Write A New Entry</a>
+            </li>
+            <li>
+                <a href="#trackerSubmenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">Trackers</a>
+                <ul class="collapse list-unstyled" id="trackerSubmenu">
+                    <li>
+                        <a href="/journal/moodTracker">Mood Tracker</a>
+                    </li>
+                    <li>
+                        <a href="/journal/emotionTracker">Emotion Tracker</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar-2 navbar-expand-lg">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-yellow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h2 class="text-center">Update Entry</h2>
+            </div>
+        </nav>
+
+        <div class="container">
+            <form action="/journal/updateEntry/{{id}}" method="POST">
+                <div class="form-group row">
+                    <label for="date" class="col-sm-2 col-form-label">Date</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="dateValue" name="date" value="{{date}} ">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="title" name="title" placeholder="Title"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="entry" class="col-sm-2 col-form-label">Entry</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="entry" name="entry"
+                            placeholder="What's on your mind?"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="entry" class="col-form-label font-italic">Rate your mood from 0 to 5</label>
+                        <input type="range" class="custom-range" min="0" max="5" step="1" id="mood" name="mood"
+                            value="0" oninput="moodRange()"></input>
+                        <div id="box">
+                            <p>Your mood today is </p>
+                            <span id="moodNum"></span>
+                            <p> out of 5</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="font-italic col-form-label" for="emotion"> Choose your emotion </label>
+                        <div id="box">
+                            <input id="emotion" name="emotion" type="radio" value="Happy">
+                            <img src="/img/happy.png" height=100 width=100>
+                            </input>
+                            <input id="emotion" name="emotion" type="radio" value="Meh">
+                            <img src="/img/meh.png" height=100 width=100>
+                            </input>
+                            <input id="emotion" name="emotion" type="radio" value="Sad">
+                            <img src="/img/sad.png" height=100 width=100>
+                            </input>
+                        </div>
+                    </div>
+                    <button class="btn btn-yellow mx-auto my-1" type="submit"> Submit </button>
+                </div>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    var range = document.getElementById('mood');
+    var box = document.getElementById('moodNum');
+    function moodRange() {
+        var val = range.value;
+        box.innerHTML = val;
+    }
+
+    let urlPath = window.location.pathname;
+    let id = urlPath.slice(urlPath.lastIndexOf('/') + 1);
+    let form = document.querySelector('form[action="/journal/updateEntry/"]');
+    let formAction = form.getAttribute('action');
+
+    form.setAttribute('action', formAction + id);
+
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar, #content').toggleClass('active');
+            $(this).toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+</script>

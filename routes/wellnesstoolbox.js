@@ -5,8 +5,10 @@ const article = require('../models/Article');
 const fs = require('fs');
 //const upload = require('../helpers/imageUpload');
 const multer = require('multer');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 
-
+// Date Creator
 let today = new Date();
 let dd = today.getDate();
 
@@ -21,15 +23,16 @@ if (mm < 10) {
 }
 today = dd + '/' + mm + '/' + yyyy;
 
+//Image Storage
 const storage = multer.diskStorage({
 	destination: function (req, file, callback) {
-		callback(null, './uploads/')
+		callback(null, './wtbuploads/')
 	},
 	filename: function (req, file, callback) {
 		callback(null, Date.now() + file.originalname);
 	}
 });
-
+//Image File Filter
 const fileFilter = (req, file, callback) => {
 	if (file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
 		callback(null, true);
@@ -37,7 +40,7 @@ const fileFilter = (req, file, callback) => {
 		callback(null, false);
 	}
 };
-
+//Initialise Upload
 const upload = multer({
 	storage: storage,
 	limits: { fileSize: 1024 * 1024 },
@@ -116,7 +119,7 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 				title,
 				description,
 				link,
-				thumbnail: '/uploads/default.jpg',
+				thumbnail: '/wtbuploads/default.jpg',
 				date: today,
 				time: (new Date()).getTime(),
 				view: 0
@@ -219,9 +222,6 @@ router.get('/admin/wtbmanagement', (req, res) => {
 	
 	//let errors = [{text:req.flash('desc')}];
 
-
-
-
 	//Retrieve Data from DB
 	article.findAll({
 		raw: true
@@ -236,7 +236,7 @@ router.get('/admin/wtbmanagement', (req, res) => {
 			depArticle,
 			article,
 			errors: errors,
-			test: req.flash('info')
+			//test: req.flash('info')
 
 		});
 	}).catch(err => console.log(err))
@@ -262,5 +262,117 @@ function sortArticle(article) {
 		}
 	}
 };
+
+//Search
+
+//Search in Meditation
+router.get('/search/meditation', (req, res) => {
+	const { term } = req.query;
+	console.log(term)
+
+	article.findAll({ where: { category: { [Op.like]: 'Meditation'}, title: { [Op.like]: '%' + term + '%'} } })
+		.then((medArticle) => {
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wtbmanagement', {
+					medArticle,
+					vidArticle,	
+					musicArticle,
+					workArticle,
+					depArticle,
+					article
+				});
+			}).catch(err => console.log(err)) });
+});
+
+//Search in Video
+router.get('/search/video', (req, res) => {
+	const { term } = req.query;
+	console.log(term)
+
+	article.findAll({ where: { category: { [Op.like]: 'Video'}, title: { [Op.like]: '%' + term + '%'} } })
+		.then((vidArticle) => {
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wtbmanagement', {
+					medArticle,
+					vidArticle,	
+					musicArticle,
+					workArticle,
+					depArticle,
+					article
+				});
+			}).catch(err => console.log(err)) });
+});
+
+//Search in Music
+router.get('/search/music', (req, res) => {
+	const { term } = req.query;
+	console.log(term)
+
+	article.findAll({ where: { category: { [Op.like]: 'Music'}, title: { [Op.like]: '%' + term + '%'} } })
+		.then((musicArticle) => {
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wtbmanagement', {
+					medArticle,
+					vidArticle,	
+					musicArticle,
+					workArticle,
+					depArticle,
+					article
+				});
+			}).catch(err => console.log(err)) });
+});
+
+//Search in Workout
+router.get('/search/workout', (req, res) => {
+	const { term } = req.query;
+	console.log(term)
+
+	article.findAll({ where: { category: { [Op.like]: 'Workout'}, title: { [Op.like]: '%' + term + '%'} } })
+		.then((workArticle) => {
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wtbmanagement', {
+					medArticle,
+					vidArticle,	
+					musicArticle,
+					workArticle,
+					depArticle,
+					article
+				});
+			}).catch(err => console.log(err)) });
+});
+
+//Search in Depression Tips
+router.get('/search/depressiontips', (req, res) => {
+	const { term } = req.query;
+	console.log(term)
+
+	article.findAll({ where: { category: { [Op.like]: 'Depression Tips'}, title: { [Op.like]: '%' + term + '%'} } })
+		.then((medArticle) => {
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wtbmanagement', {
+					medArticle,
+					vidArticle,	
+					musicArticle,
+					workArticle,
+					depArticle,
+					article
+				});
+			}).catch(err => console.log(err)) });
+});
 
 module.exports = router;

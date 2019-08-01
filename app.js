@@ -68,7 +68,7 @@ app.use(bodyParser.json());
 
 // Creates static folder for publicly accessible HTML, CSS and Javascript files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static('uploads'));
+app.use('/wtbuploads', express.static('wtbuploads'));
 
 // Method override middleware to use other HTTP methods such as PUT and DELETE
 app.use(methodOverride('_method'));

@@ -5,39 +5,60 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Admin = require('../models/Admin');
 var ex = module.exports = {};
-ex.localStrategy = function(passport){
+ex.localStrategy = function (passport) {
     passport.use(new LocalStrategy(
         function (username, password, done) {
             User.findOne({
                 where: { email: username }
             })
-            .then(user => {
-                if (!user) {
-                    return done(null, false, { message: 'Incorrect username' });
-                }
-                bcrypt.compare(password, user.password)
-                .then(res => {
-                    if(res){
-                        return done(null, true);
+                .then(user => {
+                    if (!user) {
+                        return done(null, false, { message: 'Incorrect username' });
                     }
-                    else{
-                        return done(null, false, { message: 'Incorrect password' });
-                    }
+                    bcrypt.compare(password, user.password)
+                        .then(res => {
+                            if (res) {
+                                return done(null, true);
+                            }
+                            else {
+                                return done(null, false, { message: 'Incorrect password' });
+                            }
+                        })
+
+
                 })
-                    
-                
-            })
-            .catch(err => {
-                return done(err);
-            });
+                .catch(err => {
+                    return done(err);
+                });
         }
-    ))
+    ));
+
 };
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user);
-  });
-  
-passport.deserializeUser(function(user, done) {
+});
+
+passport.deserializeUser(function (user, done) {
     done(null, user);
-  });
+});
+
+
+// passport.serializeUser(function (user, done) {
+//     done(null, user);
+// });
+
+// passport.deserializeUser(function (user, done) {
+//     User.findOne({
+//         where: { name: user }
+//     })
+//         .then((user) => {
+//             done(null, user); // user object saved in req.session
+//         })
+//         .catch((done) => { // No user found, not stored in req.session
+//             console.log(done);
+//         });
+// });
+
+
+

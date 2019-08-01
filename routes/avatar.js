@@ -6,6 +6,7 @@ const Aspect = require('../models/adminAvatar');
 const Sequelize = require('sequelize');
 const jimp = require('jimp');
 const Op = Sequelize.Op;
+const User = require('../models/User');
 
 
 
@@ -14,8 +15,8 @@ router.get('/', (req, res) => {
 	const EmptyAvatar = 'src="/img/Empy_Mark.png" height=240 width=320';
 	const EmptyPet = 'src="/img/Empy_Mark.png" height=240 width=320';
 	Avatar.findOne({
-		// 	where: { username: user },
-		// 	raw: true
+			// where: { username: "tom" },
+			// raw: true
 	}).then(check_user => {
 		const checkuser = check_user.username;
 

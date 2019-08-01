@@ -10,7 +10,7 @@ const upload = require('../helpers/imageUpload');
 const alertMessage = require('../helpers/messenger');
 
 
-router.get('/eventDisplay', (req, res) => {
+router.get('/', (req, res) => {
 	Event.findAll({
 	}).then((events) => {
 		Register.findAll({

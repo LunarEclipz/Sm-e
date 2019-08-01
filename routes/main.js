@@ -6,6 +6,7 @@ const user = require('../models/User');
 
 router.get('/', (req, res) => {
 	const title = 'SMILE';
+	console.log(req.user.id)
 	// renders views/index.handlebars, passing title as an object
 	res.render('index', {title: title})
 	

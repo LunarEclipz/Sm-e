@@ -51,7 +51,6 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                         <label class="font-italic">Event Category</label>
                         <br>
-                        {{!-- Practical 5 Exercise 2: Language radio buttons here'--}}
                         <div class="form-check form-check-inline">
                             <input class="form=check-input" type="checkbox" name="categories" value="Depression"
                                 onclick="categoryCheck()" {{checkbox event.eventCategory 'Depression'}}>
@@ -105,7 +104,7 @@
                 </div>
             </div>
             <br>
-            <button id="butAddEvent" type="submit" class="btn button" action="/adminEvents/addEvent"
+            <button id="butAddEvent" type="submit" class="btn btn-orange" action="/adminEvents/addEvent"
                 style="float:right;" disabled>Update Event
             </button>
         </form>

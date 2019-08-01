@@ -1,3 +1,5 @@
+<div class="container">
+
 <div class="row">
     <div class="col-md-12 mx-auto">
         <div class="card card-body">
@@ -6,7 +8,7 @@
                     <h3 class="text-left" style="color: #df744a;font-weight: bold;">Event List</h3>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-4 text-right">
-                    <a class="btn button" role="button" data-toggle="modal" data-target="#basicExampleModal">
+                    <a class="btn btn-orange" role="button" data-toggle="modal" data-target="#basicExampleModal">
                         View Joined Events
                     </a>
                 </div>
@@ -42,7 +44,7 @@
                                     class="fas fa-calendar mr-1"></i>{{dateFormat eventDate 'DD MMM YYYY'}}</p>
                         </div>
                         <div class="card-footer text-muted text-center">
-                            <a class="btn button" role="button" href="eventInfo/{{id}}">View Event</a>
+                            <a class="btn btn-orange" role="button" href="eventInfo/{{id}}">View Event</a>
                         </div>
                     </div>
                 </div>
@@ -87,13 +89,15 @@
                             </tr>
                         </tbody>
                         {{/each}}
-                        {{/if}}
+                        {{/if}} 
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-orange" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
 </div>

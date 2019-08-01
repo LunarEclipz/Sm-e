@@ -8,9 +8,6 @@ const firstUpload = require('../helpers/firstLevel');
 const secondUpload = require('../helpers/secondLevel');
 const thirdUpload = require('../helpers/thirdLevel');
 
-
-
-
 // var Handlebars = require('handlebars');
 
 // Handlebars.registerHelper('ifCond', function(v1, v2, options) {

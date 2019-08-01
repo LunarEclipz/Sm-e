@@ -1,4 +1,4 @@
-<h1 class="display-2 text-light">{{Title}}</h1>
+<h1 class="display-2">{{Title}}</h1>
 
 <section id="articles">
 	<div id="articles" class="card text-center shadow-lg bg-white">
@@ -26,13 +26,22 @@
 			<div id="meditation" class="tab-pane show active fadeIn" role="tabpanel">
 				<h4 class="display-4">Meditation</h4>
 				<hr class="shadow-none" style="background-color: #d7d7d7">
-				<select class="form-control col-2" id="sortBy">
-					<option>Sort By:</option>
-					<option>Most Viewed</option>
-					<option>Least Viewed</option>
-					<option>Latest First</option>
-					<option>Oldest First</option>
-				</select>
+				<div class="row">
+					<div class="d-flex col-10">
+						<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-warm">Go to Admin Page
+						</a>
+					</div>
+					<div class="col-2">
+						<select class="form-control" id="sortBy">
+							<option>Sort By:</option>
+							<option>Most Viewed</option>
+							<option>Least Viewed</option>
+							<option>Latest First</option>
+							<option>Oldest First</option>
+						</select>
+					</div>
+				</div>
+
 
 				<div class="row">
 
@@ -41,7 +50,8 @@
 					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px" width="200px">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
@@ -50,7 +60,7 @@
 								<a href="{{link}}" class="btn btn-primary btn-block">Read more</a>
 							</div>
 							<div class="card-footer">
-								<p>Last updated: {{date}}</p>	
+								<p>Last updated: {{date}}</p>
 							</div>
 						</div>
 					</div>
@@ -61,7 +71,7 @@
 					</div>
 					{{/if}}
 
-				</div>			
+				</div>
 			</div>
 
 			<div id="video" class="tab-pane show fadeIn" role="tabpanel">
@@ -82,14 +92,15 @@
 					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px" width="200px">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
 								<p class="card-text">{{description}}
 								</p>
-								<a href="{{link}}" class="btn btn-primary">Read more</a>	
-								<p>Last updated: {{date}}</p>						
+								<a href="{{link}}" class="btn btn-primary">Read more</a>
+								<p>Last updated: {{date}}</p>
 							</div>
 						</div>
 					</div>
@@ -121,14 +132,15 @@
 					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px" width="200px">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
 								<p class="card-text">{{description}}
 								</p>
-								<a href="{{link}}" class="btn btn-primary">Read more</a>	
-								<p>Last updated: {{date}}</p>						
+								<a href="{{link}}" class="btn btn-primary">Read more</a>
+								<p>Last updated: {{date}}</p>
 							</div>
 						</div>
 					</div>
@@ -160,14 +172,15 @@
 					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px" width="200px">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
 								<p class="card-text">{{description}}
 								</p>
-								<a href="{{link}}" class="btn btn-primary">Read more</a>	
-								<p>Last updated: {{date}}</p>						
+								<a href="{{link}}" class="btn btn-primary">Read more</a>
+								<p>Last updated: {{date}}</p>
 							</div>
 						</div>
 					</div>
@@ -199,14 +212,15 @@
 					<div class="col-12 mt-4 col-md-4 col-lg-3 d-flex align-items-stretch">
 						<div class="card bg-white">
 							<div class="view overlay">
-								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px" width="200px">
+								<img class="card-img-top" id="displayThumbnail" src="{{thumbnail}}" height="200px"
+									width="200px">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">{{title}}</h4>
 								<p class="card-text">{{description}}
 								</p>
 								<a href="{{link}}" class="btn btn-primary">Read more</a>
-								<p>Last updated: {{date}}</p>						
+								<p>Last updated: {{date}}</p>
 							</div>
 						</div>
 					</div>

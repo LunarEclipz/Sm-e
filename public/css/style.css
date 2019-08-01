@@ -61,6 +61,12 @@ button.btn-lg-orangealt{
   color: #555;
 }
 
+.btn-orange{
+  background-color: #DF744A;
+  color: #ffffff;
+  border-color: #DF744A; 
+}
+
 .col-sm-2{
   padding: 0px;
   margin-top: 1%;
@@ -274,3 +280,14 @@ a:focus {
     border: none;
 }
 
+/* ---------------------------------------------------
+  WELLNESS TOOLBOX
+----------------------------------------------------- */
+
+.nav-pills .nav-link.active{
+  background-color: #DF744A;
+}
+
+a:hover {
+color: darkorange;
+}

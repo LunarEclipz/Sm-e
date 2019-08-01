@@ -8,9 +8,6 @@ const firstUpload = require('../helpers/firstLevel');
 const secondUpload = require('../helpers/secondLevel');
 const thirdUpload = require('../helpers/thirdLevel');
 
-
-
-
 // var Handlebars = require('handlebars');
 
 // Handlebars.registerHelper('ifCond', function(v1, v2, options) {
@@ -244,18 +241,15 @@ router.post('/updateAspect/:id', (req, res) => {
 	let noTasks = req.body.noTasks;
 	let Name = req.body.Name;
 	let Quote = req.body.Quote;
-	let firstURL = req.body.firstURL;
 	let Tasks2 = req.body.Tasks2;
 	let noTasks2 = req.body.noTasks2;
 	let Quote2 = req.body.Quote2;
-	let secondURL = req.body.secondURL;
 	let Tasks3 = req.body.Tasks3;
 	let noTasks3 = req.body.noTasks3;
 	let Quote3 = req.body.Quote3;
-	let thirdURL = req.body.thirdURL;
 	Aspect.update({ Fields: Fields, Quote: Quote, Tasks: Tasks, noTasks: noTasks, Name: Name,
 		Quote2: Quote2, Tasks2: Tasks2, noTasks2: noTasks2, 
-		Quote3: Quote3, Tasks3: Tasks3, noTasks3: noTasks3, firstURL:firstURL, secondURL:secondURL,thirdURL:thirdURL  }, {
+		Quote3: Quote3, Tasks3: Tasks3, noTasks3: noTasks3  }, {
 		where: { id: id }
 	})
 		.then((Aspect) => {

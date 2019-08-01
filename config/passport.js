@@ -40,7 +40,14 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (user, done) {
-    done(null, user);
+    User.findOne({
+        where: { name: user }
+    })
+        .then((user) => {
+            done(null, user);
+        }).catch((done) => {
+            console.log(done);
+        });
 });
 
 

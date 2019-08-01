@@ -1,0 +1,276 @@
+.logo{
+  width:70px;
+  margin:auto;
+}
+
+.container-dashboard{
+  background-color: #ffffff;
+}
+
+.container-date{
+  background-color: #BFD8D2;
+  height: 170px;
+  display: block;
+}
+
+.day{
+  background-color: #FEDCD2;
+}
+.carousel-inner {
+  padding: 2%;
+}
+
+.carousel-item{
+  margin-left: 15%;
+}
+
+button.btn-lg-orangealt{
+  background-color: #ffffff;
+  width: 125px;
+  height: 50px;
+  text-align: center;
+  color: #DF744A;
+  margin-right: 1%;
+}
+
+.carousel-indicators{
+  margin: -4px;
+}
+
+.date-own{
+  margin-left: 46%;
+  margin-top: 1%;
+}
+
+.p-orange{
+  display: inline-block;
+  padding-left: 1.5%;
+  padding-right:1.5%;
+  margin: 3%;
+  color: #DF744A;
+}
+
+.btn-yellow{
+  background-color: #dcb239;
+  color: #ffffff;
+  border-color: #dcb239; 
+}
+
+.btn-yellowalt{
+  background-color: #fcdf88;
+  color: #555;
+}
+
+.col-sm-2{
+  padding: 0px;
+  margin-top: 1%;
+}
+
+.navbar{
+  background-color:#ffffff;
+}
+
+.navbar-brand, .navbar-nav, .nav-link {
+  color: #DF744A;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.card-text {
+  height: 70px;
+  overflow: auto;
+}
+
+/* ---------------------------------------------------
+  SIDEBAR
+----------------------------------------------------- */
+.wrapper {
+  display: flex;
+  width:100%;
+  align-items: stretch;
+  perspective: 1500px; 
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  position: fixed;
+  left: 0;
+  top:0;
+  height: 100vh;
+  z-index: 999; 
+  background: #FEDCD2;
+  color:  #fff;
+  transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+  transform-origin: center left; /* Set the transformed position of sidebar to center left side. */
+}
+
+#sidebar.active {
+  margin-left: -250px;
+  transform: rotateY(100deg); /* Rotate sidebar vertically by 100 degrees. */
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #f0c8bc;
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+#sidebar ul li a:hover {
+  color: #DF744A;
+  background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+  color: #fff;
+  background: #DF744A;
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #f0c8bc;
+}
+
+ul.CTAs {
+  padding: 20px;
+}
+
+ul.CTAs a {
+  text-align: center;
+  font-size: 0.9em !important;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+/* ---------------------------------------------------
+  CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  padding: 10px;
+  right: 0;
+}
+
+#sidebarCollapse {
+  width: 40px;
+  height: 40px;
+  background: #fcdf88;
+  cursor: pointer;
+}
+
+#sidebarCollapse span {
+  width: 80%;
+  height: 2px;
+  margin: 0 auto;
+  display: block;
+  background: #555;
+  transition-delay: 0.2s;
+  transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+}
+
+#sidebarCollapse span:first-of-type {
+  /* rotate first one */
+  transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+  /* second one is not visible */
+  opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+  /* rotate third one */
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+#sidebarCollapse.active span {
+  /* no rotation */
+  transform: none;
+  /* all bars are visible */
+  opacity: 1;
+  margin: 5px auto;
+}
+
+
+#content.active {
+  width: 100%;
+}
+
+.card-journal{
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------------------------------
+  NAVBAR-2
+----------------------------------------------------- */
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar-2 {
+    padding: 15px 10px;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    background-color: #BFD8D2;
+    padding: 2%;
+    text-shadow:  1px 1px 3px  rgb(23, 162, 184, 0.5);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+

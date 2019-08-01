@@ -75,10 +75,18 @@ button.btn-lg-orangealt{
 .navbar{
   background-color:#ffffff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  background-image:linear-gradient(to right, 
+  #c02425
+  ,
+  #f0cb35);
 }
 
 .navbar-brand, .navbar-nav, .nav-link {
   color: #DF744A;
+}
+
+.nav-white{
+  color: #fff;
 }
 
 /* width */

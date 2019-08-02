@@ -76,9 +76,8 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 	let description = req.body.Description;
 	let link = req.body.URL;
 	let errors = 0
+	let success_msg = "Article Successfully Created";
 
-	req.flash('info', 'Flash is back!')
- 	
 
 
 	if (title.length > 14) {
@@ -107,7 +106,7 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 				time: (new Date()).getTime(),
 				view: 0
 			}).then((article) => {
-
+				alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
 				res.redirect('/wellnesstoolbox/admin/wtbmanagement')
 			})
 		}
@@ -124,7 +123,10 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 				time: (new Date()).getTime(),
 				view: 0
 			}).then((article) => {
+				alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
 				res.redirect('/wellnesstoolbox/admin/wtbmanagement')
+				// alertMessage(res, 'success', 'Event successfully added', 'fas fa-calendar-alt', true)
+				// res.redirect('/wellnesstoolbox/admin/wtbmanagement')
 			})
 		}
 
@@ -150,6 +152,7 @@ router.get('/admin/wtbmanagement/delete/:id', (req, res) => {
 				id: articles.id
 			}
 		}).then((article) => {
+			alertMessage(res, 'success', 'Article deleted successfully', 'fas fa-newspaper', true)
 			res.redirect('/wellnesstoolbox/admin/wtbmanagement')
 		})
 	})
@@ -186,6 +189,7 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 					{
 						where: { id: data['id'] }
 					}).then(() => {
+						alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
 						res.redirect('/wellnesstoolbox/admin/wtbmanagement');
 					})
 			}
@@ -202,6 +206,7 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 					{
 						where: { id: data['id'] }
 					}).then(() => {
+						alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
 						res.redirect('/wellnesstoolbox/admin/wtbmanagement');
 					})
 			}
@@ -215,11 +220,11 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 
 //RENDER
 router.get('/admin/wtbmanagement', (req, res) => {
-	
+
 
 	const Title = 'WTB Management';
 	let errors = '';
-	
+
 	//let errors = [{text:req.flash('desc')}];
 
 	//Retrieve Data from DB
@@ -270,7 +275,7 @@ router.get('/search/meditation', (req, res) => {
 	const { term } = req.query;
 	console.log(term)
 
-	article.findAll({ where: { category: { [Op.like]: 'Meditation'}, title: { [Op.like]: '%' + term + '%'} } })
+	article.findAll({ where: { category: { [Op.like]: 'Meditation' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((medArticle) => {
 			article.findAll({
 				raw: true
@@ -278,13 +283,14 @@ router.get('/search/meditation', (req, res) => {
 				sortArticle(article)
 				res.render('wellnesstoolbox/admin/wtbmanagement', {
 					medArticle,
-					vidArticle,	
+					vidArticle,
 					musicArticle,
 					workArticle,
 					depArticle,
 					article
 				});
-			}).catch(err => console.log(err)) });
+			}).catch(err => console.log(err))
+		});
 });
 
 //Search in Video
@@ -292,7 +298,7 @@ router.get('/search/video', (req, res) => {
 	const { term } = req.query;
 	console.log(term)
 
-	article.findAll({ where: { category: { [Op.like]: 'Video'}, title: { [Op.like]: '%' + term + '%'} } })
+	article.findAll({ where: { category: { [Op.like]: 'Video' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((vidArticle) => {
 			article.findAll({
 				raw: true
@@ -300,13 +306,14 @@ router.get('/search/video', (req, res) => {
 				sortArticle(article)
 				res.render('wellnesstoolbox/admin/wtbmanagement', {
 					medArticle,
-					vidArticle,	
+					vidArticle,
 					musicArticle,
 					workArticle,
 					depArticle,
 					article
 				});
-			}).catch(err => console.log(err)) });
+			}).catch(err => console.log(err))
+		});
 });
 
 //Search in Music
@@ -314,7 +321,7 @@ router.get('/search/music', (req, res) => {
 	const { term } = req.query;
 	console.log(term)
 
-	article.findAll({ where: { category: { [Op.like]: 'Music'}, title: { [Op.like]: '%' + term + '%'} } })
+	article.findAll({ where: { category: { [Op.like]: 'Music' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((musicArticle) => {
 			article.findAll({
 				raw: true
@@ -322,13 +329,14 @@ router.get('/search/music', (req, res) => {
 				sortArticle(article)
 				res.render('wellnesstoolbox/admin/wtbmanagement', {
 					medArticle,
-					vidArticle,	
+					vidArticle,
 					musicArticle,
 					workArticle,
 					depArticle,
 					article
 				});
-			}).catch(err => console.log(err)) });
+			}).catch(err => console.log(err))
+		});
 });
 
 //Search in Workout
@@ -336,7 +344,7 @@ router.get('/search/workout', (req, res) => {
 	const { term } = req.query;
 	console.log(term)
 
-	article.findAll({ where: { category: { [Op.like]: 'Workout'}, title: { [Op.like]: '%' + term + '%'} } })
+	article.findAll({ where: { category: { [Op.like]: 'Workout' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((workArticle) => {
 			article.findAll({
 				raw: true
@@ -344,13 +352,14 @@ router.get('/search/workout', (req, res) => {
 				sortArticle(article)
 				res.render('wellnesstoolbox/admin/wtbmanagement', {
 					medArticle,
-					vidArticle,	
+					vidArticle,
 					musicArticle,
 					workArticle,
 					depArticle,
 					article
 				});
-			}).catch(err => console.log(err)) });
+			}).catch(err => console.log(err))
+		});
 });
 
 //Search in Depression Tips
@@ -358,7 +367,7 @@ router.get('/search/depressiontips', (req, res) => {
 	const { term } = req.query;
 	console.log(term)
 
-	article.findAll({ where: { category: { [Op.like]: 'Depression Tips'}, title: { [Op.like]: '%' + term + '%'} } })
+	article.findAll({ where: { category: { [Op.like]: 'Depression Tips' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((medArticle) => {
 			article.findAll({
 				raw: true
@@ -366,13 +375,14 @@ router.get('/search/depressiontips', (req, res) => {
 				sortArticle(article)
 				res.render('wellnesstoolbox/admin/wtbmanagement', {
 					medArticle,
-					vidArticle,	
+					vidArticle,
 					musicArticle,
 					workArticle,
 					depArticle,
 					article
 				});
-			}).catch(err => console.log(err)) });
+			}).catch(err => console.log(err))
+		});
 });
 
 module.exports = router;

@@ -18,7 +18,7 @@ ex.localStrategy = function (passport) {
                     bcrypt.compare(password, user.password)
                         .then(res => {
                             if (res) {
-                                return done(null, true);
+                                return done(null, user);
                             }
                             else {
                                 return done(null, false, { message: 'Incorrect password' });
@@ -32,33 +32,34 @@ ex.localStrategy = function (passport) {
                 });
         }
     ));
+    passport.deserializeUser(function (user, done) {
+        User.findByPk(user.id)
+            .then((user) => {
+                done(null, user); // user object saved in req.session
+            })
+            .catch((done) => { // No user found, not stored in req.session
+                console.log(done);
+            });
+
+    });
+
+    passport.serializeUser(function (user, done) {
+        done(null, user);
+    });
 
 };
 
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
 
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
+// passport.deserializeUser(function (user, done) {
+//     done(null, user);
+// });
 
 
 // passport.serializeUser(function (user, done) {
 //     done(null, user);
 // });
 
-// passport.deserializeUser(function (user, done) {
-//     User.findOne({
-//         where: { name: user }
-//     })
-//         .then((user) => {
-//             done(null, user); // user object saved in req.session
-//         })
-//         .catch((done) => { // No user found, not stored in req.session
-//             console.log(done);
-//         });
-// });
+
 
 
 

@@ -43,30 +43,9 @@ const fileFilter = (req, file, callback) => {
 //Initialise Upload
 const upload = multer({
 	storage: storage,
-	limits: { fileSize: 1024 * 1024 },
+	limits: { fileSize: 5 * 1024 * 1024 },
 	fileFilter: fileFilter
 });
-
-router.get('/user/wellnesstoolbox', (req, res) => {
-	const Title = 'Wellness Toolbox';
-
-	//Retrieve Data from DB
-	article.findAll({
-		raw: true
-	}).then((article) => {
-		sortArticle(article)
-		res.render('wellnesstoolbox/user/wellnesstoolbox', {
-			Title: Title,
-			medArticle,
-			vidArticle,
-			musicArticle,
-			workArticle,
-			depArticle
-		});
-	}).catch(err => console.log(err))
-});
-
-
 
 //Create
 router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
@@ -106,7 +85,7 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 				time: (new Date()).getTime(),
 				view: 0
 			}).then((article) => {
-				alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
+				alertMessage(res, 'success', 'Article added successfully.', 'fas fa-newspaper', true)
 				res.redirect('/wellnesstoolbox/admin/wtbmanagement')
 			})
 		}
@@ -123,7 +102,7 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 				time: (new Date()).getTime(),
 				view: 0
 			}).then((article) => {
-				alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
+				alertMessage(res, 'success', 'Article added successfully.', 'fas fa-newspaper', true)
 				res.redirect('/wellnesstoolbox/admin/wtbmanagement')
 				// alertMessage(res, 'success', 'Event successfully added', 'fas fa-calendar-alt', true)
 				// res.redirect('/wellnesstoolbox/admin/wtbmanagement')
@@ -152,7 +131,7 @@ router.get('/admin/wtbmanagement/delete/:id', (req, res) => {
 				id: articles.id
 			}
 		}).then((article) => {
-			alertMessage(res, 'success', 'Article deleted successfully', 'fas fa-newspaper', true)
+			alertMessage(res, 'success', 'Article deleted successfully.', 'fas fa-trash', true)
 			res.redirect('/wellnesstoolbox/admin/wtbmanagement')
 		})
 	})
@@ -189,7 +168,7 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 					{
 						where: { id: data['id'] }
 					}).then(() => {
-						alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
+						alertMessage(res, 'success', 'Article edited successfully.', 'fas fa-edit', true)
 						res.redirect('/wellnesstoolbox/admin/wtbmanagement');
 					})
 			}
@@ -206,7 +185,7 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 					{
 						where: { id: data['id'] }
 					}).then(() => {
-						alertMessage(res, 'success', 'Article successfully added', 'fas fa-newspaper', true)
+						alertMessage(res, 'success', 'Article edited successfully.', 'fas fa-edit', true)
 						res.redirect('/wellnesstoolbox/admin/wtbmanagement');
 					})
 			}
@@ -219,13 +198,52 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 });
 
 //RENDER
+
+//ARTICLE INFO
+router.get('/user/wellnesstoolbox/info/:id', (req, res) => {
+
+	article.findOne({
+		raw: true,
+		where: {
+			id: req.params.id,
+			//userId: req.user.id
+		}
+	}).then(data => {
+		//Increase view by 1 each time this page is visited
+		if (data) {
+			article.update(
+				{view: data.view + 1},
+				{where: { id: data['id'] }
+				}).then(() => {
+					res.render('wellnesstoolbox/user/wellnesstoolboxinfo', {
+						data
+					})
+				})
+			console.log(data);
+		}
+	})
+});
+
+//USER INTERFACE
+router.get('/user/wellnesstoolbox', (req, res) => {
+
+	//Retrieve Data from DB
+	article.findAll({
+		raw: true
+	}).then((article) => {
+		sortArticle(article)
+		res.render('wellnesstoolbox/user/wellnesstoolbox', {
+			medArticle,
+			vidArticle,
+			musicArticle,
+			workArticle,
+			depArticle
+		});
+	}).catch(err => console.log(err))
+});
+
+//ADMIN INTERFACE
 router.get('/admin/wtbmanagement', (req, res) => {
-
-
-	const Title = 'WTB Management';
-	let errors = '';
-
-	//let errors = [{text:req.flash('desc')}];
 
 	//Retrieve Data from DB
 	article.findAll({
@@ -233,20 +251,17 @@ router.get('/admin/wtbmanagement', (req, res) => {
 	}).then((article) => {
 		sortArticle(article)
 		res.render('wellnesstoolbox/admin/wtbmanagement', {
-			Title: Title,
 			medArticle,
 			vidArticle,
 			musicArticle,
 			workArticle,
 			depArticle,
 			article,
-			errors: errors,
-			//test: req.flash('info')
-
 		});
 	}).catch(err => console.log(err))
 });
 
+//Sort Articles into Categories
 function sortArticle(article) {
 	medArticle = []
 	vidArticle = []
@@ -273,22 +288,35 @@ function sortArticle(article) {
 //Search in Meditation
 router.get('/search/meditation', (req, res) => {
 	const { term } = req.query;
-	console.log(term)
+	const { user } = req.query;
 
 	article.findAll({ where: { category: { [Op.like]: 'Meditation' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((medArticle) => {
 			article.findAll({
 				raw: true
 			}).then((article) => {
-				sortArticle(article)
-				res.render('wellnesstoolbox/admin/wtbmanagement', {
-					medArticle,
-					vidArticle,
-					musicArticle,
-					workArticle,
-					depArticle,
-					article
-				});
+				if (user == 'admin') {
+					sortArticle(article)
+					res.render('wellnesstoolbox/admin/wtbmanagement', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
+				else {
+					sortArticle(article)
+					res.render('wellnesstoolbox/user/wellnesstoolbox', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
 			}).catch(err => console.log(err))
 		});
 });
@@ -296,22 +324,35 @@ router.get('/search/meditation', (req, res) => {
 //Search in Video
 router.get('/search/video', (req, res) => {
 	const { term } = req.query;
-	console.log(term)
+	const { user } = req.query;
 
 	article.findAll({ where: { category: { [Op.like]: 'Video' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((vidArticle) => {
 			article.findAll({
 				raw: true
 			}).then((article) => {
-				sortArticle(article)
-				res.render('wellnesstoolbox/admin/wtbmanagement', {
-					medArticle,
-					vidArticle,
-					musicArticle,
-					workArticle,
-					depArticle,
-					article
-				});
+				if (user == 'admin') {
+					sortArticle(article)
+					res.render('wellnesstoolbox/admin/wtbmanagement', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
+				else {
+					sortArticle(article)
+					res.render('wellnesstoolbox/user/wellnesstoolbox', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
 			}).catch(err => console.log(err))
 		});
 });
@@ -319,22 +360,35 @@ router.get('/search/video', (req, res) => {
 //Search in Music
 router.get('/search/music', (req, res) => {
 	const { term } = req.query;
-	console.log(term)
+	const { user } = req.query;
 
 	article.findAll({ where: { category: { [Op.like]: 'Music' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((musicArticle) => {
 			article.findAll({
 				raw: true
 			}).then((article) => {
-				sortArticle(article)
-				res.render('wellnesstoolbox/admin/wtbmanagement', {
-					medArticle,
-					vidArticle,
-					musicArticle,
-					workArticle,
-					depArticle,
-					article
-				});
+				if (user == 'admin') {
+					sortArticle(article)
+					res.render('wellnesstoolbox/admin/wtbmanagement', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
+				else {
+					sortArticle(article)
+					res.render('wellnesstoolbox/user/wellnesstoolbox', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
 			}).catch(err => console.log(err))
 		});
 });
@@ -342,22 +396,35 @@ router.get('/search/music', (req, res) => {
 //Search in Workout
 router.get('/search/workout', (req, res) => {
 	const { term } = req.query;
-	console.log(term)
+	const { user } = req.query;
 
 	article.findAll({ where: { category: { [Op.like]: 'Workout' }, title: { [Op.like]: '%' + term + '%' } } })
 		.then((workArticle) => {
 			article.findAll({
 				raw: true
 			}).then((article) => {
-				sortArticle(article)
-				res.render('wellnesstoolbox/admin/wtbmanagement', {
-					medArticle,
-					vidArticle,
-					musicArticle,
-					workArticle,
-					depArticle,
-					article
-				});
+				if (user == 'admin') {
+					sortArticle(article)
+					res.render('wellnesstoolbox/admin/wtbmanagement', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
+				else {
+					sortArticle(article)
+					res.render('wellnesstoolbox/user/wellnesstoolbox', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
 			}).catch(err => console.log(err))
 		});
 });
@@ -365,24 +432,38 @@ router.get('/search/workout', (req, res) => {
 //Search in Depression Tips
 router.get('/search/depressiontips', (req, res) => {
 	const { term } = req.query;
-	console.log(term)
+	const { user } = req.query;
 
 	article.findAll({ where: { category: { [Op.like]: 'Depression Tips' }, title: { [Op.like]: '%' + term + '%' } } })
-		.then((medArticle) => {
+		.then((depArticle) => {
 			article.findAll({
 				raw: true
 			}).then((article) => {
-				sortArticle(article)
-				res.render('wellnesstoolbox/admin/wtbmanagement', {
-					medArticle,
-					vidArticle,
-					musicArticle,
-					workArticle,
-					depArticle,
-					article
-				});
+				if (user == 'admin') {
+					sortArticle(article)
+					res.render('wellnesstoolbox/admin/wtbmanagement', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
+				else {
+					sortArticle(article)
+					res.render('wellnesstoolbox/user/wellnesstoolbox', {
+						medArticle,
+						vidArticle,
+						musicArticle,
+						workArticle,
+						depArticle,
+						article
+					});
+				}
 			}).catch(err => console.log(err))
 		});
+	//console.log(depArticle)
 });
 
 module.exports = router;

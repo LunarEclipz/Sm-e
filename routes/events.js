@@ -14,6 +14,9 @@ router.get('/eventDisplay', (req, res) => {
 	Event.findAll({
 	}).then((events) => {
 		Register.findAll({
+			where:{
+				user: req.user.id
+			}
 		}).then((registers) => {
 			res.render('events/user/eventDisplay', {
 				events: events,
@@ -35,7 +38,7 @@ router.get('/eventInfo/:id', (req, res) => {
 			event: event
 		})
 	})
-		.catch(err => console.log(err)); // To catch no video ID
+		.catch(err => console.log(err));
 });
 
 router.get('/find', (req, res) => {
@@ -48,12 +51,14 @@ router.get('/find', (req, res) => {
 router.get('/cancel/:id', (req, res) => {
 	Register.findOne({
 		where: {
-			id: req.params.id
+			id: req.params.id,
+			user: req.user.id
 		}
 	}).then((register) => {
 		Register.destroy({
 			where: {
-				id: req.params.id
+				id: req.params.id,
+				user: req.user.id
 			}
 		}).then((register) => {
 			alertMessage(res, 'info', 'You have cancelled your registration.', 'fas fa-remove', true)

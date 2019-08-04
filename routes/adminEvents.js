@@ -79,7 +79,6 @@ router.post('/addEvent', (req, res) => {
 				}).then((event) => {
 					alertMessage(res, 'success', 'Event successfully added', 'fas fa-calendar-alt', true)
 					res.redirect('/adminEvents/adminDisplayEvent')
-					console.log(response)
 				}).catch(err => console.log(err));
 			})
 			.catch(err => console.log(err))
@@ -197,7 +196,6 @@ router.put('/saveEdit/:id', (req, res) => {
 					}).then(() => {
 						alertMessage(res, 'info', 'Event successfully edited', 'fas fa-pencil-alt', true)
 						res.redirect('/adminEvents/adminDisplayEvent')
-						console.log(response)
 					}).catch(err => console.log(err));
 			})
 			.catch(err => console.log(err))
@@ -268,16 +266,30 @@ router.post('/eventInfo/:id', (req, res) => {
 			id: req.params.id
 		}
 	}).then((event) => {
-		let eid = req.params.id
-		let eventName = event.eventName
-
-		Register.create({
-			eid,
-			eventName
-		}).then((register) => {
-			alertMessage(res, 'success', 'You have registered for "' + register.eventName + '"', 'fas fa-calendar-alt', true)
-			res.redirect('/events/eventDisplay')
-			console.log(eventName)
+		Register.findOne({
+			where:{
+				user: req.user.id,
+				eid: req.params.id
+			}
+		}).then((duplicates)=>{
+			if (duplicates != null){
+				alertMessage(res, 'danger', 'You have already registered for this event', 'fas fa-calendar-alt', true)
+				res.redirect('/events/eventDisplay')
+			}
+			else{
+				let eid = req.params.id
+				let eventName = event.eventName
+				let user = req.user.id;
+		
+				Register.create({
+					eid,
+					eventName,
+					user
+				}).then((register) => {
+					alertMessage(res, 'success', 'You have registered for "' + register.eventName + '"', 'fas fa-calendar-alt', true)
+					res.redirect('/events/eventDisplay')
+				})
+			}
 		})
 	})
 })

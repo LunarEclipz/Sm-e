@@ -41,6 +41,8 @@ authenticate.localStrategy(passport);
 const MySQLStore = require('express-mysql-session');
 const db = require('./config/db');
 
+const hbs = require('./helpers/hbs');
+
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
 * in Node JS.
@@ -58,18 +60,10 @@ const app = express();
 *
 * */
 app.engine('handlebars', exphbs({
-	helpers: {
-		selectCheck: selectCheck,
-		dateFormat : dateFormat,
-		checkbox : checkbox
-	},
-	// helpers: hbs,
-	// helpers:{
-	// 	hbs: hbs,
-	// 	dateFormat : dateFormat,
-	// 	checkbox : checkbox
-	// },
-	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
+	helpers: hbs,
+	defaultLayout: 'base',
+	layoutsDir: __dirname + '/views/layouts',
+	partialsDir: hbs.partialsDirs(__dirname + '/views/partials')
 }));
 app.set('view engine', 'handlebars');
 
@@ -119,6 +113,7 @@ app.use(session({
 // Initilize Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 
 app.use(flash());

@@ -19,7 +19,6 @@ const passport = require('passport');
 */
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/user');
-const adminRoute = require('./routes/admin');
 const avatarRoute = require('./routes/avatar');
 const wellnesstoolboxRoute = require ('./routes/wellnesstoolbox');
 const smile = require('./config/DBConnection');
@@ -140,7 +139,6 @@ app.use(function (req, res, next) {
 * */
 app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
 app.use('/user', userRoute);
-app.use('/admin', adminRoute);
 app.use('/avatar', avatarRoute);
 app.use ('/wellnesstoolbox', wellnesstoolboxRoute);
 app.use('/adminAvatar', adminAvatarRoute);

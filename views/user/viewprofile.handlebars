@@ -1,16 +1,11 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container">
     <div class="row">
         <div class="col-md-3 ">
             <div class="list-group ">
                 <a href="#" class="list-group-item list-group-item-action active">My Profile</a>
-                <a href="/user/updateprofile" class="list-group-item list-group-item-action">Update Profile</a>
-                <a href="/user/changepwd" class="list-group-item list-group-item-action"> Change Password</a>
-                <a href="/" class="list-group-item list-group-item-action"> Delete Account</a>
+                <a href="/user/updateprofile/{{user.id}}" class="list-group-item list-group-item-action">Update Profile</a>
+                <a href="/user/changepw/{{user.id}}" class="list-group-item list-group-item-action"> Change Password</a>
+                <a href="/user/delacc" class="list-group-item list-group-item-action"> Delete Account</a>
 
 
 
@@ -27,14 +22,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form>
+
                                 <div class="form-profile-group row">
                                     <label for="username" class="col-4 col-form-label">Username: {{user.name}}</label>
                                 </div>
 
                                 <div class="form-profile-group row">
-                                    <label for="firstname" class="col-4 col-form-label">First Name:
-                                        {{user.fname}}</label>
+                                    <label for="firstname" class="col-4 col-form-label">First Name: {{user.fname}}</label>
                                 </div>
 
                                 <div class="form-profile-group row">
@@ -50,14 +44,11 @@
                                 </div>
 
                                 <div class="form-profile-group row">
-                                    <label for="number" class="col-4 col-form-label">Phone Number:
-                                        {{user.number}}</label>
+                                    <label for="number" class="col-4 col-form-label">Phone Number: {{user.number}}</label>
                                 </div>
 
                                 <br>
 
-
-                            </form>
                         </div>
                     </div>
 

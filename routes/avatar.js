@@ -15,6 +15,7 @@ const alertMessage = require('../helpers/messenger');
 router.get('/', (req, res) => {
 	const EmptyAvatar = 'src="/img/Empy_Mark.png" height=240 width=320';
 	const EmptyPet = 'src="/img/Empy_Mark.png" height=240 width=320';
+	console.log(req.user.name);
 	Avatar.findOne({
 			where: { username: req.user.name },
 			raw: true
@@ -28,10 +29,8 @@ router.get('/', (req, res) => {
 			raw: true
 		}).then(userfeelings => {
 			const user_feelings = userfeelings.feelings
-			Aspect.findAll({}, {
-				where: { Fields: 'Feelings', Name: user_feelings },
-				raw: true
-			}).then(feelings => {
+			Aspect.findAll({where: { Fields: 'Feelings', Name: user_feelings },
+			raw: true}).then(feelings => {
 
 				Avatar.findOne({
 					attributes: ['thoughts'],
@@ -75,6 +74,9 @@ router.get('/', (req, res) => {
 										where: { Name: user_aura },
 										raw: true
 									}).then(aura => {
+										const userwriting = check_user.writing;
+										const userencourage = check_user.encourage;
+										const userevent = check_user.event;
 										const fl = 1;
 										const tl = 1;
 										const al = 1;
@@ -219,7 +221,7 @@ router.get('/', (req, res) => {
 router.get('/createAvatar', (req, res) => {
 
 	Avatar.findOne({
-		where: { pet: { [Op.ne]: null } }
+		where: { pets: { [Op.ne]: null }, user: req.user.name }
 	}).then(pets => {
 		Aspect.findAll({
 		}).then((Aspect) => {
@@ -235,7 +237,14 @@ router.get('/createAvatar', (req, res) => {
 					Aspect: Aspect,
 				}) // To catch no video ID
 			}));
-	});
+	}).catch(err =>
+
+		Aspect.findAll({
+		}).then((Aspect) => {
+			res.render('avatar/createAvatar', {
+				Aspect: Aspect,
+			}) // To catch no video ID
+		}));;
 });
 
 
@@ -265,6 +274,7 @@ router.post('/updateAvatar', (req, res) => {
 	let feelings = req.body.feelings;
 	let aura = req.body.aura;
 	let actions = req.body.actions;
+	
 	Avatar.update({ username: username, thoughts: thoughts, aura: aura, actions: actions, feelings: feelings }, {
 		where: { username: req.user.name }
 	}).then((Avatar) => {
@@ -274,7 +284,7 @@ router.post('/updateAvatar', (req, res) => {
 
 router.get('/createPet', (req, res) => {
 	Avatar.findOne({
-		where: { feelings: { [Op.ne]: null } }
+		where: { feelings: { [Op.ne]: null} , username: req.user.name} 
 	}).then(Avatar => {
 		Pet.findAll({
 			// where: { petName: user_pet },
@@ -300,7 +310,6 @@ router.get('/createPet', (req, res) => {
 			res.render('avatar/createPet', {
 				pets: pets,
 				petName: petName,
-				Avatar: Avatar
 			});
 		}));
 
@@ -313,8 +322,16 @@ router.get('/deletePet', (req, res) => {
 	res.render('avatar/deletePet') // renders views/index.handlebars
 });
 
-router.get('/deleteAvatar', (req, res) => {
-	res.render('avatar/deleteAvatar') // renders views/index.handlebars
+router.post('/deleteAvatar/:name', (req, res) => {
+	alertMessage(res, 'danger', 'You have deleted a pet. ', true);
+	var name = req.params.name
+	Avatar.destroy({
+		where: {
+			username: name
+		}
+	}).then((Avatar) => {
+		res.redirect('/avatar');
+	})
 });
 
 
@@ -332,13 +349,19 @@ router.post('/saveAvatar', (req, res) => {
 	let feelings = req.body.feelings;
 	let aura = req.body.aura;
 	let actions = req.body.actions;
+	let writing = 0;
+	let encourage = 0;
+	let event = 0;
 	console.log(thoughts, feelings, aura, actions)
 	Avatar.create({
 		thoughts,
 		feelings,
 		aura,
 		actions,
-		username
+		username,
+		writing,
+		event,
+		encourage
 	}).then((Avatar) => {
 		res.redirect('/avatar');
 	})
@@ -350,10 +373,16 @@ router.post('/savePet', (req, res) => {
 	let username = req.user.name;
 	let feelingsPet = req.body.feelingsPet;
 	let pet = req.body.motiv;
+	let writing = 0;
+	let encourage = 0;
+	let event = 0;
 	Avatar.create({
 		feelingsPet,
 		pet,
-		username
+		username,
+		writing,
+		event,
+		encourage
 	}).then((Avatar) => {
 		res.redirect('/avatar');
 	})

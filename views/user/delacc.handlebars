@@ -1,16 +1,11 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-3 ">
             <div class="list-group ">
-                <a href="/user/viewprofile" class="list-group-item list-group-item-action">My Profile</a>
-                <a href="/user/updateprofile" class="list-group-item list-group-item-action">Update Profile</a>
-                <a href="/user/changepwd" class="list-group-item list-group-item-action "> Change Password</a>
-                <a href="#" class="list-group-item list-group-item-action active"> Delete Account</a>
+                <a href="/user/viewprofile/{{user.id}}" class="list-group-item list-group-item-action">My Profile</a>
+                <a href="/user/updateprofile/{{user.id}}" class="list-group-item list-group-item-action">Update Profile</a>
+                <a href="/user/changepw/{{user.id}}" class="list-group-item list-group-item-action "> Change Password</a>
+                <a href="#" class="list-group-item list-group-item-action"> Delete Account </a>
 
 
 
@@ -21,4 +16,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Delete Account</h4>
+
+                            <form action="/user/delacc/{{user.id}}" method="post">
+                                <button type="submit" class="btn btn-danger">Delete My Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

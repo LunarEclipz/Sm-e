@@ -1,12 +1,14 @@
-<div class="container">
+<div style="padding:10px;">
+    <div class="container-fluid navbar-2">
+      <h2 class="text-center">Events</h2>
+    </div>
+
+<div class="container card text-center shadow-lg bg-white">
     {{#if events}}
     <div class="card card-body">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-8">
-                <h3 class="" style="color: #df744a">Events</h3>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-4 text-right">
-                <a class="btn btn-orange" role="button" href="/adminEvents/addEvent">Add New Event</a>
+            <div class="ml-3 text-right">
+                <a class="btn btn-orange" role="button" href="/adminEvents/addEvent"><span>Add New Event</span></a>
             </div>
         </div>
         </br>
@@ -86,7 +88,7 @@
                 <h3 style="color: #df744a">Events</h3>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4 text-right">
-                <a class="btn btn-orange" role="button" href="/adminEvents/addEvent">Add New Event</a>
+                <a class="btn btn-orange" role="button" href="/adminEvents/addEvent"><span>Add New Event</span></a>
             </div>
         </div>
         <br>

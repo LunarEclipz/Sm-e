@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 	const EmptyAvatar = 'src="/img/Empy_Mark.png" height=240 width=320';
 	const EmptyPet = 'src="/img/Empy_Mark.png" height=240 width=320';
 	Avatar.findOne({
-			where: { username: "tom" },
+			where: { username: req.user.name },
 			raw: true
 	}).then(check_user => {
 		const checkuser = check_user.username;
@@ -251,7 +251,7 @@ router.post('/updatePet', (req, res) => {
 	let pet = req.body.motiv;
 	console.log(feelingsPet, pet)
 	Avatar.update({ feelingsPet: feelingsPet, pet: pet }, {
-		where: { username: "tom" }
+		where: { username: req.user.name }
 	}).then((Avatar) => {
 		res.redirect('/avatar');
 	})
@@ -260,13 +260,13 @@ router.post('/updatePet', (req, res) => {
 router.post('/updateAvatar', (req, res) => {
 	alertMessage(res, 'success', 'You have added an Avatar. ', true);
 
-	let username = "tom";
+	let username = req.user.name;
 	let thoughts = req.body.thoughts;
 	let feelings = req.body.feelings;
 	let aura = req.body.aura;
 	let actions = req.body.actions;
 	Avatar.update({ username: username, thoughts: thoughts, aura: aura, actions: actions, feelings: feelings }, {
-		where: { username: "tom" }
+		where: { username: req.user.name }
 	}).then((Avatar) => {
 		res.redirect('/avatar');
 	})
@@ -327,7 +327,7 @@ router.get('/logout', (req, res) => {
 router.post('/saveAvatar', (req, res) => {
 	alertMessage(res, 'success', 'You have added an Avatar. ', true);
 
-	let username = "tom";
+	let username = req.user.name;
 	let thoughts = req.body.thoughts;
 	let feelings = req.body.feelings;
 	let aura = req.body.aura;
@@ -347,7 +347,7 @@ router.post('/saveAvatar', (req, res) => {
 router.post('/savePet', (req, res) => {
 	alertMessage(res, 'success', 'You have added a pet. ', true);
 
-	let username = "tom";
+	let username = req.user.name;
 	let feelingsPet = req.body.feelingsPet;
 	let pet = req.body.motiv;
 	Avatar.create({

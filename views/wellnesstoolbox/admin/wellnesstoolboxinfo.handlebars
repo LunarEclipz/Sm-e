@@ -1,0 +1,78 @@
+<div class="container">
+
+    <h1 class="display-2">{{Title}}</h1>
+    <section>
+
+        {{#if data}}
+        <div class="card shadow-lg bg-white">
+
+            <div class="row">
+                <div class="col-12">
+                    <a href="/wellnesstoolbox/admin/wellnesstoolbox"><i class="fas fa-arrow-left fa-2x my-2 px-4" style="color:#DF744A;, height: 40px;, width: 40px;" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="card-title"><a>Title</a></h4>
+                                    <p class="card-text my-auto h-auto">{{data.title}}</p>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="card-title"><a>Category</a></h4>
+                                    <p class="card-text my-auto h-auto">{{data.category}}</p>
+                                </div>
+
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="card-title"><a>Last Updated</a></h4>
+                                    <i class="fas fa-clock pr-1"></i>{{data.date}}
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="card-title"><a>Views</a></h4>
+                                    <i class="fas fa-eye pr-1"></i>{{data.view}}</a>
+                                </div>
+
+                            </div>
+
+                            <hr>
+
+                            <h4 class="card-title"><a>Description</a></h4>
+                            <p class="card-text my-auto h-auto">{{data.description}}</p>
+
+                            <hr>
+
+                            <a href="{{data.link}}" class="btn btn-orange btn-block">Go to Website</a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <img src="{{data.thumbnail}}" class="img-fluid rounded" alt="thumbnail">
+                </div>
+            </div>
+
+        </div>
+
+        {{else}}
+        <p>
+            Article not found.
+        </p>
+        {{/if}}
+
+
+    </section>
+</div>

@@ -4,9 +4,11 @@ const User = require('../models/User');
 const alertMessage = require('../helpers/messenger');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const crypto = require("crypto");
 
 
-// REGISTER
+
+// REGISTER 
 
 router.get('/register', (req, res) => {
     res.render('../views/user/register');
@@ -170,99 +172,188 @@ router.get('/login', (req, res) => {
 
 
 router.post('/login',
-
     passport.authenticate('local', {
         successRedirect: '/user/home',
         failureRedirect: '/user/login',
         failureFlash: true
     }),
-    function (req, res, next) {
-        // issue a remember me cookie if the option was checked
-        if (!req.body.remember_me) { return next(); }
-
-        var token = utils.generateToken(64);
-        Token.save(token, { userId: req.user.id }, function (err) {
-            if (err) { return done(err); }
-            res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 604800000 }); // 7 days
-            return next();
-        });
-    },
-    function (req, res) {
-        res.redirect('/');
-    }
 )
 
-
-// FORGET PW
-
-router.get('/forgot', (req, res) => {
-    res.render('../views/user/forgot');
-})
-
-
-router.post('/forgot', (req, res) => {
-    if (req.method === 'GET') {
-        res.render('auth/forgot');
-    }
-    else if (req.method === 'POST') {
-        let token = crypto.randomBytes(20).toString('hex');
-
-        User.findOne({ where: { email: req.body.email } }).then(user => {
-            if (user) {
-                user.update({
-                    resetPasswordToken: token,
-                    resetPasswordExpires: Date.now() + 3600000
-                });
-
-                let link = `http://${req.headers.host}/reset/${token}`;
-
-                email.send(
-                    user.email,
-                    '[Outsource] Password Reset',
-                    `<p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>` +
-                    `<p>Please click on the following link, or paste this into your browser to complete the process:<br>` +
-                    `<a href="${link}">${link}</a></p>` +
-                    `<p>If you did not request this, please ignore this email and your password will remain unchanged.</p>`
-                );
-                req.flash('success', 'A verification email has been sent to ' + user.email);
-            }
-            else {
-                req.flash('error', 'No account with that email address exists.');
-            }
-
-            res.redirect('/forgot');
-        });
-    }
-})
-
-router.get('/reset', (req, res) => {
-   
-})
 
 // HOME PAGE
 
 router.get('/home', (req, res) => {
-    res.render('../views/user/home');
+    if (req.user != null) {
+        res.render('../views/user/home');
+    }
+    else {
+        alertMessage(res, 'danger', ' Please login to access other features', 'fas fa-pencil-alt', true)
+        res.redirect('/user/login')
+    }
 }),
 
 
 // PROFILE
 
-router.get('/viewprofile', (req, res) => {
-    res.render('../views/user/viewprofile');
+router.get('/viewprofile/:id', (req, res) => {
+        if (req.user != null) {
+            User.findOne({
+                where: {
+                    id: req.params.id
+                }
+            }).then(user=>{
+                res.render('../views/user/viewprofile', {
+                    user
+                });
+            })
+        }
+        else {
+            alertMessage(res, 'danger', ' Please login to access other features', 'fas fa-pencil-alt', true)
+            res.redirect('/user/login')
+        }
 }),
 
-router.get('/updateprofile', (req, res) => {
-    res.render('../views/user/updateprofile');
+router.get('/updateprofile/:id', (req, res) => {
+        if (req.user != null) {
+            User.findOne({
+                where: {
+                    id: req.params.id
+                }
+            }).then(user=>{
+                res.render('../views/user/updateprofile', {
+                    user
+                });
+            })
+        }
+        else {
+            alertMessage(res, 'danger', ' Please login to access other features', 'fas fa-pencil-alt', true)
+            res.redirect('/user/login')
+        }
 }),
 
-router.get('/changepw', (req, res) => {
-    res.render('../views/user/changepw');
+router.post('/updateprofile/:id', (req, res) => {
+    let fname = req.body.name
+    let lname = req.body.lastname
+    let dob = req.body.dob
+    let number = req.body.number
+    User.update({
+        fname,
+        lname,
+        dob, 
+        number
+    },{
+        where : {
+            id: req.params.id
+        }
+    }).then(user=>{
+        res.redirect('/user/viewprofile/'+ req.params.id);
+    })
+
+})
+
+
+
+// CHANGE PASSWORD
+
+router.get('/changepw/:id', (req, res) => {
+    if (req.user != null) {
+        User.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(user =>{
+            res.render('../views/user/changepw',{
+                user
+            });
+        })
+    }
+    else {
+        alertMessage(res, 'danger', ' Please login to access other features', 'fas fa-pencil-alt', true)
+        res.redirect('/user/login')
+    }
 }),
+
+router.post('/changepw/:id', (req, res) => {
+        let currPass = req.body.currpass
+        let password = req.body.newpass;
+        let cfmPass = req.body.confirmpass;
+
+        if (password !== cfmPass) {
+            alertMessage(res, 'danger', ' Passwords do not match', true)
+            res.redirect('back')
+        }
+
+        else {
+            User.findOne({
+                where: {
+                    id: req.params.id
+                }
+            }).then(user => {
+                if (user) {
+                    bcrypt.compare(currPass, user['password']).then(check => {
+                        if (check) {
+                            bcrypt.genSalt(10, (err, salt) => {
+                                bcrypt.hash(password, salt, (err, hash) => {
+                                    user.update({
+                                        password: hash,
+                                    }).then(() => {
+                                        alertMessage(res, 'success', 'Password has been successfully changed.', true)
+                                        res.redirect('/');
+                                    });
+                                });
+                            });
+                        }
+                        else {
+                            req.flash('error', 'Current Password is incorrect.');
+                            res.redirect('back');
+                        }
+                    });
+                }
+                else {
+                    alertMessage(res, 'danger', 'User Not Found.', true)
+                }
+            });
+        }
+})
+
+
+// DEL ACC
+
 
 router.get('/delacc', (req, res) => {
-    res.render('../views/user/delacc');
+    if (req.user != null) {
+        res.render('../views/user/delacc');
+    }
+    else {
+        alertMessage(res, 'danger', ' Please login to access other features', 'fas fa-pencil-alt', true)
+        res.redirect('/user/login')
+    }
 }),
+
+router.post('/delacc/:id', (req, res) => {
+        User.findOne({
+            id: req.params.id
+        }).then((user) => {
+            if (user == null) {
+                res.redirect('/')
+            }
+            else {
+                User.destroy({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                    .then((user) => {
+                        console.log('destroy');
+                        alertMessage(res, 'success', 'Account successfully deleted.', true)
+                        res.redirect('/user/viewprofile/:id')
+                    })
+            }
+        })
+})
+
+
+
 // LOGOUT
 
 router.get('/logout', (req, res) => {

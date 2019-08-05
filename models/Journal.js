@@ -15,6 +15,12 @@ const Journal = db.define('journal', {
     },
     date: {
         type: Sequelize.STRING
+    },
+    name: {
+        type: Sequelize.STRING
+    },
+    title: {
+        type: Sequelize.STRING
     }
 });
 module.exports = Journal;

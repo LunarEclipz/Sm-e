@@ -9,7 +9,54 @@ const Op = Sequelize.Op;
 const User = require('../models/User');
 const alertMessage = require('../helpers/messenger');
 
+var fl = 1;
+var tl = 1;
+var al = 1;
+var ul = 1;
 
+
+function getPercentage(tasktype, userwriting, userjournal, userevent, taskno){
+	if (tasktype == 'Events'){
+		return (userevent/taskno)*100;
+	}
+	if (tasktype == 'Encouragements'){
+	    return (userjournal/taskno)*100;
+
+	}
+	if (tasktype == 'Writing'){
+		return (userwriting/taskno)*100;
+	}
+
+}
+
+function updateLevel(field, fpb, apb, tpb, upb, fl, tl, al, ul){
+	if (field == "Feelings" && fpb >= 100){
+		fpb = 0;
+		fl = 2;
+		return fl
+	}
+	
+	if (field == "Thoughts" && apb >= 100){
+		tpb = 0;
+		tl = 2;
+		console.log(tl, "HIIIII");
+		return tl
+
+	}
+	if (field == "Actions" && tpb >= 100){
+		apb = 0;
+		al = 2;
+		return al
+
+	}
+	if (field == "Aura" && upb >= 100){
+		upb = 0;
+		ul = 2;
+		return ul
+
+	}
+
+}
 
 
 router.get('/', (req, res) => {
@@ -77,10 +124,73 @@ router.get('/', (req, res) => {
 										const userwriting = check_user.writing;
 										const userencourage = check_user.encourage;
 										const userevent = check_user.event;
-										const fl = 1;
-										const tl = 1;
-										const al = 1;
-										const ul = 1;
+
+										const fpb = getPercentage(feelings[0].Tasks, userwriting, userencourage, userevent, feelings[0].noTasks);
+										const tpb = getPercentage(thoughts[0].Tasks, userwriting, userencourage, userevent, thoughts[0].noTasks);
+										const apb = getPercentage(actions[0].Tasks, userwriting, userencourage, userevent, actions[0].noTasks);
+										const upb = getPercentage(aura[0].Tasks, userwriting, userencourage, userevent, aura[0].noTasks);
+
+										console.log(upb + "++++++THIS", aura[0].Tasks, userwriting, userencourage, userevent, aura[0].noTasks);
+										fl = updateLevel("Feelings", fpb, apb, tpb, upb, fl , tl, al, ul);
+										tl = updateLevel("Thoughts", fpb, apb, tpb, upb, fl , tl, al, ul);
+										al = updateLevel("Actions", fpb, apb, tpb, upb, fl , tl, al, ul);
+										ul = updateLevel("Aura", fpb, apb, tpb, upb, fl , tl, al, ul);
+										if (fl != 2){
+											fl = 1
+										}
+										if (tl != 2){
+											tl = 1
+										}
+										if (al != 2){
+											al = 1
+										}
+										if (ul != 2){
+											ul = 1
+										}
+										var fp =  feelings[0].firstURL;
+										var fq = feelings[0].Quote;
+										var ft = feelings[0].Tasks;
+										var fn = feelings[0].noTasks;
+
+										var tp =  thoughts[0].firstURL;
+										var tq = thoughts[0].Quote;
+										var tt = thoughts[0].Tasks;
+										var tn = thoughts[0].noTasks;
+
+										var ap =  actions[0].firstURL;
+										var aq = actions[0].Quote;
+										var at = actions[0].Tasks;
+										var an = actions[0].noTasks;
+
+										var up =  aura[0].firstURL;
+										var uq = aura[0].Quote;
+										var ut = aura[0].Tasks;
+										var un = aura[0].noTasks;
+
+										if (fl == 2){
+											 fp =  feelings[0].secondURL;
+											 fq = feelings[0].Quote2;
+											 ft = feelings[0].Tasks2;
+											 fn = feelings[0].noTasks2;
+										}
+										if (tl == 2){
+											tp =  thoughts[0].secondURL;
+											 tq = thoughts[0].Quote2;
+											 tt = thoughts[0].Tasks2;
+											 tn = thoughts[0].noTasks2;
+										}
+										if (al == 2){
+											ap =  actions[0].secondURL;
+											 aq = actions[0].Quote2;
+											 at = actions[0].Tasks2;
+											 an = actions[0].noTasks2;
+										}
+										if (ul == 2){
+											up =  aura[0].secondURL;
+											uq = aura[0].Quote2;
+											ut = aura[0].Tasks2;
+											un = aura[0].noTasks2;
+										}
 
 										Avatar.findOne({
 											attributes: ['pet'],
@@ -94,8 +204,10 @@ router.get('/', (req, res) => {
 												where: { petName: user_pet },
 												raw: true
 											}).then(pets => {
-												const images = ['./public/img/Body.png', './public/'+feelings[0].firstURL, './public/'+thoughts[0].firstURL,
-												'./public/'+ actions[0].firstURL, './public/'+aura[0].firstURL];
+												const ppb = getPercentage(pets[0].tasks, userwriting, userencourage, userevent, pets[0].noTasks);
+
+												const images = ['./public/img/Body.png', './public/'+fp, './public/'+tp,
+												'./public/'+ ap, './public/'+up];
 												const jimps = [];
 												
 												for (var i = 0; i < images.length; i++) {
@@ -117,10 +229,12 @@ router.get('/', (req, res) => {
 													AvatarPic: EmptyAvatar, PetPic: EmptyPet,
 													checkuser: checkuser, feelings: feelings[0], thoughts: thoughts[0],
 													actions: actions[0], aura: aura[0], fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,
-													pets: pets[0], finalImg:finalImg
+													pets: pets[0], finalImg:finalImg, fpb:fpb, tpb:tpb, apb:apb, upb:upb, fp:fp, fn:fn, fq:fq, ft:ft,
+													tp:tp, tn:tn, tt:tt, tq:tq, ap:ap, an:an, at:at, aq:aq, up:up, ut:ut, un:un, uq:uq, ppb:ppb
 												});
 											}).catch(err =>{
-												const images = ['./public/img/Body.png', './public/'+feelings[0].firstURL, './public/'+thoughts[0].firstURL,
+
+												const images = ['./public/img/Body.png', './public/'+fl, './public/'+thoughts[0].firstURL,
 												'./public/'+ actions[0].firstURL, './public/'+aura[0].firstURL];
 												const jimps = [];
 												for (var i = 0; i < images.length; i++) {
@@ -141,7 +255,8 @@ router.get('/', (req, res) => {
 												res.render('avatar/avatar', {
 													AvatarPic: EmptyAvatar, PetPic: EmptyPet,
 													checkuser: checkuser, feelings: feelings[0], thoughts: thoughts[0],
-													actions: actions[0], aura: aura[0], fl: fl, tl: tl, al: al, ul: ul, check_user: check_user,finalImg:finalImg
+													actions: actions[0], aura: aura[0], fl: fl, tl: tl, al: al, ul: ul, check_user: check_user, finalImg:finalImg,
+													fpb:fpb, tpb:tpb, apb:apb, upb:upb, fp:fp, fn:fn, fq:fq, ft:ft,  
 												})}); // To catch no video ID
 										});
 									});
@@ -168,10 +283,12 @@ router.get('/', (req, res) => {
 					where: { petName: user_pet },
 					raw: true
 				}).then(pets => {
+					const ppb = getPercentage(pets[0].tasks, userwriting, userencourage, userevent, Pet[0].noTasks);
+
 					res.render('avatar/avatar', {
 						AvatarPic: EmptyAvatar, PetPic: EmptyPet,
 						checkuser: checkuser, check_user: check_user,
-						pets: pets[0]
+						pets: pets[0], ppb:ppb
 					});
 				}).catch(err =>
 
@@ -324,7 +441,11 @@ router.get('/deletePet', (req, res) => {
 
 router.post('/deleteAvatar/:name', (req, res) => {
 	alertMessage(res, 'danger', 'You have deleted a pet. ', true);
-	var name = req.params.name
+	var name = req.params.name;
+	fl = 1;
+	tl = 1;
+	al = 1;
+	ul = 1;
 	Avatar.destroy({
 		where: {
 			username: name
@@ -387,5 +508,7 @@ router.post('/savePet', (req, res) => {
 		res.redirect('/avatar');
 	})
 });
+
+
 
 module.exports = router;

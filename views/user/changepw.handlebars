@@ -1,24 +1,51 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container">
     <div class="row">
         <div class="col-md-3 ">
             <div class="list-group ">
-                <a href="#" class="list-group-item list-group-item-action">My Profile</a>
-                <a href="/user/updateprofile" class="list-group-item list-group-item-action">Update Profile</a>
-                <a href="/user/changepwd" class="list-group-item list-group-item-action active"> Change Password</a>
-                <a href="/" class="list-group-item list-group-item-action"> Delete Account</a>
-
-
-
+                <a href="/user/viewprofile/{{user.id}}" class="list-group-item list-group-item-action">My Profile</a>
+                <a href="/user/updateprofile/{{user.id}}" class="list-group-item list-group-item-action">Update Profile</a>
+                <a href="#" class="list-group-item list-group-item-action active"> Change Password</a>
+                <a href="/user/delacc" class="list-group-item list-group-item-action"> Delete Account</a>
             </div>
         </div>
+
+
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Your Profile</h4>
+                            <h4>Change Password</h4>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="post" action="/user/changepw/{{user.id}}">
+
+                                        <div class="form-pass-group">
+                                            <label for="currPass">
+                                                Current Password
+                                            </label>
+                                            <input type="password" name="currpass" autofocus class="form-control" />
+                                        </div>
+                                        <br>
+                                        <div class="form-pass-group">
+                                            <label for="newPass">
+                                                New Password
+                                            </label>
+                                            <input type="password" name="newpass" autofocus class="form-control" />
+                                        </div>
+                                        <br>
+                                        <div class="form-pass-group">
+                                            <label for="confPass">
+                                                Confirm New Password
+                                            </label>
+                                            <input type="password" name="confirmpass" autofocus class="form-control" />
+                                        </div>
+                                        <br>
+                                        <div class="form-pass-group">
+                                            <input type="submit" class="btn btn-primary" value="Reset Password" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>

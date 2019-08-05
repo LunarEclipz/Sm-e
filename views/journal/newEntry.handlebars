@@ -19,9 +19,9 @@
                     <li>
                         <a href="/journal/moodTracker">Mood Tracker</a>
                     </li>
-                    {{!-- <li>
+                    <li>
                         <a href="/journal/emotionTracker">Emotion Tracker</a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -69,22 +69,50 @@
                         <input type="range" class="custom-range" min="0" max="5" step="1" id="mood" name="mood"
                             value="0" oninput="moodRange()"></input>
                         <div id="box">
-                            <p>Your mood today is </p>
+                            <p class="p-orange">Your mood today is </p>
                             <span id="moodNum"></span>
-                            <p> out of 5</p>
+                            <p class="p-orange"> out of 5</p>
+                        </div>
+                        <div>
+                            <p class="p-orange">You feel </p>
+                            <span id="emotionCurrent"></span>
+                            <p class="p-orange"> today </p>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label class="font-italic col-form-label" for="emotion"> Choose your emotion </label>
                         <div id="box">
-                            <input id="emotion" name="emotion" type="radio" value="Happy">
-                            <img src="/img/happy.png" height=100 width=100>
+                            <input id="emotionHappy" name="emotion" onclick="currentEmotion()" type="radio" value="happy">
+                            <img src="/img/emoticons/happy.png" height=40 width=40>
                             </input>
-                            <input id="emotion" name="emotion" type="radio" value="Meh">
-                            <img src="/img/meh.png" height=100 width=100>
+                            <input id="emotionInLove" name="emotion" onclick="currentEmotion()" type="radio" value="in-love">
+                            <img src="/img/emoticons/in-love.png" height=40 width=40>
                             </input>
-                            <input id="emotion" name="emotion" type="radio" value="Sad">
-                            <img src="/img/sad.png" height=100 width=100>
+                            <input id="emotionExcited" name="emotion" onclick="currentEmotion()" type="radio" value="excited">
+                            <img src="/img/emoticons/excited.png" height=40 width=40>
+                            </input>
+                            <input id="emotionSad" name="emotion" onclick="currentEmotion()" type="radio" value="sad">
+                            <img src="/img/emoticons/sad.png" height=40 width=40>
+                            </input>
+                            <input id="emotionCrying" name="emotion" onclick="currentEmotion()" type="radio" value="like crying">
+                            <img src="/img/emoticons/crying.png" height=40 width=40>
+                            </input>
+                            <br>
+                            <br>
+                            <input id="emotionSick" name="emotion" onclick="currentEmotion()" type="radio" value="sick">
+                            <img src="/img/emoticons/sick.png" height=40 width=40>
+                            </input>
+                            <input id="emotionLucky" name="emotion" onclick="currentEmotion()" type="radio" value="lucky">
+                            <img src="/img/emoticons/lucky.png" height=40 width=40>
+                            </input>
+                            <input id="emotionUnlucky" name="emotion" onclick="currentEmotion()" type="radio" value="unlucky">
+                            <img src="/img/emoticons/unlucky.png" height=40 width=40>
+                            </input>
+                            <input id="emotionConfused" name="emotion" onclick="currentEmotion()" type="radio" value="confused">
+                            <img src="/img/emoticons/confused.png" height=40 width=40>
+                            </input>
+                            <input id="emotionDistracted" name="emotion" onclick="currentEmotion()" type="radio" value="distracted">
+                            <img src="/img/emoticons/distracted.png" height=40 width=40>
                             </input>
                         </div>
                     </div>
@@ -101,27 +129,62 @@
 <script type="text/javascript">
     var range = document.getElementById('mood');
     var box = document.getElementById('moodNum');
-    //var moodData = [];
     function moodRange() {
         var val = range.value;
         box.innerHTML = val;
     }
-    //moodData.push(val);
+
+    var happy = document.getElementById('emotionHappy');
+    var sad = document.getElementById('emotionSad');
+    var love = document.getElementById('emotionInLove');
+    var confused = document.getElementById('emotionConfused');
+    var crying = document.getElementById('emotionCrying');
+    var distracted = document.getElementById('emotionDistracted');
+    var excited = document.getElementById('emotionExcited');
+    var lucky = document.getElementById('emotionLucky');
+    var sick = document.getElementById('emotionSick');
+    var unlucky = document.getElementById('emotionUnlucky');
+    var emotionCurrent = document.getElementById('emotionCurrent');
+    function currentEmotion (){
+        if (happy.checked == true){
+            emotionCurrent.innerHTML = happy.value;
+        }
+        else if (sad.checked == true){
+            emotionCurrent.innerHTML = sad.value;
+        }
+        else if (love.checked == true){
+            emotionCurrent.innerHTML = love.value;
+        }
+        else if (confused.checked == true){
+            emotionCurrent.innerHTML = confused.value;
+        }
+        else if (crying.checked == true){
+            emotionCurrent.innerHTML = crying.value;
+        }
+        else if (distracted.checked == true){
+            emotionCurrent.innerHTML = distracted.value;
+        }
+        else if (excited.checked == true){
+            emotionCurrent.innerHTML = excited.value;
+        }
+        else if (lucky.checked == true){
+            emotionCurrent.innerHTML = lucky.value;
+        }
+        else if (sick.checked == true){
+            emotionCurrent.innerHTML = sick.value;
+        }
+        else if (unlucky.checked == true){
+            emotionCurrent.innerHTML = unlucky.value;
+        }
+    }
     
-    
-    //var dateData = [];
     var dateValue = document.getElementById('dateValue');
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
-    today = mm + '/' + dd + '/' + yyyy;
+    today = dd + 'th Day, ' + mm + 'th Month, in the Year ' + yyyy+ '.';
     dateValue.value = today;
-    //var date = new Date(yyyy, mm, dd);
-    //dateData.push(date)
-
-    //var myData = [moodData, dateData];
-    //localStorage.setItem('objectToPass', myData)
 
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {

@@ -19,9 +19,9 @@
                     <li class="active">
                         <a href="/journal/moodTracker">Mood Tracker</a>
                     </li>
-                    {{!-- <li>
+                    <li>
                         <a href="/journal/emotionTracker">Emotion Tracker</a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -43,7 +43,7 @@
 
         <div class="container">
             <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-            <p class="font-italic">
+            <p class="font-italic p-orange">
                 Drag to Zoom
             </p>
         </div>
@@ -65,6 +65,9 @@
     });
 </script>
 <script>
+    var i = 0;
+
+
     window.onload = function () {
 
         var chart = new CanvasJS.Chart("chartContainer", {
@@ -78,18 +81,14 @@
                     type: "line",
 
                     dataPoints: [
-                        { x: new Date(2019, 00, 1), y: 1 },
-                        { x: new Date(2019, 01, 1), y: 5 },
-                        { x: new Date(2019, 02, 1), y: 5 },
-                        { x: new Date(2019, 03, 1), y: 4 },
-                        { x: new Date(2019, 04, 1), y: 4 },
-                        { x: new Date(2019, 05, 1), y: 5 },
-                        { x: new Date(2019, 06, 1), y: 2 },
-                        { x: new Date(2019, 07, 1), y: 3 },
-                        { x: new Date(2019, 08, 1), y: 1 },
-                        { x: new Date(2019, 09, 1), y: 0 },
-                        { x: new Date(2019, 10, 1), y: 0 },
-                        { x: new Date(2019, 11, 1), y: 1 }
+                        {{#each Journal}}
+
+                            { x: new Date(getYear('{{{date}}}')), y: {{mood}} },
+
+
+                        {{/each}}
+
+                        
                     ]
                 }
             ]
@@ -98,19 +97,14 @@
 
     }
 
-    /*var myData = localStorage['objectToPass'];
-    localStorage.removeItem('objectToPass');
-    var moodY = myData[0];
-    var dateX = myData[1];
-    var data = [];
-    var dataSeries = { type: "line" };
-    var dataPoints = [];
-    dataPoints.push({
-        x: moodY,
-        y: dateX
-    });
-    dataSeries.dataPoints = dataPoints;
-    data.push(dataSeries);*/
+    function getYear(d){
+        var date = d.toString();
+        var year = date.substring(34,38);
+        var month = date.substring(10,12);
+        var day = date.substring(0,2);
+        console.log(d, date,'!!!!', year, month, day)
+        return (year+', '+ month +', '+ day)
+    }
 
 </script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

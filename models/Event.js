@@ -21,7 +21,7 @@ const Event = db.define('event', {
         type: Sequelize.DATE
     },
     eventTime: {
-        type: Sequelize.TIME
+        type: Sequelize.TIME 
     },
     eventEndTime: {
         type: Sequelize.TIME
@@ -35,5 +35,8 @@ const Event = db.define('event', {
     longtitude: {
         type: Sequelize.STRING
     },
+    numberJoined: {
+        type: Sequelize.INTEGER
+    }
 });
 module.exports = Event;

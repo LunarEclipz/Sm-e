@@ -10,6 +10,6 @@ const Register = db.define('register', {
     },
     user: {
         type: Sequelize.STRING
-    }
+    },
 });
 module.exports = Register;

@@ -3,6 +3,7 @@
 		<div class="col-sm-6 col-md-6 col-lg-6">
 
 			{{#if check_user.feelings}}
+			
 			<img src="/uploads/final-images/test.png" alt="Poster unavailable" id="mergedImg" height="240" width="320">
 			<br>
 			<hr>
@@ -51,10 +52,16 @@
 										{{feelings.noTasks}}
 									</p>
 								</div>
+
+								
 							</div>
 						</div>
 					</div>
+					<div class="progress md-progress" style="height: 20px">
+    								<div class="progress-bar bg-danger" role="progressbar" style="width: 25%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+								</div>
 				</div>
+				
 			</div>
 
 			<div class="card border-primary mb-2 w-100 mx-auto">
@@ -83,7 +90,7 @@
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">Level</p>
 									<p class="text-info">
-										{{fl}}
+										{{tl}}
 									</p>
 								</div>
 							</div>
@@ -101,10 +108,16 @@
 										{{thoughts.noTasks}}
 									</p>
 								</div>
+
 							</div>
 						</div>
 					</div>
+					<div class="progress md-progress" style="height: 20px">
+    								<div class="progress-bar bg-danger" role="progressbar" style="width: 500%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+								</div>
 				</div>
+				
+								
 			</div>
 
 			<div class="card border-primary mb-2 w-100 mx-auto">
@@ -133,7 +146,7 @@
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">Level</p>
 									<p class="text-info">
-										{{fl}}
+										{{al}}
 									</p>
 								</div>
 							</div>
@@ -151,9 +164,14 @@
 										{{actions.noTasks}}
 									</p>
 								</div>
+
+								
 							</div>
 						</div>
 					</div>
+				<div class="progress md-progress" style="height: 20px">
+    								<div class="progress-bar bg-danger" role="progressbar" style="width: 25%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+								</div>
 				</div>
 			</div>
 
@@ -184,7 +202,7 @@
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">Level</p>
 									<p class="text-info">
-										{{fl}}
+										{{ul}}
 									</p>
 								</div>
 							</div>
@@ -202,8 +220,14 @@
 										{{aura.noTasks}}
 									</p>
 								</div>
+
+								
 							</div>
 						</div>
+						
+					<div class="progress md-progress" style="height: 20px">
+    								<div class="progress-bar bg-danger" role="progressbar" style="width: 25%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+								</div>
 					</div>
 				</div>
 			</div>
@@ -240,7 +264,7 @@
 					<div class="col-sm-12 col-md-12 col-lg-12">
 						<div class="row">
 							<div class="col-sm-12 col-md-6 col-lg-3">
-									<p class="font-italic">noTasks</p>
+									<p class="font-italic">Quotes</p>
 									<p class="text-info">
 										{{pets.quotes}}
 									</p>
@@ -251,7 +275,7 @@
 									</p>
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-3">
-									<p class="font-italic">noTasks</p>
+									<p class="font-italic"></p>
 									<p class="text-info">
 										{{pets.noTasks}}
 									</p>
@@ -285,21 +309,45 @@
 			{{/if}}
 			<br>
 		</div>
+
+		{{#if check_user}}
+		<button type='button' class='btn btn-lg btn-info btn-block btn-dark' data-toggle='modal' data-target='#myModal'>
+			Delete Avatar
+		</button> <br>{{/if}}
+
 	</div>
 
-	{{!-- <script src="https://unpkg.com/merge-images">
-		import mergeImages from 'merge-images';
-		(function merge() {
-			(mergeImages([{ src: '/img/body.png', x: 0, y: 0 },
-			{ src: '{{feelings.firstURL}}', x: 0, y: 0 },
-			{ src: '{{thoughts.firstURL}}', x: 10, y: 0 },
-			{ src: '{{actions.firstURL}}', x: 110, y: 0 },
-			{ src: '{{aura.firstURL}}' }
-			]).then(b64 =>
-				document.getElementById("mergedImg").src = b64;
- ) )
+
+	<div class="container">
+
+            <div class="modal fade" id="myModal{{id}}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{Name}}, Are you sure you want to delete your Avatar & Pet?</h4>
+                
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <h5>All chnages cannot be undone. You will lose all your progress and data, are you sure you want to delete?</h5>
+                        <div class="modal-body">
+                           
+                        <div class="modal-footer">
+                            <form action="/avatar/deleteAvatar/{{check_user.username}}" method="POST">
+                                <button type="submit" class="btn btn-warning"> Delete Pet</button>
+                            </form>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-		}.();
-	</script> --}}
+	<script src="https://unpkg.com/merge-images">
+		console.log({{feelings.Quotes}});
+	</script>

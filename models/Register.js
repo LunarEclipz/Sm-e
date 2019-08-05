@@ -7,6 +7,9 @@ const Register = db.define('register', {
     },
     eid: {
         type: Sequelize.STRING
+    },
+    user: {
+        type: Sequelize.STRING
     }
 });
 module.exports = Register;

@@ -13,7 +13,7 @@ ex.localStrategy = function (passport) {
             })
                 .then(user => {
                     if (!user) {
-                        return done(null, false, { message: 'Incorrect username' });
+                        return done(null, false, { message: username + '  is not registered.' });
                     }
                     bcrypt.compare(password, user.password)
                         .then(res => {
@@ -58,6 +58,7 @@ ex.localStrategy = function (passport) {
 // passport.serializeUser(function (user, done) {
 //     done(null, user);
 // });
+
 
 
 

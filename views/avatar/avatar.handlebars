@@ -1,61 +1,8 @@
 <div class="jumbotron text-center">
-	{{#if check_user}}
-					<i class="fa fa-question fa-5x"data-toggle='modal' data-target='#helpModal' width="200" height="200"></i>
-					<div class="container">
-{{/if}}
-            <div class="modal fade" id="helpModal" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-
-
-                        <div class="modal-header">
-
-                            <h4 class="modal-title">Avatar and Pet Explanation</h4>
-                
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                        </div>
-
-
-                        <div class="modal-body">
-                            <h5>Hi! Welcome to your Avatar Page !</h5>
-                        <div class="modal-body">
-                           			<img src="/uploads/final-images/test.png" alt="Poster unavailable" id="mergedImg" height="60" width="80">
-									   <h6>This Image Is Your Final Avatar.</h6>
-									<h6> It is made of 4 Different Aspects, which you gotten from answering questions, for example :</h6>
-																	<img src="{{{fp}}}" alt="Poster unavailable" height="60" width="80">
-									<h6>Each aspects, can be evolved, changing its' looks, up to 2 times.</h6>
-									<h6>All you need to do, is just completed the tasks!</h6>
-									<h6>Encouragement requires you to use the wellness tool box</h6>
-									<h6>Writing requires you to use the Journal</h6>
-									<h6>Events requires you to register for an Event.</h6>
-
-									<h6>Pets are something which can be created daily through answering questions</h6>
-									
-
-									<h7>If you would like to delete your progress, you can press the delete button at the bottom. But this cannot be undone!</h7>
-									<h5>Have fun leveling up your Avatar!</h5>
-
-
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-			</div></div>
-
 	<div class='row'>
 		<div class="col-sm-6 col-md-6 col-lg-6">
 
 			{{#if check_user.feelings}}
-			
 			<img src="/uploads/final-images/test.png" alt="Poster unavailable" id="mergedImg" height="240" width="320">
 			<br>
 			<hr>
@@ -69,8 +16,8 @@
 					<div class="col-sm-12 col-md-12 col-lg-12">
 
 						<div class="row">
-							<a href="{{{fp}}}" data-title="{{feelings.name}}" data-toggle="lightbox">
-								<img src="{{{fp}}}" alt="Poster unavailable" height="240" width="320">
+							<a href="{{{feelings.firstURL}}}" data-title="{{feelings.name}}" data-toggle="lightbox">
+								<img src="{{{feelings.firstURL}}}" alt="Poster unavailable" height="240" width="320">
 							</a>
 						</div>
 
@@ -80,7 +27,7 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Quote</p>
 									<p class="text-info">
-										{{fq}}
+										{{feelings.Quote}}
 									</p>
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-3">
@@ -94,26 +41,20 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Tasks</p>
 									<p class="text-info">
-										{{ft}}
+										{{feelings.Tasks}}
 									</p>
 								</div>
 
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">noTasks</p>
 									<p class="text-info">
-										{{fn}}
+										{{feelings.noTasks}}
 									</p>
 								</div>
-
-								
 							</div>
 						</div>
 					</div>
-					<div class="progress md-progress" style="height: 20px">
-    								<div class="progress-bar bg-danger" role="progressbar" style="width: {{fpb}}%; height: 20px" aria-valuenow="{{fpb}}" aria-valuemin="0" aria-valuemax="100">{{fpb}}%</div>
-								</div>
 				</div>
-				
 			</div>
 
 			<div class="card border-primary mb-2 w-100 mx-auto">
@@ -125,8 +66,8 @@
 					<div class="col-sm-12 col-md-12 col-lg-12">
 
 						<div class="row">
-							<a href="{{{tp}}}" data-title="{{thoughts.name}}" data-toggle="lightbox">
-								<img src="{{{tp}}}" alt="Poster unavailable" height="240" width="320">
+							<a href="{{{thoughts.firstURL}}}" data-title="{{thoughts.name}}" data-toggle="lightbox">
+								<img src="{{{thoughts.firstURL}}}" alt="Poster unavailable" height="240" width="320">
 							</a>
 						</div>
 
@@ -136,13 +77,13 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Quote</p>
 									<p class="text-info">
-										{{tq}}
+										{{thoughts.Quote}}
 									</p>
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">Level</p>
 									<p class="text-info">
-										{{tl}}
+										{{fl}}
 									</p>
 								</div>
 							</div>
@@ -150,26 +91,20 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Tasks</p>
 									<p class="text-info">
-										{{tt}}
+										{{thoughts.Tasks}}
 									</p>
 								</div>
 
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">noTasks</p>
 									<p class="text-info">
-										{{tn}}
+										{{thoughts.noTasks}}
 									</p>
 								</div>
-
 							</div>
 						</div>
 					</div>
-					<div class="progress md-progress" style="height: 20px">
-    								<div class="progress-bar bg-danger" role="progressbar" style="width: {{tpb}}%; height: 20px" aria-valuenow="{{tpb}}" aria-valuemin="0" aria-valuemax="100">{{tpb}}%</div>
-								</div>
 				</div>
-				
-								
 			</div>
 
 			<div class="card border-primary mb-2 w-100 mx-auto">
@@ -181,8 +116,8 @@
 					<div class="col-sm-12 col-md-12 col-lg-12">
 
 						<div class="row">
-							<a href="{{{ap}}}" data-title="{{actions.name}}" data-toggle="lightbox">
-								<img src="{{{ap}}}" alt="Poster unavailable" height="240" width="320">
+							<a href="{{{actions.firstURL}}}" data-title="{{actions.name}}" data-toggle="lightbox">
+								<img src="{{{actions.firstURL}}}" alt="Poster unavailable" height="240" width="320">
 							</a>
 						</div>
 
@@ -192,13 +127,13 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Quote</p>
 									<p class="text-info">
-										{{aq}}
+										{{actions.Quote}}
 									</p>
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">Level</p>
 									<p class="text-info">
-										{{al}}
+										{{fl}}
 									</p>
 								</div>
 							</div>
@@ -206,24 +141,19 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Tasks</p>
 									<p class="text-info">
-										{{at}}
+										{{actions.Tasks}}
 									</p>
 								</div>
 
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">noTasks</p>
 									<p class="text-info">
-										{{an}}
+										{{actions.noTasks}}
 									</p>
 								</div>
-
-								
 							</div>
 						</div>
 					</div>
-				<div class="progress md-progress" style="height: 20px">
-    								<div class="progress-bar bg-danger" role="progressbar" style="width: {{apb}}%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{apb}}%</div>
-								</div>
 				</div>
 			</div>
 
@@ -237,8 +167,8 @@
 					<div class="col-sm-12 col-md-12 col-lg-12">
 
 						<div class="row">
-							<a href="{{{up}}}" data-title="{{aura.name}}" data-toggle="lightbox">
-								<img src="{{{up}}}" alt="Poster unavailable" height="240" width="320">
+							<a href="{{{aura.firstURL}}}" data-title="{{aura.name}}" data-toggle="lightbox">
+								<img src="{{{aura.firstURL}}}" alt="Poster unavailable" height="240" width="320">
 							</a>
 						</div>
 
@@ -248,13 +178,13 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Quote</p>
 									<p class="text-info">
-										{{uq}}
+										{{aura.Quote}}
 									</p>
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">Level</p>
 									<p class="text-info">
-										{{ul}}
+										{{fl}}
 									</p>
 								</div>
 							</div>
@@ -262,24 +192,18 @@
 								<div class="col-sm-12 col-md-6 col-lg-9">
 									<p class="font-italic">Tasks</p>
 									<p class="text-info">
-										{{ut}}
+										{{aura.Tasks}}
 									</p>
 								</div>
 
 								<div class="col-sm-12 col-md-6 col-lg-3">
 									<p class="font-italic">noTasks</p>
 									<p class="text-info">
-										{{un}}
+										{{aura.noTasks}}
 									</p>
 								</div>
-
-								
 							</div>
 						</div>
-						
-					<div class="progress md-progress" style="height: 20px">
-    								<div class="progress-bar bg-danger" role="progressbar" style="width: {{upb}}%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{upb}}%</div>
-								</div>
 					</div>
 				</div>
 			</div>
@@ -316,7 +240,7 @@
 					<div class="col-sm-12 col-md-12 col-lg-12">
 						<div class="row">
 							<div class="col-sm-12 col-md-6 col-lg-3">
-									<p class="font-italic">Quotes</p>
+									<p class="font-italic">noTasks</p>
 									<p class="text-info">
 										{{pets.quotes}}
 									</p>
@@ -327,12 +251,10 @@
 									</p>
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-3">
-									<p class="font-italic">Pet Progress</p>
-									<br>
-									<div class="progress md-progress" style="height: 20px">
-    								<div class="progress-bar bg-danger" role="progressbar" style="width: {{ppb}}%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ppb}}%</div>
-								</div>
-									
+									<p class="font-italic">noTasks</p>
+									<p class="text-info">
+										{{pets.noTasks}}
+									</p>
 								</div>
 							
 						</div>
@@ -363,47 +285,21 @@
 			{{/if}}
 			<br>
 		</div>
-
-		{{#if check_user}}
-		<button type='button' class='btn btn-lg btn-info btn-block btn-dark' data-toggle='modal' data-target='#myModal'>
-			Delete Avatar
-		</button> <br>{{/if}}
-
 	</div>
 
+	{{!-- <script src="https://unpkg.com/merge-images">
+		import mergeImages from 'merge-images';
+		(function merge() {
+			(mergeImages([{ src: '/img/body.png', x: 0, y: 0 },
+			{ src: '{{feelings.firstURL}}', x: 0, y: 0 },
+			{ src: '{{thoughts.firstURL}}', x: 10, y: 0 },
+			{ src: '{{actions.firstURL}}', x: 110, y: 0 },
+			{ src: '{{aura.firstURL}}' }
+			]).then(b64 =>
+				document.getElementById("mergedImg").src = b64;
+ ) )
 
-	<div class="container">
 
-            <div class="modal fade" id="myModal{{id}}" role="dialog">
-                <div class="modal-dialog">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">{{Name}}, Are you sure you want to delete your Avatar & Pet?</h4>
-                
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                        </div>
-                        <div class="modal-body">
-                            <h5>All chnages cannot be undone. You will lose all your progress and data, are you sure you want to delete?</h5>
-                        <div class="modal-body">
-                           
-                        <div class="modal-footer">
-                            <form action="/avatar/deleteAvatar/{{check_user.username}}" method="POST">
-                                <button type="submit" class="btn btn-warning"> Yes, Im sure I'd want to delete.</button>
-                            </form>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-	<script src="https://unpkg.com/merge-images">
-		console.log({{feelings.Quotes}});
-	</script>
-	
-
-			
-			
+		}.();
+	</script> --}}

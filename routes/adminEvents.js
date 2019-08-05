@@ -39,6 +39,7 @@ router.post('/addEvent', (req, res) => {
 	let eventTime = req.body.eventTime;
 	let eventEndTime = req.body.eventEndTime;
 	let posterURL = req.body.posterURL;
+	let numberJoined = 0;
 
 	if (isNaN(eventCost) == true && eventCost.toLowerCase() != 'free') {
 		errors.push({ text: "Invalid Event Cost" })
@@ -61,7 +62,8 @@ router.post('/addEvent', (req, res) => {
 			eventDate,
 			eventTime,
 			eventEndTime,
-			posterURL
+			posterURL,
+			numberJoined
 		})
 	}
 	else {
@@ -88,6 +90,7 @@ router.post('/addEvent', (req, res) => {
 					posterURL,
 					latitude,
 					longtitude,
+					numberJoined
 				}).then((event) => {
 					alertMessage(res, 'success', 'Event successfully added', 'fas fa-calendar-alt', true)
 					res.redirect('/adminEvents/adminDisplayEvent')
@@ -212,6 +215,7 @@ router.put('/saveEdit/:id', (req, res) => {
 	}
 
 	if (errors.length > 0) {
+		alertMessage(res, 'danger', 'Invalid Event Cost', 'fas fa-pencil-alt', true)
 		res.redirect('back')
 	}
 	else {
@@ -309,12 +313,12 @@ router.post('/upload', (req, res) => {
 })
 
 router.post('/eventInfo/:id', (req, res) => {
-
+	
 	Event.findOne({
 		where: {
 			id: req.params.id
 		}
-	}).then((event) => {
+	}).then((event) => {			
 		Register.findOne({
 			where:{
 				user: req.user.id,
@@ -326,6 +330,16 @@ router.post('/eventInfo/:id', (req, res) => {
 				res.redirect('/events/eventDisplay')
 			}
 			else{
+				if (event){
+					Event.update({
+						numberJoined: event.numberJoined + 1
+					}, {
+							where: {
+								id: req.params.id
+							}
+						})
+					}
+					
 				let eid = req.params.id
 				let eventName = event.eventName
 				let user = req.user.id;
@@ -333,7 +347,7 @@ router.post('/eventInfo/:id', (req, res) => {
 				Register.create({
 					eid,
 					eventName,
-					user
+					user,
 				}).then((register) => {
 					alertMessage(res, 'success', 'You have registered for "' + register.eventName + '"', 'fas fa-calendar-alt', true)
 					res.redirect('/events/eventDisplay')

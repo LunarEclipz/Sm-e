@@ -101,13 +101,20 @@
         });
 
         var infoWindow = new google.maps.InfoWindow({
-            content: '<img id="poster" {{#if event.posterURL}} src="{{event.posterURL}}" {{else}} src="/img/default.jpeg" {{/if}} alt="No image available" class="border img-thumbnail img-fluid" style="height:100%;width:70%"> <br><br> <h5>{{event.eventName}}</h5> <p>{{dateFormat event.eventDate 'DD MMM YYYY'}}, {{event.eventTime}} - {{event.eventEndTime}}</p>'
+            content: '<img id="poster" {{#if event.posterURL}} src="{{event.posterURL}}" {{else}} src="/img/default.jpeg" {{/if}} alt="No image available" class="border img-thumbnail img-fluid" style="height:100%;width:50%"> <br><br> <h5>{{event.eventName}}</h5> <p>{{dateFormat event.eventDate 'DD MMM YYYY'}}, {{event.eventTime}} - {{event.eventEndTime}}</p>'
         });
 
         marker.addListener('click', function () {
             infoWindow.open(map, marker);
         });
-        console.log('======>', {{event.latitude}}, {{event.longtitude}})
+
+        marker.addListener('mouseover', function () {
+        infoWindow.open(map, marker);
+        });
+
+        marker.addListener('mouseout', function () {
+        infoWindow.open(map, marker);
+        });
     }
 
 </script>

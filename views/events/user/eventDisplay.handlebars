@@ -1,103 +1,166 @@
 <div class="container">
 
-<div class="row">
-    <div class="col-md-12 mx-auto">
-        <div class="card card-body">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-8">
-                    <h3 class="text-left" style="color: #df744a;font-weight: bold;">Event List</h3>
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-8">
+                        <h3 class="text-left" style="color: #df744a;font-weight: bold;">Current Events</h3>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4 text-right">
+                        <a class="btn btn-orange text-white" role="button" data-toggle="modal"
+                            data-target="#basicExampleModal">
+                            View Joined Events
+                        </a>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-4 text-right">
-                    <a class="btn btn-orange" role="button" data-toggle="modal" data-target="#basicExampleModal">
-                        View Joined Events
-                    </a>
+                </br>
+                <div id="search" class="search-wrap col-sm-12 col-sm-12 col-lg-12" style="color: #df744a">
+                    <p class="font-italic text-left"><i class="fas fa-search"></i> Search for Events</i></p>
+                    <form action="/events/find" class="search">
+                        <div>
+                            <input type="search" name="term" class="form-control"
+                                placeholder="Type something and hit 'Enter' to search for it!">
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <div class="col-sm-12 col-md-12 col-lg-3 align-items-right">
+                    <select class="form-control sortFunction">
+                        <option>Sort By: </option>
+                        <option>Most Joined</option>
+                        <option>Least Joined</option>
+                        <option>Latest First</option>
+                        <option>Oldest First</option>
+                    </select>
+                </div>
+                </br>
+                <hr>
+                <div class="card-deck">
+                    {{#if events}}
+                    {{#each events}}
+                    <div class="card-body col-sm-12 col-md-12 col-lg-4 d-flex align-items-stretch">
+                        <div class="card card-cascade regular">
+                            <!-- Card image -->
+                            <div class="view view-cascade overlay">
+                                <img id="poster" {{#if posterURL}} src="{{posterURL}}" {{else}} src="/img/default.jpeg"
+                                    {{/if}} alt="No image available" class="card-img-top" height="250px" width="200px">
+                            </div>
+                            <!-- Card content -->
+                            <div class="card-body card-body-cascade">
+                                <h4 class="font-weight-bold card-title">{{eventName}}</h4>
+                                <h5 class="card-text" style="color:#df744a">{{eventCost}}</h5>
+                                <p>{{eventLocation}}</p>
+                                <p style="color: #df744a"> <i
+                                        class="fas fa-calendar mr-1"></i>{{dateFormat eventDate 'DD MMM YYYY'}}</p>
+                                <h6 class="text-info">Going: {{numberJoined}}</h6>
+                            </div>
+                            <div class="card-footer text-muted text-center">
+                                <a class="btn btn-orange" role="button" href="eventInfo/{{id}}">View Event</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <div class="text-center" style="margin-left: 20px">
+                        <h4 class="text-center">No Events</h4>
+                    </div>
+                    {{/if}}
+                </div>
+                <br>
+                <hr>
+                <br>
+                <div>
+                    <h4 class="text-center" style="color:#df744a;">Event Locations</h4>
+                    <br>
+                    <div id="map" style="height: 400px; width: 100%;"></div>
                 </div>
             </div>
-            </br>
-            <div id="search" class="search-wrap" style="color: #df744a">
-                <p class="font-italic text-left"><i class="fas fa-search"></i> Search for Events</i></p>
-                <form action="/events/find" class="search">
+        </div>
+    </div>
+    </br>
+
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#df744a">Events You Registered for:
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{#if registers}}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <th class="text-left align-middle">Event Name</th>
+                                <th class="text-left align-middle">Actions</th>
+                            </thead>
+                            {{#each registers}}
+                            <tbody>
+                                <tr>
+                                    <td class="text-left align-middle"><a href="eventInfo/{{eid}}">{{eventName}}</a>
+                                    </td>
+                                    <td class="text-left align-middle">
+                                        <button class="btn btn-danger" data-toggle="confirmation"
+                                            data-title="Cancel Registration?" href="cancel/{{id}}">Cancel
+                                            Registration</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {{/each}}
+                        </table>
+                    </div>
+                    {{else}}
                     <div>
-                        <input type="search" name="term" class="form-control"
-                            placeholder="Type something and hit 'Enter' to search for it!">
+                        <h5>You have not joined any events</h5>
                     </div>
-                </form>
-            </div>
-            </br>
-            <hr>
-            <div class="card-deck">
-                {{#if events}}
-                {{#each events}}
-                <div class="card-body col-sm-12 col-md-12 col-lg-4 d-flex align-items-stretch">
-                    <div class="card card-cascade regular">
-                        <!-- Card image -->
-                        <div class="view view-cascade overlay">
-                            <img id="poster" {{#if posterURL}} src="{{posterURL}}" {{else}} src="/img/default.jpeg"
-                                {{/if}} alt="No image available" class="card-img-top" height="250px" width="200px">
-                        </div>
-                        <!-- Card content -->
-                        <div class="card-body card-body-cascade">
-                            <h4 class="font-weight-bold card-title contentText">{{eventName}}</h4>
-                            <h5 class="card-text contentText" style="color:#df744a">{{eventCost}}</h5>
-                            <p class="card-text contentText">{{eventLocation}}</p>
-                            <p class="card-text" style="color: #df744a"> <i
-                                    class="fas fa-calendar mr-1"></i>{{dateFormat eventDate 'DD MMM YYYY'}}</p>
-                        </div>
-                        <div class="card-footer text-muted text-center">
-                            <a class="btn btn-orange" role="button" href="eventInfo/{{id}}">View Event</a>
-                        </div>
-                    </div>
+                    {{/if}}
                 </div>
-                {{/each}}
-                {{else}}
-                <div class="text-center" style="margin-left: 20px">
-                    <h4 class="contentText">No Events</h4>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-orange" data-dismiss="modal">Close</button>
                 </div>
-                {{/if}}
-            </div>
-        </div>
-    </div>
-</div>
-</br>
-
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color:#df744a">Events You Registered for: </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <th class="text-left align-middle">Event Name</th>
-                            <th class="text-left align-middle">Actions</th>
-                        </thead>
-                        {{#if registers}}
-                        {{#each registers}}
-                        <tbody>
-                            <tr>
-                                <td class="text-left align-middle"><a href="eventInfo/{{eid}}">{{eventName}}</a></td>
-                                <td class="text-left align-middle">
-                                    <button class="btn btn-danger" data-toggle="confirmation"
-                                        data-title="Cancel Registration?" href="cancel/{{id}}">Cancel Registration</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        {{/each}}
-                        {{/if}} 
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-orange" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-</div>
+<script>
+    function initMap() {
+        // Map options
+        var options = {
+            zoom: 11,
+            center: { lat: 1.3521, lng: 103.8198 }
+        }
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+        {{#if events}}
+        {{#each events}}
+        // Add marker
+        var marker = new google.maps.Marker({
+            position: { lat: {{latitude}}, lng: {{longtitude}} },
+            map: map,
+        });
+        
+        var infoWindow = new google.maps.InfoWindow({
+            content: '<img id="poster" {{#if posterURL}} src="{{posterURL}}" {{else}} src="/img/default.jpeg" {{/if}} alt="No image available" class="border img-thumbnail img-fluid" style="height:100%;width:50%"> <br><br> <h5>{{eventName}}</h5> <p>{{dateFormat eventDate 'DD MMM YYYY'}}, {{eventTime}} - {{eventEndTime}}</p>'
+        });
+        marker.addListener('click', function () {
+            window.location.href = 'eventInfo/{{id}}';
+        });
+        marker.addListener('mouseover', function () {
+            infoWindow.open(map, marker);
+        });
+        marker.addListener('mouseout', function () {
+            infoWindow.close(map, marker);
+        });
+        {{/each}}
+        {{/if}}
+    }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAY6l_kdezwueW1JJgqSt1IX4sqZnbZWA&callback=initMap">
+    </script>

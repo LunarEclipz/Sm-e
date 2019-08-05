@@ -20,12 +20,13 @@
             </form>
         </div>
         <br>
+        <hr>
         {{#each events}}
         <div class="card mb-2 w-100 mx-auto" style="border-color:#df744a">
             <div class="contentText" style="margin-left:20px; margin-top: 20px; border-color:#df744a;">
-                <h5 class="" style="font-weight:bold;">{{eventName}}</h5>
+                <h5 style="font-weight:bold;">{{eventName}}</h5>
             </div>
-            <div class="card-body" style="color: #df744a;">
+            <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-2">
                         <a href="{{posterURL}}" data-title="{{eventName}}" data-toggle="lightbox">
@@ -36,27 +37,27 @@
                     <div class="col-sm-12 col-md-12 col-lg-8">
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Time of Event</p>
+                                <p class="font-italic" style="color: #df744a; font-weight: bold;">Time of Event</p>
                                 <p class="contentText">{{eventTime}}</p>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Cost of Event</p>
+                                <p class="font-italic" style="color: #df744a; font-weight: bold;">Cost of Event</p>
                                 <p class="contentText">{{eventCost}}</p>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Event Date</p>
+                                <p class="font-italic" style="color: #df744a; font-weight: bold;">Event Date</p>
                                 <p class="contentText">{{dateFormat eventDate 'DD/MM/YYYY'}}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-9">
-                                <p class="font-italic">Categories</p>
+                                <p class="font-italic" style="color: #df744a; font-weight: bold;">Categories</p>
                                 <p class="contentText">{{eventCategory}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-2">
-                        <a href="editEvent/{{id}}" class="card-link text-success">
+                        <a href="editEvent/{{id}}" class="card-link text-info">
                             <i class="fas fa-pencil-alt"></i>
                             Edit
                         </a>
@@ -69,8 +70,8 @@
                 </div>
 
             </div>
-            <div class="card-footer" style="color: #df744a; border-color: #df744a">
-                <h6 class="font-italic">About Event:</h6>
+            <div class="card-footer" style="border-color: #df744a">
+                <h6 class="font-italic" style="color: #df744a; font-weight: bold;">About Event:</h6>
                 <p class="contentText">{{eventDescription}}</p>
             </div>
         </div>
@@ -82,7 +83,7 @@
     <div class="card card-body">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-8">
-                <h3 class="" style="color: #df744a">Events</h3>
+                <h3 style="color: #df744a">Events</h3>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4 text-right">
                 <a class="btn btn-orange" role="button" href="/adminEvents/addEvent">Add New Event</a>
@@ -96,9 +97,10 @@
                     <input type="search" name="term" class="form-control"
                         placeholder="Type something and hit 'Enter' to search for it!">
                 </div>
-                <br>
             </form>
         </div>
+        <br>
+        <hr>
         <h3 style="position: relative; margin: 0 auto;" class="contentText">No Events available</h3>
     </div>
 </div>

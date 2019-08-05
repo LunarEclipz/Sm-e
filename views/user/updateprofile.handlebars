@@ -1,21 +1,18 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container">
     <div class="row">
         <div class="col-md-3 ">
+
             <div class="list-group ">
-                <a href="/user/viewprofile" class="list-group-item list-group-item-action">My Profile</a>                
+                <a href="/user/viewprofile/{{user.id}}" class="profile list-group-item list-group-item-action">My
+                    Profile</a>
                 <a href="#" class="list-group-item list-group-item-action active">Update Profile</a>
-                <a href="/user/changepwd" class="list-group-item list-group-item-action"> Change Password</a>
-                <a href="/" class="list-group-item list-group-item-action"> Delete Account</a>
-
-
-
+                <a href="/user/changepw/{{user.id}}" class="list-group-item list-group-item-action"> Change Password</a>
+                <a href="/user/delacc" class="list-group-item list-group-item-action"> Delete Account</a>
             </div>
+
+
         </div>
+
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
@@ -27,7 +24,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form action = "/user/updateprofile" method="post">
+
+                            <form action="/user/updateprofile/{{user.id}}" method="post">
                                 <div class="form-profile-group row">
                                     <label for="username" class="col-4 col-form-label">Username</label>
                                     <div class="col-8">
@@ -42,7 +40,7 @@
                                     <label for="name" class="col-4 col-form-label">First Name</label>
                                     <div class="col-8">
                                         <input id="name" name="name" placeholder="First Name" class="form-control here"
-                                            type="text">
+                                            type="text" {{#if user.fname}} value="{{user.fname}}" {{/if}}>
                                     </div>
                                 </div>
 
@@ -52,7 +50,19 @@
                                     <label for="lastname" class="col-4 col-form-label">Last Name</label>
                                     <div class="col-8">
                                         <input id="lastname" name="lastname" placeholder="Last Name"
-                                            class="form-control here" type="text">
+                                            class="form-control here" type="text" {{#if user.lname}}
+                                            value="{{user.lname}}" {{/if}}>
+                                    </div>
+                                </div>
+
+                                <br>
+
+
+                                <div class="form-profile-group row">
+                                    <label for="dob" class="col-4 col-form-label">Date of Birth</label>
+                                    <div class="col-8">
+                                        <input id="dob" name="dob" placeholder="Date of Birth" class="form-control here"
+                                            type="date" {{#if user.dob}} value="{{user.dob}}" {{/if}}>
                                     </div>
                                 </div>
 
@@ -62,7 +72,17 @@
                                     <label for="email" class="col-4 col-form-label">Email</label>
                                     <div class="col-8">
                                         <input id="email" name="email" value={{user.email}} class="form-control here"
-                                            required="required" type="text" readonly>
+                                            type="text" readonly>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="form-profile-group row">
+                                    <label for="number" class="col-4 col-form-label">Phone Number</label>
+                                    <div class="col-8">
+                                        <input id="number" name="number" value="number" class="form-control here"
+                                            type="number" {{#if user.number}} value="{{user.number}}" {{/if}}>
                                     </div>
                                 </div>
 
@@ -74,7 +94,9 @@
                                             Profile</button>
                                     </div>
                                 </div>
+
                             </form>
+
                         </div>
                     </div>
 

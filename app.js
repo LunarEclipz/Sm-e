@@ -29,6 +29,7 @@ const adminEventsRoute = require('./routes/adminEvents')
 const {dateFormat} = require('./helpers/dateFormat')
 const {checkbox} = require('./helpers/checkbox')
 const {selectCheck} = require('./helpers/hbs')
+const {ifCond} = require('./helpers/hbs')
 
 // Connects to MySQL database
 const smileDB = require('./config/DBConnection');
@@ -59,7 +60,12 @@ const app = express();
 *
 * */
 app.engine('handlebars', exphbs({
-	helpers: hbs,
+	helpers: {
+		ifCond: ifCond,
+		selectCheck: selectCheck,
+		dateFormat : dateFormat,
+		checkbox : checkbox
+	},
 	defaultLayout: 'base',
 	layoutsDir: __dirname + '/views/layouts',
 	partialsDir: hbs.partialsDirs(__dirname + '/views/partials')

@@ -111,12 +111,6 @@ router.post('/admin/wtbmanagement', upload.single('Thumbnail'), (req, res) => {
 
 	}
 
-	//Form Info
-	// console.log(req.body)
-	//Thumbnail Info
-	// console.log(req.file)
-	//Insert values into DB
-
 });
 //Delete
 router.get('/admin/wtbmanagement/delete/:id', (req, res) => {
@@ -199,67 +193,164 @@ router.post('/admin/wtbmanagement/edit/:id', upload.single('Thumbnail'), (req, r
 
 //RENDER
 
-//ARTICLE INFO
-router.get('/user/wellnesstoolbox/info/:id', (req, res) => {
-
-	article.findOne({
-		raw: true,
-		where: {
-			id: req.params.id,
-			//userId: req.user.id
-		}
-	}).then(data => {
-		//Increase view by 1 each time this page is visited
-		if (data) {
-			article.update(
-				{view: data.view + 1},
-				{where: { id: data['id'] }
-				}).then(() => {
-					res.render('wellnesstoolbox/user/wellnesstoolboxinfo', {
-						data
-					})
-				})
-			console.log(data);
-		}
-	})
-});
-
-//USER INTERFACE
+//USER SIDE//
+//Articles
 router.get('/user/wellnesstoolbox', (req, res) => {
 
-	//Retrieve Data from DB
-	article.findAll({
-		raw: true
-	}).then((article) => {
-		sortArticle(article)
-		res.render('wellnesstoolbox/user/wellnesstoolbox', {
-			medArticle,
-			vidArticle,
-			musicArticle,
-			workArticle,
-			depArticle
-		});
-	}).catch(err => console.log(err))
+	if (req.user != null) {
+		//Retrieve Data from DB
+		article.findAll({
+			raw: true
+		}).then((article) => {
+			sortArticle(article)
+			res.render('wellnesstoolbox/user/wellnesstoolbox', {
+				medArticle,
+				vidArticle,
+				musicArticle,
+				workArticle,
+				depArticle
+			});
+		}).catch(err => console.log(err))
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
 });
 
-//ADMIN INTERFACE
+//Article Info
+router.get('/user/wellnesstoolbox/info/:id', (req, res) => {
+
+	if (req.user != null) {
+		article.findOne({
+			raw: true,
+			where: {
+				id: req.params.id,
+				//userId: req.user.id
+			}
+		}).then(data => {
+			//Increase view by 1 each time this page is visited
+			if (data) {
+				article.update(
+					{ view: data.view + 1 },
+					{
+						where: { id: data['id'] }
+					}).then(() => {
+						res.render('wellnesstoolbox/user/wellnesstoolboxinfo', {
+							data
+						})
+					})
+			}
+		})
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
+});
+
+
+//ADMIN SIDE//
+//Articles
+router.get('/admin/wellnesstoolbox', (req, res) => {
+	if (req.user != null) {
+		if (req.user.acctype != 'admin') {
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
+		}
+		else {
+			//Retrieve Data from DB
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wellnesstoolbox', {
+					medArticle,
+					vidArticle,
+					musicArticle,
+					workArticle,
+					depArticle
+				});
+			}).catch(err => console.log(err))
+		}
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
+});
+
+//Article Info
+router.get('/admin/wellnesstoolbox/info/:id', (req, res) => {
+
+	if (req.user != null) {
+		if (req.user.acctype != 'admin') {
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
+		}
+		else {
+			article.findOne({
+				raw: true,
+				where: {
+					id: req.params.id,
+					//userId: req.user.id
+				}
+			}).then(data => {
+				//Increase view by 1 each time this page is visited
+				if (data) {
+					article.update(
+						{ view: data.view + 1 },
+						{
+							where: { id: data['id'] }
+						}).then(() => {
+							res.render('wellnesstoolbox/admin/wellnesstoolboxinfo', {
+								data
+							})
+						})
+				}
+			})
+		}
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
+});
+
+
+//Management
 router.get('/admin/wtbmanagement', (req, res) => {
 
-	//Retrieve Data from DB
-	article.findAll({
-		raw: true
-	}).then((article) => {
-		sortArticle(article)
-		res.render('wellnesstoolbox/admin/wtbmanagement', {
-			medArticle,
-			vidArticle,
-			musicArticle,
-			workArticle,
-			depArticle,
-			article,
-		});
-	}).catch(err => console.log(err))
+	if (req.user != null) {
+		if (req.user.acctype != 'admin') {
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
+		}
+		else {
+			//Retrieve Data from DB
+			article.findAll({
+				raw: true
+			}).then((article) => {
+				sortArticle(article)
+				res.render('wellnesstoolbox/admin/wtbmanagement', {
+					medArticle,
+					vidArticle,
+					musicArticle,
+					workArticle,
+					depArticle,
+					article,
+				});
+			}).catch(err => console.log(err))
+		}
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
 });
+
+
+
 
 //Sort Articles into Categories
 function sortArticle(article) {
@@ -463,7 +554,6 @@ router.get('/search/depressiontips', (req, res) => {
 				}
 			}).catch(err => console.log(err))
 		});
-	//console.log(depArticle)
 });
 
 module.exports = router;

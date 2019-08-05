@@ -7,7 +7,7 @@ router.get('/calendar', (req, res) => {
 	Journal.findAll({
 	}).then((Journal) => {
 		res.render('journal/calendar', {
-			Journal: Journal
+			Journal: Journal,
 		});
 	});
 });
@@ -15,7 +15,13 @@ router.get('/calendar', (req, res) => {
 // Mood Tracker
 router.get('/moodTracker', (req, res) => {
 	const Title = "Mood Tracker";
-	res.render('journal/moodTracker', { title: Title })
+	Journal.findAll({
+		where: { name: req.user.name }
+	}).then(Journal => {
+		console.log(Journal);
+		res.render('journal/moodTracker', { title: Title, Journal: Journal })
+	}
+	)
 });
 
 // New Entry
@@ -31,10 +37,12 @@ router.post('/saveEntry', (req, res) => {
 	let emotion = req.body.emotion;
 	let date = req.body.date;
 	let title = req.body.title;
-	console.log(entry, date, mood, emotion, title)
+	let name = req.user.name;
+	console.log(entry, date, mood, emotion, title, name)
 
 	Journal.create({
 		entry,
+		name,
 		mood,
 		emotion,
 		date,
@@ -63,8 +71,9 @@ router.post('/updateEntry/:id', (req, res) => {
 	let mood = req.body.mood;
 	let emotion = req.body.emotion;
 	let date = req.body.date;
+	let name = req.user.name;
 	let title = req.body.title;
-	Journal.update({ entry: entry, date: date, mood: mood, emotion: emotion, title: title }, {
+	Journal.update({ entry: entry, date: date, mood: mood, emotion: emotion, title: title, name: name }, {
 		where: { id: id }
 	})
 		.then((Journal) => {

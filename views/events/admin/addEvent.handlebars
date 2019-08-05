@@ -1,9 +1,12 @@
-<div class="container card text-center shadow-lg bg-white">
-    <div class="card card-body" style="color:#df744a">
-        <h3>Add Event</h3>
+<div style="padding:10px;">
+    <div class="container-fluid navbar-2">
+        <h2 class="text-center">Add Events</h2>
+    </div>
+
+    <div class="container card text-center shadow-lg bg-white" style="color:#df744a">
         <form action="" method="post" id="addEvent">
-            <div class="row">
-                <div class="col-lg-9">
+            <div class="row mt-4">
+                <div class="col-lg-7 ">
                     <div class="form-group">
                         {{!-- Practical 5 Exercise 2: Add a eventName input text here named 'eventName'--}}
                         <label class="font-italic" for="eventName">Event Name</label>
@@ -24,24 +27,23 @@
                         <input class="form-control" type="text" name="eventLocation" id="eventLocation" required>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <input type="file" id="posterUpload" name="posterUpload"
                         accept="image/png,image/jpeg,image/jpg,image/gif">
-                    <img id="poster" src="/img/default.jpeg" alt="" class="border img-thumbnail img-fluid"
-                        style="height:95%;width:100%">
+                    <img id="poster" src="/img/default.jpeg" alt="" class="border mt-3 img-thumbnail img-fluid"
+                        style="height:45%;width:50%">
                     <input id="posterURL" type="hidden" name="posterURL">
                     <div class="font-weight-bold text-danger small" id="posterErr" style="display:none"></div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="form-group">
-                <div class="row mb-2">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
+                    <div class="mt-4">    
                         <label class="font-italic">Date of Event</label>
                         <input id="datepicker" width="200" name="eventDate" readonly required />
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <div class="mx-auto">
                         <label class="font-italic">Event Category</label>
                         <br>
                         {{!-- Practical 5 Exercise 2: Language radio buttons here'--}}
@@ -81,13 +83,11 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class=" col-lg-6">
                             <label for="eventTime" class="font-italic">Event Start Time</label>
                             <input class="form-control" type="time" id="eventTime" name="eventTime" required>
                         </div>
-                        <div class="col-sm-12 col-md-12 col-lg-2">       
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-4 align-self-end">
+                        <div class="col-lg-6">
                             <label for="eventEndTime" class="font-italic">Event End Time</label>
                             <input class="form-control" type="time" id="eventEndTime" name="eventEndTime" required>
                         </div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <br>
-            <button id="butAddEvent" type="submit" class="btn btn-orange" action="/adminEvents/addEvent"
+            <button id="butAddEvent" type="submit" class="btn btn-orange mb-3" action="/adminEvents/addEvent"
                 style="float:right;" disabled><span>Add Event</span>
             </button>
         </form>

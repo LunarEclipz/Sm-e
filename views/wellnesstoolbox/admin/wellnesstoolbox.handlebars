@@ -1,3 +1,8 @@
+<div style="padding:10px;">
+    <div class="container-fluid navbar-2">
+      <h2 class="text-center">Wellness Toolbox</h2>
+    </div>
+
 <div class="container">
 	<h1 class="display-2">{{Title}}</h1>
 
@@ -32,7 +37,7 @@
 							<h4 class="display-4">Meditation</h4>
 						</div>
 						<div class="col-2 my-auto">
-							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange">Go to Admin Page
+							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange"><span>Go to Admin Page</span>
 							</a>
 						</div>
 					</div>
@@ -48,6 +53,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -65,7 +77,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -99,7 +111,7 @@
 							<h4 class="display-4">Video</h4>
 						</div>
 						<div class="col-2 my-auto">
-							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange">Go to Admin Page
+							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange"><span>Go to Admin Page</span>
 							</a>
 						</div>
 					</div>
@@ -115,6 +127,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -132,7 +151,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -166,7 +185,7 @@
 							<h4 class="display-4">Music</h4>
 						</div>
 						<div class="col-2 my-auto">
-							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange">Go to Admin Page
+							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange"><span>Go to Admin Page</span>
 							</a>
 						</div>
 					</div>
@@ -182,6 +201,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -199,7 +225,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -233,7 +259,7 @@
 							<h4 class="display-4">Workout</h4>
 						</div>
 						<div class="col-2 my-auto">
-							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange">Go to Admin Page
+							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange"><span>Go to Admin Page</span>
 							</a>
 						</div>
 					</div>
@@ -249,6 +275,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -266,7 +299,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -300,7 +333,7 @@
 							<h4 class="display-4">Depression Tips</h4>
 						</div>
 						<div class="col-2 my-auto">
-							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange">Go to Admin Page
+							<a href="/wellnesstoolbox/admin/wtbmanagement" class="btn btn-sm py-2 btn-orange"><span>Go to Admin Page</span>
 							</a>
 						</div>
 					</div>
@@ -316,6 +349,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -333,7 +373,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">

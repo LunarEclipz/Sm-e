@@ -1,3 +1,9 @@
+<div style="padding:10px;">
+    <div class="container-fluid navbar-2">
+      <h2 class="text-center">Wellness Toolbox</h2>
+    </div>
+
+
 <div class="container">
 	<h1 class="display-2">{{Title}}</h1>
 
@@ -46,6 +52,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option onchange="MostViewed()">Most Viewed</option>
+								<option>Least Viewed</option>
+								<option>Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -63,7 +76,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -111,6 +124,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -128,7 +148,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -176,6 +196,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -193,7 +220,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -241,6 +268,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -258,7 +292,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">
@@ -306,6 +340,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -323,7 +364,7 @@
 									<h4 class="card-title">{{title}}</h4>
 									<p class="card-text">{{description}}
 									</p>
-									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block">Read more</a>
+									<a href="wellnesstoolbox/info/{{id}}" class="btn btn-orange btn-block"><span>Read more</span></a>
 								</div>
 
 								<div class="card-footer">

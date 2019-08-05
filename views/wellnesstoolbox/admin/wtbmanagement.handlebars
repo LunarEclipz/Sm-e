@@ -1,3 +1,8 @@
+<div style="padding:10px;">
+    <div class="container-fluid navbar-2">
+      <h2 class="text-center">Wellness Toolbox</h2>
+    </div>
+
 <div class="container">
 
 	<h1 class="display-2">{{Title}}</h1>
@@ -52,6 +57,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select onchange="sortBy()" class="form-control" id="sortBy">
+								<option value="">Sort By:</option>
+								<option value="mostViewed">Most Viewed</option>
+								<option value="leastViewed">Least Viewed</option>
+								<option value="latest">Latest First</option>
+								<option value="oldest">Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -133,6 +145,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -214,6 +233,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -295,6 +321,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -376,6 +409,13 @@
 							</form>
 						</div>
 						<div class="col-2">
+							<select class="form-control" id="sortBy">
+								<option>Sort By:</option>
+								<option>Most Viewed</option>
+								<option>Least Viewed</option>
+								<option onchange="sortLatest()">Latest First</option>
+								<option>Oldest First</option>
+							</select>
 						</div>
 					</div>
 
@@ -483,7 +523,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button id="createbutton" class="btn btn-primary btn-md btn-block">Create</button>
+						<button id="createbutton" class="btn btn-yellowalt btn-md "><span>Create</span></button>
 					</div>
 				</form>
 

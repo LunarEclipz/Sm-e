@@ -25,7 +25,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link nav-white" {{#ifCond 'user.acctype == "admin"'}} href="/wellnesstoolbox/admin/wellnesstoolbox" {{else}} href="/wellnesstoolbox/user/wellnesstoolbox"
+					<a class="nav-link nav-white" {{#ifCond 'user.acctype == "admin"'}} href="/wellnesstoolbox/admin/wtbmanagement" {{else}} href="/wellnesstoolbox/user/wellnesstoolbox"
 						{{/ifCond}}>Wellness Toolbox</a>
 				</li>
 
@@ -34,12 +34,14 @@
 
 			{{#if user}}
 			<ul class="navbar-nav ml-auto">
-				<p style="padding-top: 0.5rem">{{user.name}}</p>
+				<p style="padding-top: 1rem; margin-left:-11rem;" class="nav-white">{{user.name}}
+					<i class="fa fa-fw fa-user nav-white"></i>
+				</p>
 				<li class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">
-						<i class="fa fa-fw fa-user nav-white"></i></a>
+					<a href="#" class="nav-link-plain dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">
+					</a>
 					<div class="dropdown-menu">
-						<a href="/user/viewprofile/{{user.id}}" class="dropdown-item">Profile Page</a>
+						<a href="/user/viewprofile" class="dropdown-item">Profile Page</a>
 						<a href="/user/logout" class="dropdown-item">Logout</a>
 					</div>
 				</li>
@@ -48,10 +50,10 @@
 
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item ">
-					<a href="/user/login" class="nav-link">Login</a>
+					<a href="/user/login" class="nav-link nav-white">Login</a>
 				</li>
 				<li class="nav-item">
-					<a href="/user/regselect" class="nav-link">Register</a>
+					<a href="/user/regselect" class="nav-link nav-white">Register</a>
 				</li>
 			</ul>
 

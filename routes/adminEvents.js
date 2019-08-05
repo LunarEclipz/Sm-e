@@ -11,7 +11,19 @@ const upload = require('../helpers/imageUpload');
 const alertMessage = require('../helpers/messenger');
 
 router.get('/addEvent', (req, res) => {
-	res.render('events/admin/addEvent')
+	if (req.user != null){
+		if (req.user.acctype != 'admin'){
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
+		}
+		else{
+			res.render('events/admin/addEvent')
+		}
+	}
+	else{
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
 });
 
 
@@ -86,18 +98,44 @@ router.post('/addEvent', (req, res) => {
 });
 
 router.get('/editEvent', (req, res) => {
-	res.render('events/admin/editEvent')
+	if (req.user != null){
+		if (req.user.acctype != 'admin'){
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
+		}
+		else{
+			res.render('events/admin/editEvent')
+		}
+	}
+	else{
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-user-alt', true)
+		res.redirect('/user/login')
+	}
 });
 
 router.get('/adminDisplayEvent', (req, res) => {
-	Event.findAll({
-	}).then((events) => {
-		res.render('events/admin/adminDisplayEvent', {
-			events: events,
-		})
-	})
-		.catch(err => console.log(err))
+	if (req.user != null){
+		if (req.user.acctype != 'admin'){
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
+		}
+		else{
+			Event.findAll({
+			}).then((events) => {
+				res.render('events/admin/adminDisplayEvent', {
+					events: events,
+					user : req.user.id
+				})
+			})
+				.catch((err) => console.log(err))
+		}
+	}
+	else{
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-user-alt', true)
+		res.redirect('/user/login')
+	}
 });
+
 
 router.get('/delete/:id', (req, res) => {
 	Event.findOne({
@@ -110,23 +148,35 @@ router.get('/delete/:id', (req, res) => {
 				id: req.params.id
 			}
 		}).then((event) => {
+			alertMessage(res, 'danger', 'You have deleted the event', 'fas fa-trash-alt', true)
 			res.redirect('/adminEvents/adminDisplayEvent')
 		})
 	})
 })
 
 router.get('/editEvent/:id', (req, res) => {
-
-	Event.findOne({
-		where: {
-			id: req.params.id
+	if (req.user != null){
+		if (req.user.acctype != 'admin'){
+			alertMessage(res, 'danger', 'You are not authorised', 'fas fa-pencil-alt', true)
+			res.redirect('/user/home')
 		}
-	}).then((event) => {
-		checkTick(event);
-		res.render('events/admin/editEvent', {
-			event
-		})
-	})
+		else{
+			Event.findOne({
+				where: {
+					id: req.params.id
+				}
+			}).then((event) => {
+				checkTick(event);
+				res.render('events/admin/editEvent', {
+					event
+				})
+			})
+		}
+	}
+	else{
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-user-alt', true)
+		res.redirect('/user/login')
+	}
 })
 
 function checkTick(event) {
@@ -162,7 +212,6 @@ router.put('/saveEdit/:id', (req, res) => {
 	}
 
 	if (errors.length > 0) {
-		alertMessage(res, 'danger', 'Invalid Event Cost input', 'fas fa-pencil-alt', true)
 		res.redirect('back')
 	}
 	else {

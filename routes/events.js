@@ -11,34 +11,46 @@ const alertMessage = require('../helpers/messenger');
 
 
 router.get('/eventDisplay', (req, res) => {
-	Event.findAll({
-	}).then((events) => {
-		Register.findAll({
-			where:{
-				user: req.user.id
-			}
-		}).then((registers) => {
-			res.render('events/user/eventDisplay', {
-				events: events,
-				registers
+	if (req.user != null) {
+		Event.findAll({
+		}).then((events) => {
+			Register.findAll({
+				where: {
+					user: req.user.id
+				}
+			}).then((registers) => {
+				res.render('events/user/eventDisplay', {
+					events: events,
+					registers
+				})
 			})
-		})
 
-	})
-		.catch(err => console.log(err))
+		})
+			.catch(err => console.log(err))
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
 });
 
 router.get('/eventInfo/:id', (req, res) => {
-	Event.findOne({
-		where: {
-			id: req.params.id
-		}
-	}).then((event) => {
-		res.render('events/user/eventInfo', {
-			event: event
+	if (req.user != null) {
+		Event.findOne({
+			where: {
+				id: req.params.id
+			}
+		}).then((event) => {
+			res.render('events/user/eventInfo', {
+				event: event
+			})
 		})
-	})
-		.catch(err => console.log(err));
+			.catch(err => console.log(err));
+	}
+	else {
+		alertMessage(res, 'danger', 'Please login to access other features', 'fas fa-pencil-alt', true)
+		res.redirect('/user/login')
+	}
 });
 
 router.get('/find', (req, res) => {

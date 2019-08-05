@@ -1,8 +1,7 @@
 <!-- Sidebar  -->
-<div class="wrapper">
 <nav id="sidebar">
   <div class="sidebar-header">
-    <h3>Journal.</h3>
+    <h3 style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1)">Journal.</h3>
   </div>
 
   <ul class="list-unstyled">
@@ -13,19 +12,10 @@
       <a href="/journal/newEntry">Write A New Entry</a>
     </li>
     <li>
-      <a href="#trackerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Trackers</a>
-      <ul class="collapse list-unstyled" id="trackerSubmenu">
-        <li>
-          <a href="/journal/moodTracker">Mood Tracker</a>
-        </li>
-        <li>
-          <a href="/journal/emotionTracker">Emotion Tracker</a>
-        </li>
-      </ul>
+      <a href="/journal/moodTracker">Mood Tracker</a>
     </li>
   </ul>
 </nav>
-</div>
 
 <!-- Page Content  -->
 <div id="content">
@@ -42,12 +32,12 @@
     </div>
   </nav>
 
-  <div class="container text-center">
+  <div class="container card text-center shadow-lg bg-white">
     <div class="card-columns">
       {{#each Journal}}
 
 
-      <div class="card">
+      <div class="card my-3">
         {{!-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
         <div class="card-body card-journal">
           <h4 class="card-title">{{title}}</h4>
@@ -55,7 +45,7 @@
           <p class="card-text">Mood: {{mood}}</p>
           <p class="card-text">Emotion: {{emotion}}</p>
           <button type="button" class="btn btn-md btn-block btn-yellowalt" data-toggle="modal"
-            data-target="#entries{{id}}">View</button>
+            data-target="#entries{{id}}"><span>View</span></button>
         </div>
       </div>
 

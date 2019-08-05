@@ -1,126 +1,122 @@
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>Journal.</h3>
+    </div>
 
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Journal.</h3>
+    <ul class="list-unstyled">
+        <li>
+            <a href="/journal/calendar">View All Entries</a>
+        </li>
+        <li class="active">
+            <a href="/journal/newEntry">Write A New Entry</a>
+        </li>
+        <li>
+            <a href="/journal/moodTracker">Mood Tracker</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Page Content  -->
+<div id="content">
+
+    <nav class="navbar-2 navbar-expand-lg">
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-yellow">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <h2 class="text-center">New Entry</h2>
         </div>
-
-        <ul class="list-unstyled">
-            <li>
-                <a href="/journal/calendar">View All Entries</a>
-            </li>
-            <li class="active">
-                <a href="/journal/newEntry">Write A New Entry</a>
-            </li>
-            <li>
-                <a href="#trackerSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle">Trackers</a>
-                <ul class="collapse list-unstyled" id="trackerSubmenu">
-                    <li>
-                        <a href="/journal/moodTracker">Mood Tracker</a>
-                    </li>
-                    <li>
-                        <a href="/journal/emotionTracker">Emotion Tracker</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
     </nav>
 
-    <!-- Page Content  -->
-    <div id="content">
-
-        <nav class="navbar-2 navbar-expand-lg">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-yellow">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <h2 class="text-center">New Entry</h2>
+    <div class="container card text-center shadow-lg bg-white">
+        <form action="/journal/saveEntry" method="POST">
+            <div class="form-group row my-3">
+                <label for="date" class="col-sm-2 col-form-label">Date</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="dateValue" name="date" value=" ">
+                </div>
             </div>
-        </nav>
+            <div class="form-group row">
+                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="title" name="title" placeholder="Title"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="entry" class="col-sm-2 col-form-label">Entry</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="5" id="entry" name="entry"
+                        placeholder="What's on your mind?"></textarea>
+                </div>
+            </div>
 
-        <div class="container">
-            <form action="/journal/saveEntry" method="POST">
-                <div class="form-group row">
-                    <label for="date" class="col-sm-2 col-form-label">Date</label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="dateValue" name="date" value=" ">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="entry" class="col-form-label font-italic">Rate your mood from 0 to 5</label>
+                    <input type="range" class="custom-range" min="0" max="5" step="1" id="mood" name="mood" value="0"
+                        oninput="moodRange()"></input>
+                    <div id="box">
+                        <p class="p-orange">Your mood today is </p>
+                        <span id="moodNum"></span>
+                        <p class="p-orange"> out of 5</p>
+                    </div>
+                    <div>
+                        <p class="p-orange">You feel </p>
+                        <span id="emotionCurrent"></span>
+                        <p class="p-orange"> today </p>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="title" class="col-sm-2 col-form-label">Title</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="title" name="title" placeholder="Title"></textarea>
+                <div class="col-sm-6">
+                    <label class="font-italic col-form-label" for="emotion"> Choose your emotion </label>
+                    <div id="box">
+                        <input id="emotionHappy" name="emotion" onclick="currentEmotion()" type="radio" value="happy">
+                        <img src="/img/emoticons/happy.png" height=40 width=40>
+                        </input>
+                        <input id="emotionInLove" name="emotion" onclick="currentEmotion()" type="radio"
+                            value="in-love">
+                        <img src="/img/emoticons/in-love.png" height=40 width=40>
+                        </input>
+                        <input id="emotionExcited" name="emotion" onclick="currentEmotion()" type="radio"
+                            value="excited">
+                        <img src="/img/emoticons/excited.png" height=40 width=40>
+                        </input>
+                        <input id="emotionSad" name="emotion" onclick="currentEmotion()" type="radio" value="sad">
+                        <img src="/img/emoticons/sad.png" height=40 width=40>
+                        </input>
+                        <input id="emotionCrying" name="emotion" onclick="currentEmotion()" type="radio"
+                            value="like crying">
+                        <img src="/img/emoticons/crying.png" height=40 width=40>
+                        </input>
+                        <br>
+                        <br>
+                        <input id="emotionSick" name="emotion" onclick="currentEmotion()" type="radio" value="sick">
+                        <img src="/img/emoticons/sick.png" height=40 width=40>
+                        </input>
+                        <input id="emotionLucky" name="emotion" onclick="currentEmotion()" type="radio" value="lucky">
+                        <img src="/img/emoticons/lucky.png" height=40 width=40>
+                        </input>
+                        <input id="emotionUnlucky" name="emotion" onclick="currentEmotion()" type="radio"
+                            value="unlucky">
+                        <img src="/img/emoticons/unlucky.png" height=40 width=40>
+                        </input>
+                        <input id="emotionConfused" name="emotion" onclick="currentEmotion()" type="radio"
+                            value="confused">
+                        <img src="/img/emoticons/confused.png" height=40 width=40>
+                        </input>
+                        <input id="emotionDistracted" name="emotion" onclick="currentEmotion()" type="radio"
+                            value="distracted">
+                        <img src="/img/emoticons/distracted.png" height=40 width=40>
+                        </input>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="entry" class="col-sm-2 col-form-label">Entry</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" id="entry" name="entry"
-                            placeholder="What's on your mind?"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="entry" class="col-form-label font-italic">Rate your mood from 0 to 5</label>
-                        <input type="range" class="custom-range" min="0" max="5" step="1" id="mood" name="mood"
-                            value="0" oninput="moodRange()"></input>
-                        <div id="box">
-                            <p class="p-orange">Your mood today is </p>
-                            <span id="moodNum"></span>
-                            <p class="p-orange"> out of 5</p>
-                        </div>
-                        <div>
-                            <p class="p-orange">You feel </p>
-                            <span id="emotionCurrent"></span>
-                            <p class="p-orange"> today </p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <label class="font-italic col-form-label" for="emotion"> Choose your emotion </label>
-                        <div id="box">
-                            <input id="emotionHappy" name="emotion" onclick="currentEmotion()" type="radio" value="happy">
-                            <img src="/img/emoticons/happy.png" height=40 width=40>
-                            </input>
-                            <input id="emotionInLove" name="emotion" onclick="currentEmotion()" type="radio" value="in-love">
-                            <img src="/img/emoticons/in-love.png" height=40 width=40>
-                            </input>
-                            <input id="emotionExcited" name="emotion" onclick="currentEmotion()" type="radio" value="excited">
-                            <img src="/img/emoticons/excited.png" height=40 width=40>
-                            </input>
-                            <input id="emotionSad" name="emotion" onclick="currentEmotion()" type="radio" value="sad">
-                            <img src="/img/emoticons/sad.png" height=40 width=40>
-                            </input>
-                            <input id="emotionCrying" name="emotion" onclick="currentEmotion()" type="radio" value="like crying">
-                            <img src="/img/emoticons/crying.png" height=40 width=40>
-                            </input>
-                            <br>
-                            <br>
-                            <input id="emotionSick" name="emotion" onclick="currentEmotion()" type="radio" value="sick">
-                            <img src="/img/emoticons/sick.png" height=40 width=40>
-                            </input>
-                            <input id="emotionLucky" name="emotion" onclick="currentEmotion()" type="radio" value="lucky">
-                            <img src="/img/emoticons/lucky.png" height=40 width=40>
-                            </input>
-                            <input id="emotionUnlucky" name="emotion" onclick="currentEmotion()" type="radio" value="unlucky">
-                            <img src="/img/emoticons/unlucky.png" height=40 width=40>
-                            </input>
-                            <input id="emotionConfused" name="emotion" onclick="currentEmotion()" type="radio" value="confused">
-                            <img src="/img/emoticons/confused.png" height=40 width=40>
-                            </input>
-                            <input id="emotionDistracted" name="emotion" onclick="currentEmotion()" type="radio" value="distracted">
-                            <img src="/img/emoticons/distracted.png" height=40 width=40>
-                            </input>
-                        </div>
-                    </div>
-                    <button class="btn btn-yellow mx-auto my-1" type="submit"> Submit </button>
-                </div>
-            </form>
-        </div>
+                <button class="btn btn-yellowalt mx-auto my-1" type="submit"><span> Submit </span></button>
+            </div>
+        </form>
     </div>
+</div>
 </div>
 </div>
 </div>
@@ -145,45 +141,45 @@
     var sick = document.getElementById('emotionSick');
     var unlucky = document.getElementById('emotionUnlucky');
     var emotionCurrent = document.getElementById('emotionCurrent');
-    function currentEmotion (){
-        if (happy.checked == true){
+    function currentEmotion() {
+        if (happy.checked == true) {
             emotionCurrent.innerHTML = happy.value;
         }
-        else if (sad.checked == true){
+        else if (sad.checked == true) {
             emotionCurrent.innerHTML = sad.value;
         }
-        else if (love.checked == true){
+        else if (love.checked == true) {
             emotionCurrent.innerHTML = love.value;
         }
-        else if (confused.checked == true){
+        else if (confused.checked == true) {
             emotionCurrent.innerHTML = confused.value;
         }
-        else if (crying.checked == true){
+        else if (crying.checked == true) {
             emotionCurrent.innerHTML = crying.value;
         }
-        else if (distracted.checked == true){
+        else if (distracted.checked == true) {
             emotionCurrent.innerHTML = distracted.value;
         }
-        else if (excited.checked == true){
+        else if (excited.checked == true) {
             emotionCurrent.innerHTML = excited.value;
         }
-        else if (lucky.checked == true){
+        else if (lucky.checked == true) {
             emotionCurrent.innerHTML = lucky.value;
         }
-        else if (sick.checked == true){
+        else if (sick.checked == true) {
             emotionCurrent.innerHTML = sick.value;
         }
-        else if (unlucky.checked == true){
+        else if (unlucky.checked == true) {
             emotionCurrent.innerHTML = unlucky.value;
         }
     }
-    
+
     var dateValue = document.getElementById('dateValue');
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
-    today = dd + 'th Day, ' + mm + 'th Month, in the Year ' + yyyy+ '.';
+    today = dd + 'th Day, ' + mm + 'th Month, in the Year ' + yyyy + '.';
     dateValue.value = today;
 
     $(document).ready(function () {

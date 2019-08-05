@@ -1,53 +1,43 @@
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>Journal.</h3>
+    </div>
 
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Journal.</h3>
+    <ul class="list-unstyled">
+        <li>
+            <a href="/journal/calendar">View All Entries</a>
+        </li>
+        <li>
+            <a href="/journal/newEntry">Write A New Entry</a>
+        </li>
+        <li class="active">
+            <a href="/journal/moodTracker">Mood Tracker</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Page Content  -->
+<div id="content">
+
+    <nav class="navbar-2 navbar-expand-lg">
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-yellow">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <h2 class="text-center">Mood Tracker</h2>
         </div>
-
-        <ul class="list-unstyled">
-            <li>
-                <a href="/journal/calendar">View All Entries</a>
-            </li>
-            <li>
-                <a href="/journal/newEntry">Write A New Entry</a>
-            </li>
-            <li>
-                <a href="#trackerSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle">Trackers</a>
-                <ul class="collapse list-unstyled" id="trackerSubmenu">
-                    <li class="active">
-                        <a href="/journal/moodTracker">Mood Tracker</a>
-                    </li>
-                    <li>
-                        <a href="/journal/emotionTracker">Emotion Tracker</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
     </nav>
 
-    <!-- Page Content  -->
-    <div id="content">
-
-        <nav class="navbar-2 navbar-expand-lg">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-yellow">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <h2 class="text-center">Mood Tracker</h2>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-            <p class="font-italic p-orange">
-                Drag to Zoom
-            </p>
-        </div>
+    <div class="container card text-center shadow-lg bg-white">
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <p class="font-italic p-orange">
+            Drag to Zoom
+        </p>
     </div>
+</div>
 </div>
 </div>
 </div>
@@ -81,29 +71,30 @@
                     type: "line",
 
                     dataPoints: [
-                        {{#each Journal}}
+                        {{ #each Journal }}
 
-                            { x: new Date(getYear('{{{date}}}')), y: {{mood}} },
+                            { x: new Date(getYear('{{{date}}}')), y: {{ mood }} },
 
 
-                        {{/each}}
+        {{
+            /each}}
 
                         
                     ]
-                }
+    }
             ]
         });
-        chart.render();
+    chart.render();
 
     }
 
-    function getYear(d){
+    function getYear(d) {
         var date = d.toString();
-        var year = date.substring(34,38);
-        var month = date.substring(10,12);
-        var day = date.substring(0,2);
-        console.log(d, date,'!!!!', year, month, day)
-        return (year+', '+ month +', '+ day)
+        var year = date.substring(34, 38);
+        var month = date.substring(10, 12);
+        var day = date.substring(0, 2);
+        console.log(d, date, '!!!!', year, month, day)
+        return (year + ', ' + month + ', ' + day)
     }
 
 </script>
